@@ -16,7 +16,7 @@ import jdbc.DB;
 import user.UserMain;
 
 public class Intro extends JFrame implements ActionListener {
-
+	// 김종하입니다.
 	private JButton btn_user, btn_admin;
 
 	public Intro(String title, int width, int height) {
@@ -26,7 +26,7 @@ public class Intro extends JFrame implements ActionListener {
 		setLocationRelativeTo(this); // 모니터 가운데
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프로그램 종료
 		setResizable(false);
-
+ 
 		// 레이아웃
 		setLayout(new BorderLayout());
 
