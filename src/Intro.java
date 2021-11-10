@@ -16,7 +16,7 @@ import jdbc.DB;
 import user.UserMain;
 
 public class Intro extends JFrame implements ActionListener {
-	// 김종하입니다.
+	
 	private JButton btn_user, btn_admin;
 
 	public Intro(String title, int width, int height) {
