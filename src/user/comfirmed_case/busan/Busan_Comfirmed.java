@@ -51,7 +51,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 	private JTextField tx1;
 	private JButton b3;
 	private DefaultTableCellRenderer tbCellRender;
-
+ 
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public Busan_Comfirmed(String title, int width, int height) {
 		this.setTitle(title);

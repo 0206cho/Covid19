@@ -60,8 +60,8 @@ public class UserMain extends JFrame implements ActionListener  {
 		
 		
 		
-		b1 = new JButton("확진자현황");
-		b1.setBounds(230, 100, 120, 100);
+		b1 = new JButton("백신접종현황");
+		b1.setBounds(210, 100, 140, 100);
 		b1.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		b1.setFocusPainted(false);
 		b1.setBackground(Color.white);
