@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import jdbc.DB;
@@ -28,7 +29,7 @@ public class AdminLogin extends JFrame implements ActionListener {
 	private JLabel lbl1;
 	private JLabel lbl2;
 	private JTextField tx1;
-	private JTextField tx2;
+	private JPasswordField tx2;
 	private JButton b1;
 
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
@@ -54,7 +55,8 @@ public class AdminLogin extends JFrame implements ActionListener {
 		lbl1 = new JLabel("ID : ");
 		lbl2 = new JLabel("PW : ");
 		tx1 = new JTextField(10);
-		tx2 = new JTextField(10);
+		tx2 = new JPasswordField(10);
+		tx2.setEchoChar('*'); // 텍스트필드에 입력한 값 안보이고 *로 표시됨
 		lbl1.setBounds(200, 0, 300, 300);
 		lbl1.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		tx1.setBounds(240, 140, 200, 30);

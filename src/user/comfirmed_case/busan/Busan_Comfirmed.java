@@ -166,8 +166,10 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 
 	//지역 검색하는 메소드 생성
 	public void getSearch(DefaultTableModel model, String combo, String word) throws Exception {
-		String sql = "select * from confirmed where PERSON LIKE '%부산%' AND " + combo.trim() + " LIKE '" + word.trim()
-				+ "'";
+//		String sql = "select * from confirmed where PERSON LIKE '%부산%' AND " + combo.trim() + " LIKE '" + word.trim()
+//				+ "'";
+		
+		String sql = "SELECT * FROM vaccinationstatus WHERE name LIKE '%부산%' AND name LIKE '%" + word + "%'";
 
 		try {
 			ResultSet rs = DB.getResultSet(sql);
