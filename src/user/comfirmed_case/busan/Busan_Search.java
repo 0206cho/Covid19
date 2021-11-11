@@ -43,7 +43,7 @@ public class Busan_Search extends JFrame implements ActionListener {
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //닫을수 있는 특정 상수값을 주었기 때문에 프레임 종료버튼이 클릭될때 프로그램도 같이 사라짐 
-		String [] hi = {"확진자","확진일","거주지","감염경로","증상유무"};
+		String [] hi = {"보건소"};
 		this.busan_Comfirmed = busan_Comfirmed;
 		p2 = new JPanel();
 		p2.setLayout(new BorderLayout());
@@ -59,9 +59,9 @@ public class Busan_Search extends JFrame implements ActionListener {
 		cb = new JComboBox<String>(hi);
 		cb.setBackground(Color.white);
 		cb.addActionListener(this);
-		tx1 = new JTextField("부산-",10);
+		tx1 = new JTextField("",10);
 		p1.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-		lbl1 = new JLabel("탭을 선택후 검색어를 입력해주세요. EX) 감염경로 - 기타 확진자 접촉");
+		lbl1 = new JLabel("검색어를 입력해주세요. EX) 보건소 - 강서구");
 		lbl1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		p1.add(lbl1);
 		p1.add(cb);
@@ -112,18 +112,18 @@ public class Busan_Search extends JFrame implements ActionListener {
 			if(getCombo.equals("거주지")) {
 				getCombo = "LOCAL";
 			}
-			else if(getCombo.equals("확진자")) {
-				getCombo = "PERSON";
-			}
-			else if(getCombo.equals("확진일")) {
-				getCombo = "DATE";
-			}
-			else if(getCombo.equals("감염경로")) {
-				getCombo = "ROUTE";
-			}
-			else if(getCombo.equals("증상유무")) {
-				getCombo = "SYMPTOM";
-			}
+//			else if(getCombo.equals("확진자")) {
+//				getCombo = "PERSON";
+//			}
+//			else if(getCombo.equals("확진일")) {
+//				getCombo = "DATE";
+//			}
+//			else if(getCombo.equals("감염경로")) {
+//				getCombo = "ROUTE";
+//			}
+//			else if(getCombo.equals("증상유무")) {
+//				getCombo = "SYMPTOM";
+//			}
 			try {
 				busan_Comfirmed.getSearch(busan_Comfirmed.getModel(), getCombo, tx1.getText());
 				
@@ -135,7 +135,7 @@ public class Busan_Search extends JFrame implements ActionListener {
 		else if (obj == cb) {
 				int getIndex = cb.getSelectedIndex();
 				if(getIndex == 0) {
-					tx1.setText("부산-");
+					tx1.setText("");
 				}
 				else {
 					tx1.setText("");

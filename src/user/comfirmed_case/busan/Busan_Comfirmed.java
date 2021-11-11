@@ -102,11 +102,11 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 
 		p4 = new JPanel();
 		p4.setBackground(Color.white);
-		String[] header = { "확진자", "확진일", "거주지", "감염경로", "증상유무" };
+		String[] header = { "보건소", "1차-당일접종", "1차-당일누계", "2차-당일접종", "2차-당일누계", "부스터샷-당일접종", "부스터샷-당일누계" };
 		model = new DefaultTableModel(header, 0);
 		table = new JTable(model);
 		scroll = new JScrollPane(table);
-		scroll.setPreferredSize(new Dimension(778, 500));
+		scroll.setPreferredSize(new Dimension(828, 500));
 		
 		// DefaultCellHeaderRender 생성 (가운데 정렬을 위한)
 		tbCellRender = new DefaultTableCellRenderer();
@@ -125,11 +125,13 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 		table.setRowSorter(tablesorter);
 		
 		//컬럼 길이조절
-		table.getColumnModel().getColumn(0).setPreferredWidth(0);
+		table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		table.getColumnModel().getColumn(1).setPreferredWidth(0);
 		table.getColumnModel().getColumn(2).setPreferredWidth(0);
-		table.getColumnModel().getColumn(3).setPreferredWidth(200);
+		table.getColumnModel().getColumn(3).setPreferredWidth(0);
 		table.getColumnModel().getColumn(4).setPreferredWidth(0);
+		table.getColumnModel().getColumn(5).setPreferredWidth(0);
+		table.getColumnModel().getColumn(6).setPreferredWidth(0);
 
 		p4.add(scroll);
 
@@ -147,7 +149,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 
 	// 테이블에 db가져옴,, 반드시 기존테이블에 있는거 다 삭제하고 db에 가져오는식으로? 해야 깔끔하다
 	public void useraddAll(DefaultTableModel model) {
-		String sql = "select * from confirmed where PERSON LIKE '%부산%'";
+		String sql = "select * from vaccinationstatus where name LIKE '%부산%'";
 		try {
 			ResultSet rs = DB.getResultSet(sql);
 			for (int i = 0; i < model.getRowCount();) {
@@ -155,7 +157,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 			}
 
 			while (rs.next()) {
-				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5) };
+				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7) };
 				model.addRow(data);
 			}
 		} catch (Exception e) {
@@ -177,7 +179,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 				model.removeRow(0);
 			}
 			while (rs.next()) {
-				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5) };
+				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7) };
 				model.addRow(data);
 			}
 		} catch (SQLException e) {
@@ -198,7 +200,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new Busan_Comfirmed("부산 확진자 현황", 800, 615);
+		new Busan_Comfirmed("부산 확진자 현황", 850, 615);
 	}
 
 	public DefaultTableModel getModel() {
@@ -213,7 +215,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 		} else if (obj == b3) {
 			useraddAll(model);
 		} else if (obj == b1) {
-			new Busan_Search("부산 확진자 검색", 450, 250, this);
+			new Busan_Search("부산 확진자 검색", 350, 250, this);
 		}
 	}
 
