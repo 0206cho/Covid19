@@ -34,6 +34,7 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener {
 	private JButton btnLogout;
 	private Color color1;
 	private Color color2;
+	private String iso_id;
 
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public IsolatedMain_Modify(String title, int width, int height) {
@@ -89,38 +90,32 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener {
 
 		// 현재 날짜 구하기 (시스템 시계, 시스템 타임존)
 		LocalDate now = LocalDate.now();
-		String s_now = now.toString();
-		System.out.println(now);
+//		System.out.println(now);
 
 		// 자가격리 날짜
 		String isolatedDate = "SELECT DATEDIFF('" + now
 				+ "', (select isolatedDate from isolated where name Like '김민솔'))";
-		
+
 		try {
 			ResultSet rs = DB.getResultSet(isolatedDate);
-			System.out.println(isolatedDate);
 			while (rs.next()) {
-//				String iso_id = rs.getString("isolatedID");
-//				String iso_name = rs.getString("name");
-//				String iso_pw = rs.getString("isolatedPW");
-//				String iso_local = rs.getString("local");
-//				String iso_phone = rs.getString("phone");
-//				String iso_date = rs.getString("isolatedDate");
-				
-				
+				iso_id = rs.getString(1);
+				System.out.println(iso_id);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
 
 		ta.setFont(new Font("맑은고딕", Font.BOLD, 14));
 		ta.setLineWrap(true); // 벽에 닿으면 줄바꿈
 //		ta.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT); //오른쪽 정렬
-		ta.setText("자가격리 " + " " + "일째\n" + "생활수칙\n" + "");
+		ta.setText("자가격리 " + iso_id + "일째\n" + "생활수칙\n" + "");
 
+		
+		JLabel lbl_rule = new JLabel("dsfs");
+		ta.add(lbl_rule);
+		
 		JScrollPane sp = new JScrollPane(ta, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		sp.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
