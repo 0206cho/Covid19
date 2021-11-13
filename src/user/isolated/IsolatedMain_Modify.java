@@ -100,12 +100,12 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener {
 			ResultSet rs = DB.getResultSet(isolatedDate);
 			System.out.println(isolatedDate);
 			while (rs.next()) {
-				String iso_id = rs.getString("isolatedID");
-				String iso_name = rs.getString("name");
-				String iso_pw = rs.getString("isolatedPW");
-				String iso_local = rs.getString("local");
-				String iso_phone = rs.getString("phone");
-				String iso_date = rs.getString("isolatedDate");
+//				String iso_id = rs.getString("isolatedID");
+//				String iso_name = rs.getString("name");
+//				String iso_pw = rs.getString("isolatedPW");
+//				String iso_local = rs.getString("local");
+//				String iso_phone = rs.getString("phone");
+//				String iso_date = rs.getString("isolatedDate");
 				
 				
 			}
