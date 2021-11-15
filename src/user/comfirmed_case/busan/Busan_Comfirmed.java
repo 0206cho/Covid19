@@ -106,7 +106,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 		model = new DefaultTableModel(header, 0);
 		table = new JTable(model);
 		scroll = new JScrollPane(table);
-		scroll.setPreferredSize(new Dimension(828, 500));
+		scroll.setPreferredSize(new Dimension(858, 500));
 		
 		// DefaultCellHeaderRender 생성 (가운데 정렬을 위한)
 		tbCellRender = new DefaultTableCellRenderer();
@@ -200,7 +200,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new Busan_Comfirmed("부산 확진자 현황", 850, 615);
+		new Busan_Comfirmed("부산 확진자 현황", 880, 615);
 	}
 
 	public DefaultTableModel getModel() {

@@ -6,7 +6,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
@@ -15,6 +18,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.text.AttributeSet.ColorAttribute;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import jdbc.DB;
 import user.UserMain;
@@ -40,28 +48,31 @@ public class Distancing_Map extends JFrame implements ActionListener {
 	
 	private JPanel p1;
 	private JLabel lblicon;
-	private JButton b1;
-	private JButton b2;
-	private JButton b3;
+	private JButton seoul_btn;
+	private JButton incheon_btn;
+	private JButton gyeonggi_btn;
 	private JLabel lbl1;
 	private JPanel p2;
-	private JButton b4;
-	private JButton b5;
-	private JButton b6;
+	private JButton chungnam_btn;
+	private JButton seojong_btn;
+	private JButton daejeon_btn;
 	private String localName;
 	private String lvlNum;
-	private JButton b7;
-	private JButton b8;
-	private JButton b9;
-	private JButton b10;
-	private JButton b11;
-	private JButton b12;
-	private JButton b13;
-	private AbstractButton b14;
-	private AbstractButton b15;
-	private JButton b16;
-	private JButton b17;
-	
+	private JButton jeonbuk_btn;
+	private JButton gwangju_btn;
+	private JButton jeonnam_btn;
+	private JButton jeju_btn;
+	private JButton gyeongnam_btn;
+	private JButton busan_btn;
+	private JButton ulsan_btn;
+	private AbstractButton daegu_btn;
+	private AbstractButton gyeongbuk_btn;
+	private JButton chungbuk_btn;
+	private JButton gangwon_btn;
+	String url = "https://ncv.kdca.go.kr/mainStatus.es?mid=a11702000000";
+	Document doc;
+	Elements seoul_elm,busan_elm;
+	private JLabel right_lbl;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public Distancing_Map(String title, int width, int height) {
 		this.setTitle(title);
@@ -77,8 +88,11 @@ public class Distancing_Map extends JFrame implements ActionListener {
 		lblicon = new JLabel(icon);
 		lblicon.setToolTipText("밤낮없이 방역을 위해 고생하시는 관계자분들 응원합니다!!");
 		p2.setBackground(Color.white);
+		right_lbl = new JLabel("<html><body><center>" +"<br>"+"<br>"+ "* 지역별 2차 백신 접종율 현황입니다.&nbsp&nbsp"+ "</body></html>");
+
+		right_lbl.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		p2.add(lblicon,BorderLayout.WEST);
-		
+		p2.add(right_lbl,BorderLayout.EAST);
 		
 		
 		
@@ -93,129 +107,54 @@ public class Distancing_Map extends JFrame implements ActionListener {
 		//서울
 		localName = "서울";
 		String lvlSeoul = setLevel(localName);
-		b1 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlSeoul + "</body></html>");
-		b1.setBounds(70, 35, 120, 40);
-		b1.setFocusPainted(false);
-		b1.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b1.addActionListener(this);
-		if(lvlSeoul.equals("1.0")) {
-			//0xE6FFFF
-			b1.setBackground(new Color(0xE6FFFF));
-		}else if(lvlSeoul.equals("1.5")) {
-			//5AAEFF
-			b1.setBackground(new Color(0x5AAEFF));
-		}else if(lvlSeoul.equals("2.0")) {
-			//FFE400
-			b1.setBackground(new Color(0xFFE400));
-		}else if(lvlSeoul.equals("2.5")) {
-			//FFBB00
-			b1.setBackground(new Color(0xFFBB00));
-		}else if(lvlSeoul.equals("3.0")) {
-			//FF0000
-			b1.setBackground(new Color(0xFF0000));
-		}
+		seoul_btn = new JButton();
+		seoul_btn.setBounds(70, 35, 120, 40);
+		seoul_btn.setFocusPainted(false);
+		seoul_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		seoul_btn.addActionListener(this);
+		seoul_btn.setBackground(new Color(0x87cefa));
 		
 		
 		
 		//인천
 		localName = "인천";
 		String lvlInC = setLevel(localName);
-		b2 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlInC + "</body></html>");
-		b2.setBounds(35, 94, 120, 40);
-		b2.setFocusPainted(false);
-		b2.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b2.addActionListener(this);
-		if(lvlInC.equals("1.0")) {
-			//0xE6FFFF
-			b2.setBackground(new Color(0xE6FFFF));
-		}else if(lvlInC.equals("1.5")) {
-			//5AAEFF
-			b2.setBackground(new Color(0x5AAEFF));
-		}else if(lvlInC.equals("2.0")) {
-			//FFE400
-			b2.setBackground(new Color(0xFFE400));
-		}else if(lvlInC.equals("2.5")) {
-			//FFBB00
-			b2.setBackground(new Color(0xFFBB00));
-		}else if(lvlInC.equals("3.0")) {
-			//FF0000
-			b2.setBackground(new Color(0xFF0000));
-		}
+		incheon_btn = new JButton();
+		incheon_btn.setBounds(35, 94, 120, 40);
+		incheon_btn.setFocusPainted(false);
+		incheon_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		incheon_btn.addActionListener(this);
+		incheon_btn.setBackground(new Color(0x87cefa));
 		
 		//경기
 		localName = "경기";
 		String lvlGG = setLevel(localName);
-		b3 = new JButton("<html><body><center>"+localName+"<br>"+ lvlGG + "</body></html>");
-		b3.setBounds(28, 165, 113, 40);
-		b3.setFocusPainted(false);
-		b3.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b3.addActionListener(this);
-		if(lvlGG.equals("1.0")) {
-			//0xE6FFFF
-			b3.setBackground(new Color(0xE6FFFF));
-		}else if(lvlGG.equals("1.5")) {
-			//5AAEFF
-			b3.setBackground(new Color(0x5AAEFF));
-		}else if(lvlGG.equals("2.0")) {
-			//FFE400
-			b3.setBackground(new Color(0xFFE400));
-		}else if(lvlGG.equals("2.5")) {
-			//FFBB00
-			b3.setBackground(new Color(0xFFBB00));
-		}else if(lvlGG.equals("3.0")) {
-			//FF0000
-			b3.setBackground(new Color(0xFF0000));
-		}
+		gyeonggi_btn = new JButton();
+		gyeonggi_btn.setBounds(28, 165, 113, 40);
+		gyeonggi_btn.setFocusPainted(false);
+		gyeonggi_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		gyeonggi_btn.addActionListener(this);
+		gyeonggi_btn.setBackground(new Color(0x87cefa));
 		
 		//충남
 		localName = "충청남도";
 		String lvlCN = setLevel(localName);
-		b4 = new JButton("<html><body><center>"+localName+"<br>"+ lvlCN + "</body></html>");
-		b4.setBounds(20, 220, 113, 40);
-		b4.setFocusPainted(false);
-		b4.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b4.addActionListener(this);
-		if(lvlCN.equals("1.0")) {
-			//0xE6FFFF
-			b4.setBackground(new Color(0xE6FFFF));
-		}else if(lvlCN.equals("1.5")) {
-			//5AAEFF
-			b4.setBackground(new Color(0x5AAEFF));
-		}else if(lvlCN.equals("2.0")) {
-			//FFE400
-			b4.setBackground(new Color(0xFFE400));
-		}else if(lvlCN.equals("2.5")) {
-			//FFBB00
-			b4.setBackground(new Color(0xFFBB00));
-		}else if(lvlCN.equals("3.0")) {
-			//FF0000
-			b4.setBackground(new Color(0xFF0000));
-		}
+		chungnam_btn = new JButton();
+		chungnam_btn.setBounds(20, 220, 113, 40);
+		chungnam_btn.setFocusPainted(false);
+		chungnam_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		chungnam_btn.addActionListener(this);
+		chungnam_btn.setBackground(new Color(0x87cefa));
 		
 		//세종
 		localName = "세종자치시";
 		String lvlSJ = setLevel(localName);
-		b5 = new JButton("<html><body><center>"+localName+"<br>"+ lvlSJ + "</body></html>");
-		b5.setBounds(7, 280, 113, 40);
-		b5.setFocusPainted(false);
-		b5.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b5.addActionListener(this);
-		if(lvlSJ.equals("1.0")) {
-			//0xE6FFFF
-			b5.setBackground(new Color(0xE6FFFF));
-		}else if(lvlSJ.equals("1.5")) {
-			//5AAEFF
-			b5.setBackground(new Color(0x5AAEFF));
-		}else if(lvlSJ.equals("2.0")) {
-			//FFE400
-			b5.setBackground(new Color(0xFFE400));
-		}else if(lvlSJ.equals("2.5")) {
-			//FFBB00
-			b5.setBackground(new Color(0xFFBB00));
-		}else if(lvlSJ.equals("3.0")) {
-			//FF0000
-			b5.setBackground(new Color(0xFF0000));
-		}
+		seojong_btn = new JButton();
+		seojong_btn.setBounds(7, 280, 113, 40);
+		seojong_btn.setFocusPainted(false);
+		seojong_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		seojong_btn.addActionListener(this);
+		seojong_btn.setBackground(new Color(0x87cefa));
 		
 		
 		
@@ -223,331 +162,184 @@ public class Distancing_Map extends JFrame implements ActionListener {
 		localName = "대전광역시";
 		String lvlDJ = setLevel(localName);
 		
-		b6 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlDJ + "</body></html>");
-		b6.setBounds(7, 340, 113, 40);
-		b6.setFocusPainted(false);
-		b6.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b6.addActionListener(this);
-		if(lvlDJ.equals("1.0")) {
-			//0xE6FFFF
-			b6.setBackground(new Color(0xE6FFFF));
-		}else if(lvlDJ.equals("1.5")) {
-			//5AAEFF
-			b6.setBackground(new Color(0x5AAEFF));
-		}else if(lvlDJ.equals("2.0")) {
-			//FFE400
-			b6.setBackground(new Color(0xFFE400));
-		}else if(lvlDJ.equals("2.5")) {
-			//FFBB00
-			b6.setBackground(new Color(0xFFBB00));
-		}else if(lvlDJ.equals("3.0")) {
-			//FF0000
-			b6.setBackground(new Color(0xFF0000));
-		}
+		daejeon_btn = new JButton();
+		daejeon_btn.setBounds(7, 340, 113, 40);
+		daejeon_btn.setFocusPainted(false);
+		daejeon_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		daejeon_btn.addActionListener(this);
+		daejeon_btn.setBackground(new Color(0x87cefa));
 		
 		//전북
 		localName = "전라북도";
 		String lvlJB = setLevel(localName);
 		
-		b7 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlJB + "</body></html>");
-		b7.setBounds(7, 400, 113, 40);
-		b7.setFocusPainted(false);
-		b7.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b7.addActionListener(this);
-		if(lvlJB.equals("1.0")) {
-			//0xE6FFFF
-			b7.setBackground(new Color(0xE6FFFF));
-		}else if(lvlJB.equals("1.5")) {
-			//5AAEFF
-			b7.setBackground(new Color(0x5AAEFF));
-		}else if(lvlJB.equals("2.0")) {
-			//FFE400
-			b7.setBackground(new Color(0xFFE400));
-		}else if(lvlJB.equals("2.5")) {
-			//FFBB00
-			b7.setBackground(new Color(0xFFBB00));
-		}else if(lvlJB.equals("3.0")) {
-			//FF0000
-			b7.setBackground(new Color(0xFF0000));
-		}
+		jeonbuk_btn = new JButton();
+		jeonbuk_btn.setBounds(7, 400, 113, 40);
+		jeonbuk_btn.setFocusPainted(false);
+		jeonbuk_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		jeonbuk_btn.addActionListener(this);
+		jeonbuk_btn.setBackground(new Color(0x87cefa));
 		
 		//광주
 		localName = "광주광역시";
 		String lvlGJ = setLevel(localName);
 		
-		b8 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlGJ + "</body></html>");
-		b8.setBounds(7, 485, 113, 40);
-		b8.setFocusPainted(false);
-		b8.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b8.addActionListener(this);
-		if(lvlGJ.equals("1.0")) {
-			//0xE6FFFF
-			b8.setBackground(new Color(0xE6FFFF));
-		}else if(lvlGJ.equals("1.5")) {
-			//5AAEFF
-			b8.setBackground(new Color(0x5AAEFF));
-		}else if(lvlGJ.equals("2.0")) {
-			//FFE400
-			b8.setBackground(new Color(0xFFE400));
-		}else if(lvlGJ.equals("2.5")) {
-			//FFBB00
-			b8.setBackground(new Color(0xFFBB00));
-		}else if(lvlGJ.equals("3.0")) {
-			//FF0000
-			b8.setBackground(new Color(0xFF0000));
-		}
+		gwangju_btn = new JButton();
+		gwangju_btn.setBounds(7, 485, 113, 40);
+		gwangju_btn.setFocusPainted(false);
+		gwangju_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		gwangju_btn.addActionListener(this);
+		gwangju_btn.setBackground(new Color(0x87cefa));
 		
 		//전남
 		localName = "전라남도";
 		String lvlJN = setLevel(localName);
 		
-		b9 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlJN + "</body></html>");
-		b9.setBounds(70, 570, 113, 40);
-		b9.setFocusPainted(false);
-		b9.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b9.addActionListener(this);
-		if(lvlJN.equals("1.0")) {
-			//0xE6FFFF
-			b9.setBackground(new Color(0xE6FFFF));
-		}else if(lvlJN.equals("1.5")) {
-			//5AAEFF
-			b9.setBackground(new Color(0x5AAEFF));
-		}else if(lvlJN.equals("2.0")) {
-			//FFE400
-			b9.setBackground(new Color(0xFFE400));
-		}else if(lvlJN.equals("2.5")) {
-			//FFBB00
-			b9.setBackground(new Color(0xFFBB00));
-		}else if(lvlJN.equals("3.0")) {
-			//FF0000
-			b9.setBackground(new Color(0xFF0000));
-		}
+		jeonnam_btn = new JButton();
+		jeonnam_btn.setBounds(70, 570, 113, 40);
+		jeonnam_btn.setFocusPainted(false);
+		jeonnam_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		jeonnam_btn.addActionListener(this);
+		jeonnam_btn.setBackground(new Color(0x87cefa));
 		
 		//제주
 		localName = "제주도";
 		String lvlJJ = setLevel(localName);
 		
-		b10 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlJJ + "</body></html>");
-		b10.setBounds(268, 675, 113, 40);
-		b10.setFocusPainted(false);
-		b10.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b10.addActionListener(this);
-		if(lvlJJ.equals("1.0")) {
-			//0xE6FFFF
-			b10.setBackground(new Color(0xE6FFFF));
-		}else if(lvlJJ.equals("1.5")) {
-			//5AAEFF
-			b10.setBackground(new Color(0x5AAEFF));
-		}else if(lvlJJ.equals("2.0")) {
-			//FFE400
-			b10.setBackground(new Color(0xFFE400));
-		}else if(lvlJJ.equals("2.5")) {
-			//FFBB00
-			b10.setBackground(new Color(0xFFBB00));
-		}else if(lvlJJ.equals("3.0")) {
-			//FF0000
-			b10.setBackground(new Color(0xFF0000));
-		}
+		jeju_btn = new JButton();
+		jeju_btn.setBounds(268, 675, 113, 40);
+		jeju_btn.setFocusPainted(false);
+		jeju_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		jeju_btn.addActionListener(this);
+		jeju_btn.setBackground(new Color(0x87cefa));
 		
 		//경남
 		localName = "경상남도";
 		String lvlGN = setLevel(localName);
 		
-		b11 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlGN + "</body></html>");
-		b11.setBounds(320, 559, 113, 40);
-		b11.setFocusPainted(false);
-		b11.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b11.addActionListener(this);
-		if(lvlGN.equals("1.0")) {
-			//0xE6FFFF
-			b11.setBackground(new Color(0xE6FFFF));
-		}else if(lvlGN.equals("1.5")) {
-			//5AAEFF
-			b11.setBackground(new Color(0x5AAEFF));
-		}else if(lvlGN.equals("2.0")) {
-			//FFE400
-			b11.setBackground(new Color(0xFFE400));
-		}else if(lvlGN.equals("2.5")) {
-			//FFBB00
-			b11.setBackground(new Color(0xFFBB00));
-		}else if(lvlGN.equals("3.0")) {
-			//FF0000
-			b11.setBackground(new Color(0xFF0000));
-		}
+		gyeongnam_btn = new JButton();
+		gyeongnam_btn.setBounds(320, 559, 113, 40);
+		gyeongnam_btn.setFocusPainted(false);
+		gyeongnam_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		gyeongnam_btn.addActionListener(this);
+		gyeongnam_btn.setBackground(new Color(0x87cefa));
 		
 		//부산
 		localName = "부산";
 		String lvlBS = setLevel(localName);
 		
-		b12 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlBS + "</body></html>");
-		b12.setBounds(400, 515, 113, 40);
-		b12.setFocusPainted(false);
-		b12.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b12.addActionListener(this);
-		if(lvlBS.equals("1.0")) {
-			//0xE6FFFF
-			b12.setBackground(new Color(0xE6FFFF));
-		}else if(lvlBS.equals("1.5")) {
-			//5AAEFF
-			b12.setBackground(new Color(0x5AAEFF));
-		}else if(lvlBS.equals("2.0")) {
-			//FFE400
-			b12.setBackground(new Color(0xFFE400));
-		}else if(lvlBS.equals("2.5")) {
-			//FFBB00
-			b12.setBackground(new Color(0xFFBB00));
-		}else if(lvlBS.equals("3.0")) {
-			//FF0000
-			b12.setBackground(new Color(0xFF0000));
-		}
+		busan_btn = new JButton();
+		busan_btn.setBounds(400, 515, 113, 40);
+		busan_btn.setFocusPainted(false);
+		busan_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		busan_btn.addActionListener(this);
+		busan_btn.setBackground(new Color(0x87cefa));
 		
 		//울산
 		localName = "울산";
 		String lvlUS = setLevel(localName);
 		
-		b13 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlUS + "</body></html>");
-		b13.setBounds(501, 464, 113, 40);
-		b13.setFocusPainted(false);
-		b13.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b13.addActionListener(this);
-		if(lvlUS.equals("1.0")) {
-			//0xE6FFFF
-			b13.setBackground(new Color(0xE6FFFF));
-		}else if(lvlUS.equals("1.5")) {
-			//5AAEFF
-			b13.setBackground(new Color(0x5AAEFF));
-		}else if(lvlUS.equals("2.0")) {
-			//FFE400
-			b13.setBackground(new Color(0xFFE400));
-		}else if(lvlUS.equals("2.5")) {
-			//FFBB00
-			b13.setBackground(new Color(0xFFBB00));
-		}else if(lvlUS.equals("3.0")) {
-			//FF0000
-			b13.setBackground(new Color(0xFF0000));
-		}
+		ulsan_btn = new JButton();
+		ulsan_btn.setBounds(501, 464, 113, 40);
+		ulsan_btn.setFocusPainted(false);
+		ulsan_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		ulsan_btn.addActionListener(this);
+		ulsan_btn.setBackground(new Color(0x87cefa));
 		
 		//대구
 		localName = "대구";
 		String lvlDK = setLevel(localName);
 		
-		b14 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlDK + "</body></html>");
-		b14.setBounds(528, 360, 113, 40);
-		b14.setFocusPainted(false);
-		b14.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b14.addActionListener(this);
-		if(lvlDK.equals("1.0")) {
-			//0xE6FFFF
-			b14.setBackground(new Color(0xE6FFFF));
-		}else if(lvlDK.equals("1.5")) {
-			//5AAEFF
-			b14.setBackground(new Color(0x5AAEFF));
-		}else if(lvlDK.equals("2.0")) {
-			//FFE400
-			b14.setBackground(new Color(0xFFE400));
-		}else if(lvlDK.equals("2.5")) {
-			//FFBB00
-			b14.setBackground(new Color(0xFFBB00));
-		}else if(lvlDK.equals("3.0")) {
-			//FF0000
-			b14.setBackground(new Color(0xFF0000));
-		}
+		daegu_btn = new JButton();
+		daegu_btn.setBounds(528, 360, 113, 40);
+		daegu_btn.setFocusPainted(false);
+		daegu_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		daegu_btn.addActionListener(this);
+		daegu_btn.setBackground(new Color(0x87cefa));
 		
 		//경북
 		localName = "경상북도";
 		String lvlGB = setLevel(localName);
 		
-		b15 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlGB + "</body></html>");
-		b15.setBounds(528, 248, 113, 40);
-		b15.setFocusPainted(false);
-		b15.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b15.addActionListener(this);
-		if(lvlGB.equals("1.0")) {
-			//0xE6FFFF
-			b15.setBackground(new Color(0xE6FFFF));
-		}else if(lvlGB.equals("1.5")) {
-			//5AAEFF
-			b15.setBackground(new Color(0x5AAEFF));
-		}else if(lvlGB.equals("2.0")) {
-			//FFE400
-			b15.setBackground(new Color(0xFFE400));
-		}else if(lvlGB.equals("2.5")) {
-			//FFBB00
-			b15.setBackground(new Color(0xFFBB00));
-		}else if(lvlGB.equals("3.0")) {
-			//FF0000
-			b15.setBackground(new Color(0xFF0000));
-		}
+		gyeongbuk_btn = new JButton();
+		gyeongbuk_btn.setBounds(528, 248, 113, 40);
+		gyeongbuk_btn.setFocusPainted(false);
+		gyeongbuk_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		gyeongbuk_btn.addActionListener(this);
+		gyeongbuk_btn.setBackground(new Color(0x87cefa));
 		
 		//충북
 		localName = "충청북도";
 		String lvlCB = setLevel(localName);
 		
-		b16 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlCB + "</body></html>");
-		b16.setBounds(507, 141, 113, 40);
-		b16.setFocusPainted(false);
-		b16.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b16.addActionListener(this);
-		if(lvlCB.equals("1.0")) {
-			//0xE6FFFF
-			b16.setBackground(new Color(0xE6FFFF));
-		}else if(lvlCB.equals("1.5")) {
-			//5AAEFF
-			b16.setBackground(new Color(0x5AAEFF));
-		}else if(lvlCB.equals("2.0")) {
-			//FFE400
-			b16.setBackground(new Color(0xFFE400));
-		}else if(lvlCB.equals("2.5")) {
-			//FFBB00
-			b16.setBackground(new Color(0xFFBB00));
-		}else if(lvlCB.equals("3.0")) {
-			//FF0000
-			b16.setBackground(new Color(0xFF0000));
-		}
+		chungbuk_btn = new JButton();
+		chungbuk_btn.setBounds(507, 141, 113, 40);
+		chungbuk_btn.setFocusPainted(false);
+		chungbuk_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		chungbuk_btn.addActionListener(this);
+		chungbuk_btn.setBackground(new Color(0x87cefa));
 		
 		//강원
 		localName = "강원도";
 		String lvlGWD = setLevel(localName);
 		
-		b17 = new JButton("<html><body><center>"+ localName +"<br>"+ lvlGWD + "</body></html>");
-		b17.setBounds(454, 49, 113, 40);
-		b17.setFocusPainted(false);
-		b17.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		b17.addActionListener(this);
-		if(lvlGWD.equals("1.0")) {
-			//0xE6FFFF
-			b17.setBackground(new Color(0xE6FFFF));
-		}else if(lvlGWD.equals("1.5")) {
-			//5AAEFF
-			b17.setBackground(new Color(0x5AAEFF));
-		}else if(lvlGWD.equals("2.0")) {
-			//FFE400
-			b17.setBackground(new Color(0xFFE400));
-		}else if(lvlGWD.equals("2.5")) {
-			//FFBB00
-			b17.setBackground(new Color(0xFFBB00));
-		}else if(lvlGWD.equals("3.0")) {
-			//FF0000
-			b17.setBackground(new Color(0xFF0000));
-		}
+		gangwon_btn = new JButton();
+		gangwon_btn.setBounds(454, 49, 113, 40);
+		gangwon_btn.setFocusPainted(false);
+		gangwon_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		gangwon_btn.addActionListener(this);
+		gangwon_btn.setBackground(new Color(0x87cefa));
+//		if(lvlGWD.equals("1.0")) {
+//			//0xE6FFFF
+//			gangwon_btn.setBackground(new Color(0xE6FFFF));
+//		}else if(lvlGWD.equals("1.5")) {
+//			//5AAEFF
+//			gangwon_btn.setBackground(new Color(0x5AAEFF));
+//		}else if(lvlGWD.equals("2.0")) {
+//			//FFE400
+//			gangwon_btn.setBackground(new Color(0xFFE400));
+//		}else if(lvlGWD.equals("2.5")) {
+//			//FFBB00
+//			gangwon_btn.setBackground(new Color(0xFFBB00));
+//		}else if(lvlGWD.equals("3.0")) {
+//			//FF0000
+//			gangwon_btn.setBackground(new Color(0xFF0000));
+//		}
 		
-		p1.add(b1);
-		p1.add(b2);
-		p1.add(b3);
-		p1.add(b4);
-		p1.add(b5);
-		p1.add(b6);
-		p1.add(b7);
-		p1.add(b8);
-		p1.add(b9);
-		p1.add(b10);
-		p1.add(b11);
-		p1.add(b12);
-		p1.add(b13);
-		p1.add(b14);
-		p1.add(b15);
-		p1.add(b16);
-		p1.add(b17);
+		// 실행 간격 지정(3600초)
+		int sec = 3600;
+		// 주기적인 작업을 위한
+		final ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
+		exec.scheduleAtFixedRate(new Runnable() {
+			@Override
+			public void run() {
+				vaccine_Status();
+				// 에러 발생시 중지시킴
+				exec.shutdown();
+			}
+			}, 0, sec, TimeUnit.SECONDS);
+		
+		
+		
+		
+		
+		p1.add(seoul_btn);
+		p1.add(incheon_btn);
+		p1.add(gyeonggi_btn);
+		p1.add(chungnam_btn);
+		p1.add(seojong_btn);
+		p1.add(daejeon_btn);
+		p1.add(jeonbuk_btn);
+		p1.add(gwangju_btn);
+		p1.add(jeonnam_btn);
+		p1.add(jeju_btn);
+		p1.add(gyeongnam_btn);
+		p1.add(busan_btn);
+		p1.add(ulsan_btn);
+		p1.add(daegu_btn);
+		p1.add(gyeongbuk_btn);
+		p1.add(chungbuk_btn);
+		p1.add(gangwon_btn);
 		
 		p1.add(lblicon);
 		
@@ -602,41 +394,135 @@ public class Distancing_Map extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if(obj == b1) {
-			new Seoul_Comfirmed("서울 확진자 현황", 800, 615);
-		}else if(obj == b2) {
-			new Incheon_Comfirmed("인천 확진자 현황", 800, 615);
-		}else if(obj == b3) {
-			new Gyeonggi_Comfirmed("경기 확진자 현황", 800, 615);
-		}else if(obj == b4) {
-			new Chungnam_Comfirmed("충남 확진자 현황", 800, 615);
-		}else if(obj == b5) {
-			new Sejong_Comfirmed("세종 확진자 현황", 800, 615);
-		}else if(obj == b6) {
-			new Daejeon_Comfirmed("대전 확진자 현황", 800, 615);
-		}else if(obj == b7) {
-			new Jeonbuk_Comfirmed("전북 확진자 현황", 800, 615);
-		}else if(obj == b8) {
-			new Gwangju_Comfirmed("광주 확진자 현황", 800, 615);
-		}else if(obj == b9) {
-			new Jeonnam_Comfirmed("전남 확진자 현황", 800, 615);
-		}else if(obj == b10) {
-			new Jeju_Comfirmed("제주 확진자 현황", 800, 615);
-		}else if(obj == b11) {
-			new Gyeongnam_Comfirmed("경남 확진자 현황", 800, 615);
-		}else if(obj == b12) {
-			new Busan_Comfirmed("부산 확진자 현황", 800, 615);
-		}else if(obj == b13) {
-			new Ulsan_Comfirmed("울산 확진자 현황", 800, 615);
-		}else if(obj == b14) {
-			new Daegu_Comfirmed("대구 확진자 현황", 800, 615);
-		}else if(obj == b15) {
-			new Gyeongbuk_Comfirmed("경북 확진자 현황", 800, 615);
-		}else if(obj == b16) {
-			new Chungbuk_Comfirmed("충북 확진자 현황", 800, 615);
-		}else if(obj == b17) {
-			new Gangwon_Comfirmed("강원 확진자 현황", 800, 615);
+		if(obj == seoul_btn) {
+			new Seoul_Comfirmed("서울 확진자 현황", 880, 615);
+		}else if(obj == incheon_btn) {
+			new Incheon_Comfirmed("인천 확진자 현황", 880, 615);
+		}else if(obj == gyeonggi_btn) {
+			new Gyeonggi_Comfirmed("경기 확진자 현황", 880, 615);
+		}else if(obj == chungnam_btn) {
+			new Chungnam_Comfirmed("충남 확진자 현황", 880, 615);
+		}else if(obj == seojong_btn) {
+			new Sejong_Comfirmed("세종 확진자 현황", 880, 615);
+		}else if(obj == daejeon_btn) {
+			new Daejeon_Comfirmed("대전 확진자 현황", 880, 615);
+		}else if(obj == jeonbuk_btn) {
+			new Jeonbuk_Comfirmed("전북 확진자 현황", 880, 615);
+		}else if(obj == gwangju_btn) {
+			new Gwangju_Comfirmed("광주 확진자 현황", 880, 615);
+		}else if(obj == jeonnam_btn) {
+			new Jeonnam_Comfirmed("전남 확진자 현황", 880, 615);
+		}else if(obj == jeju_btn) {
+			new Jeju_Comfirmed("제주 확진자 현황", 880, 615);
+		}else if(obj == gyeongnam_btn) {
+			new Gyeongnam_Comfirmed("경남 확진자 현황", 880, 615);
+		}else if(obj == busan_btn) {
+			new Busan_Comfirmed("부산 확진자 현황", 880, 615);
+		}else if(obj == ulsan_btn) {
+			new Ulsan_Comfirmed("울산 확진자 현황", 880, 615);
+		}else if(obj == daegu_btn) {
+			new Daegu_Comfirmed("대구 확진자 현황", 880, 615);
+		}else if(obj == gyeongbuk_btn) {
+			new Gyeongbuk_Comfirmed("경북 확진자 현황", 880, 615);
+		}else if(obj == chungbuk_btn) {
+			new Chungbuk_Comfirmed("충북 확진자 현황", 880, 615);
+		}else if(obj == gangwon_btn) {
+			new Gangwon_Comfirmed("강원 확진자 현황", 880, 615);
 		}
 	}
+
+	public void vaccine_Status() {
+		Document doc;
+		try {
+			doc = Jsoup.connect(url).get();
+			seoul_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(2) > td:nth-child(5)");
+			busan_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(3) > td:nth-child(5)");
+			Elements daegu_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(4) > td:nth-child(5)");
+			Elements incheon_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(5) > td:nth-child(5)");
+			Elements gwangju_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(6) > td:nth-child(5)");
+			Elements daejeon_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(7) > td:nth-child(5)");
+			Elements ulsan_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(8) > td:nth-child(5)");
+			Elements seojong_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(9) > td:nth-child(5)");
+			Elements gyeonggi_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(10) > td:nth-child(5)");
+			Elements gangwon_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(11) > td:nth-child(5)");
+			Elements chungbuk_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(12) > td:nth-child(5)");
+			Elements chungnam_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(13) > td:nth-child(5)");
+			Elements jeonbuk_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(14) > td:nth-child(5)");
+			Elements jeonnam_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(15) > td:nth-child(5)");
+			Elements gyeongbuk_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(16) > td:nth-child(5)");
+			Elements gyeongnam_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(17) > td:nth-child(5)");
+			Elements jeju_elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child(18) > td:nth-child(5)");
+			
+			
+			String seoul_vaccine = seoul_elm.text();
+			seoul_vaccine = seoul_vaccine.format("%.2f%%%n", Double.parseDouble(seoul_vaccine.replace(",",""))  / 9505868 * 100.0);
+			String busan_vaccine = busan_elm.text();
+			busan_vaccine = busan_vaccine.format("%.2f%%%n", Double.parseDouble(busan_vaccine.replace(",",""))  / 3356587 * 100.0);
+			String daegu_vaccine = daegu_elm.text();
+			daegu_vaccine = daegu_vaccine.format("%.2f%%%n", Double.parseDouble(daegu_vaccine.replace(",",""))  / 2401110 * 100.0);
+			String incheon_vaccine = incheon_elm.text();
+			incheon_vaccine = incheon_vaccine.format("%.2f%%%n", Double.parseDouble(incheon_vaccine.replace(",",""))  / 2915839 * 100.0);
+			String gwangju_vaccine = gwangju_elm.text();
+			gwangju_vaccine = gwangju_vaccine.format("%.2f%%%n", Double.parseDouble(gwangju_vaccine.replace(",",""))  / 1441552 * 100.0);
+			String daejeon_vaccine = daejeon_elm.text();
+			daejeon_vaccine = daejeon_vaccine.format("%.2f%%%n", Double.parseDouble(daejeon_vaccine.replace(",",""))  / 1454011	 * 100.0);
+			String ulsan_vaccine = ulsan_elm.text();
+			ulsan_vaccine = ulsan_vaccine.format("%.2f%%%n", Double.parseDouble(ulsan_vaccine.replace(",",""))  / 1130315 * 100.0);
+			String seojong_vaccine = seojong_elm.text();
+			seojong_vaccine = seojong_vaccine.format("%.2f%%%n", Double.parseDouble(seojong_vaccine.replace(",",""))  / 354705 * 100.0);
+			String gyeonggi_vaccine = gyeonggi_elm.text();
+			gyeonggi_vaccine = gyeonggi_vaccine.format("%.2f%%%n", Double.parseDouble(gyeonggi_vaccine.replace(",",""))  / 13315895 * 100.0);
+			String gangwon_vaccine = gangwon_elm.text();
+			gangwon_vaccine = gangwon_vaccine.format("%.2f%%%n", Double.parseDouble(gangwon_vaccine.replace(",",""))  / 1529586 * 100.0);
+			String chungbuk_vaccine = chungbuk_elm.text();
+			chungbuk_vaccine = chungbuk_vaccine.format("%.2f%%%n", Double.parseDouble(chungbuk_vaccine.replace(",",""))  / 1591009 * 100.0);
+			String chungnam_vaccine = chungbuk_elm.text();
+			chungnam_vaccine = chungnam_vaccine.format("%.2f%%%n", Double.parseDouble(chungnam_vaccine.replace(",",""))  / 2106946 * 100.0);
+			String jeonbuk_vaccine = jeonbuk_elm.text();
+			jeonbuk_vaccine = jeonbuk_vaccine.format("%.2f%%%n", Double.parseDouble(jeonbuk_vaccine.replace(",",""))  / 1792694 * 100.0);
+			String jeonnam_vaccine = jeonnam_elm.text();
+			jeonnam_vaccine = jeonnam_vaccine.format("%.2f%%%n", Double.parseDouble(jeonnam_vaccine.replace(",",""))  / 1839432 * 100.0);
+			String gyeongbuk_vaccine = gyeongbuk_elm.text();
+			gyeongbuk_vaccine = gyeongbuk_vaccine.format("%.2f%%%n", Double.parseDouble(gyeongbuk_vaccine.replace(",",""))  / 2623028 * 100.0);
+			String gyeongnam_vaccine = gyeongbuk_elm.text();
+			gyeongnam_vaccine = gyeongnam_vaccine.format("%.2f%%%n", Double.parseDouble(gyeongnam_vaccine.replace(",",""))  / 3321362 * 100.0);
+			String jeju_vaccine = jeju_elm.text();
+			jeju_vaccine = jeju_vaccine.format("%.2f%%%n", Double.parseDouble(jeju_vaccine.replace(",",""))  / 669177 * 100.0);
+			
+			System.out.println(seoul_vaccine);
+			System.out.println(busan_vaccine);
+			
+			
+			seoul_btn.setText("<html><body><center>"+ "서울" +"<br>"+ seoul_vaccine + "</body></html>");
+			busan_btn.setText("<html><body><center>"+ "부산" +"<br>"+ busan_vaccine + "</body></html>");
+			daegu_btn.setText("<html><body><center>"+ "대구" +"<br>"+ daegu_vaccine + "</body></html>");
+			incheon_btn.setText("<html><body><center>"+ "인천" +"<br>"+ incheon_vaccine + "</body></html>");
+			gwangju_btn.setText("<html><body><center>"+ "광주" +"<br>"+ gwangju_vaccine + "</body></html>");
+			daejeon_btn.setText("<html><body><center>"+ "대전" +"<br>"+ daejeon_vaccine + "</body></html>");
+			ulsan_btn.setText("<html><body><center>"+ "울산" +"<br>"+ ulsan_vaccine + "</body></html>");
+			seojong_btn.setText("<html><body><center>"+ "세종" +"<br>"+ seojong_vaccine + "</body></html>");
+			gyeonggi_btn.setText("<html><body><center>"+ "경기" +"<br>"+ gyeonggi_vaccine + "</body></html>");
+			gangwon_btn.setText("<html><body><center>"+ "강원도" +"<br>"+ gangwon_vaccine + "</body></html>");
+			chungbuk_btn.setText("<html><body><center>"+ "충청북도" +"<br>"+ chungbuk_vaccine + "</body></html>");
+			chungnam_btn.setText("<html><body><center>"+ "충청남도" +"<br>"+ chungnam_vaccine + "</body></html>");
+			jeonbuk_btn.setText("<html><body><center>"+ "전라북도" +"<br>"+ jeonbuk_vaccine + "</body></html>");
+			jeonnam_btn.setText("<html><body><center>"+ "전라남도" +"<br>"+ jeonnam_vaccine + "</body></html>");
+			gyeongbuk_btn.setText("<html><body><center>"+ "경상북도" +"<br>"+ gyeongbuk_vaccine + "</body></html>");
+			gyeongnam_btn.setText("<html><body><center>"+ "경상남도" +"<br>"+ gyeongbuk_vaccine + "</body></html>");
+			gyeongnam_btn.setText("<html><body><center>"+ "경상남도" +"<br>"+ gyeongbuk_vaccine + "</body></html>");
+			jeju_btn.setText("<html><body><center>"+ "제주도" +"<br>"+ jeju_vaccine + "</body></html>");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	public void data_1(Elements elm) {
+		for (int i = 2; i <= 3; i++) {
+			elm = doc.select("#content > div.data_table.tbl_scrl_t > table > tbody > tr:nth-child("+i+") > td:nth-child(5)");
+		}
+	}
+	
 
 }
