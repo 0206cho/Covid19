@@ -22,7 +22,7 @@ public class IsolatedMonitoring extends JFrame implements ActionListener {
 // JFrame을 불러옴
 	public IsolatedMonitoring() {
 		this.setTitle("자가모니터링 방법");
-		setSize(600, 600);
+		setSize(500, 400);
 		setLocationRelativeTo(this); // 내 자신으로부터 상대적인 위치 잡음
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false); // 실행후 화면크기 변경 불가
@@ -45,13 +45,14 @@ public class IsolatedMonitoring extends JFrame implements ActionListener {
 		color = new Color(0xE6FFFF);
 
 		pCenter = new JPanel();
-		pCenter.setLayout(new FlowLayout());
+		pCenter.setLayout(new BorderLayout());
+		pCenter.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0));
 		pCenter.setBackground(color);
 		
-		lblMonitoring = new JLabel("<html>◆자가모니터링 방법◆<br/>"
-				+ "▶매일 아침, 저녁으로 체온 측정하기<br/>"
-				+ "▶호흡기증상 등 감염 증상이 나타나는지 스스로 건강상태 확인<br/>"
-				+ "▶보건소에서 1일 1회 이상 연락 시, 감염 증상 알려주기<br/></html>");
+		lblMonitoring = new JLabel("<html>◆자가모니터링 방법◆<br/><br/><br/>"
+				+ "▶ 매일 아침, 저녁으로 체온 측정하기<br/><br/><br/>"
+				+ "▶ 호흡기증상 등 감염 증상이 나타나는지 스스로 건강상태 확인<br/><br/><br/>"
+				+ "▶ 보건소에서 1일 1회 이상 연락 시, 감염 증상 알려주기<br/></html>");
 		lblMonitoring.setFont(new Font("맑은고딕", Font.BOLD, 14));
 		pCenter.add(lblMonitoring);
 

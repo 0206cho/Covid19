@@ -22,7 +22,7 @@ public class IsolatedTogether extends JFrame implements ActionListener {
 // JFrame을 불러옴
 	public IsolatedTogether() {
 		this.setTitle("자가격리대상자의 가족 및 동거인을 위한 생활수칙");
-		setSize(600, 600);
+		setSize(480, 600);
 		setLocationRelativeTo(this); // 내 자신으로부터 상대적인 위치 잡음
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false); // 실행후 화면크기 변경 불가
@@ -45,28 +45,29 @@ public class IsolatedTogether extends JFrame implements ActionListener {
 		color = new Color(0xE6FFFF);
 
 		pCenter = new JPanel();
-		pCenter.setLayout(new FlowLayout());
+		pCenter.setLayout(new BorderLayout());
+		pCenter.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0));		
 		pCenter.setBackground(color);
 		
-		lblTogether = new JLabel("<HTML>◆자가격리대상자의 가족 및 동거인을 위한 생활수칙◆<BR/>"
-				+ "  ▶가족 또는 동거인은 최대한 자가격리대상자와<BR/>"
+		lblTogether = new JLabel("<HTML>◆자가격리대상자의 가족 및 동거인을 위한 생활수칙◆<BR/><BR/>"
+				+ "  ▶ 가족 또는 동거인은 최대한 자가격리대상자와<BR/>"
 				+ "      접촉하지 않도록 하기<BR/>"
-				+ "      -특히, 노인, 임산부, 소아, 만성질환, 암 등<BR/>"
+				+ "      - 특히, 노인, 임산부, 소아, 만성질환, 암 등<BR/>"
 				+ "       면역력이 저하된 분은 접촉 금지하기<BR/>"
-				+ "      -외부인의 방문 제한하기<BR/>"
-				+ "  ▶자가격리대상자와 불가피하게 접촉할 경우<BR/>"
+				+ "      - 외부인의 방문 제한하기<BR/>"
+				+ "  ▶ 자가격리대상자와 불가피하게 접촉할 경우<BR/>"
 				+ "      마스크를 쓰고 서로 2m이상의 거리를 두기<BR/>"
-				+ "  ▶자가격리대상자와 독립된 공간에서 생활하시고,<BR/>"
+				+ "  ▶ 자가격리대상자와 독립된 공간에서 생활하시고,<BR/>"
 				+ "      공용으로 사용하는 공간은 자주 환기를 시키기<BR/>"
-				+ "  ▶비누 또는 손세정제를 이용하여<BR/>"
+				+ "  ▶ 비누 또는 손세정제를 이용하여<BR/>"
 				+ "      흐르는 물에 30초 이상 자주 손 씻기<BR/>"
-				+ "  ▶자가격리대상자와 생활용품을 구분하여 사용하기<BR/>"
-				+ "      -자가격리대상자의 의복 및 침구류는 단독세탁<BR/>"
-				+ "      -자가격리대상자의 식기류 등은 별도로 분리하여<BR/>"
+				+ "  ▶ 자가격리대상자와 생활용품을 구분하여 사용하기<BR/>"
+				+ "      - 자가격리대상자의 의복 및 침구류는 단독세탁<BR/>"
+				+ "      - 자가격리대상자의 식기류 등은 별도로 분리하여<BR/>"
 				+ "       깨끗이 씻기 전에 다른 사람이 사용하지 않도록 하기<BR/>"
-				+ "  ▶테이블 위, 문손잡이, 욕실기구, 키보드, 침대 옆 테이블 등<BR/>"
+				+ "  ▶ 테이블 위, 문손잡이, 욕실기구, 키보드, 침대 옆 테이블 등<BR/>"
 				+ "      손길이 많이 닿는 곳의 표면 자주 닦기<BR/>"
-				+ "  ▶자가격리대상자의 건강상태를 주의 깊게 관찰하기<BR/></HTML>");
+				+ "  ▶ 자가격리대상자의 건강상태를 주의 깊게 관찰하기<BR/></HTML>");
 		
 		lblTogether.setFont(new Font("맑은고딕", Font.BOLD, 14));
 		pCenter.add(lblTogether);

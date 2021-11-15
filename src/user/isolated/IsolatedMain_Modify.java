@@ -77,38 +77,41 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		color2 = new Color(0xE6FFFF);
 
 		pCenter = new JPanel();
-		pCenter.setLayout(new FlowLayout());
+		pCenter.setLayout(null);
 		pCenter.setBackground(color2);
 
 		// 현재 날짜 구하기 (시스템 시계, 시스템 타임존)
 		LocalDate now = LocalDate.now();
 
 		// 자가격리 날짜
-		String isolatedDate = "SELECT DATEDIFF('" + now
-				+ "', (select isolatedDate from isolated where name Like '김민솔'))";
+//		String isolatedDate = "SELECT DATEDIFF('" + now
+//				+ "', (select isolatedDate from isolated where name Like '김민솔'))";
+		String isolatedDate = "SELECT name, DATEDIFF('" + now + "', (select isolatedDate from isolated WHERE isolatedID LIKE 'ISO001')) "
+				+ "from isolated WHERE isolatedID LIKE 'ISO001'";
 		
-//		String isolatedName = "SELECT name "
-//				+ "FROM isolated"
-//				+ "WHERE isolatedID LIKE 'ISO001'";
 		// -> 로그인한 사용자 id마다 이름, 자가격리 날짜 다르게 수정,,
 
 		try {
 			ResultSet rs = DB.getResultSet(isolatedDate);
 			while (rs.next()) {
-				iso_id = rs.getString(1);
+				iso_name = rs.getString(1);
+				iso_id = rs.getString(2);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		JLabel lbl_day = new JLabel("자가격리 " + iso_id + "일째");
+		
+		JLabel lbl_day = new JLabel("※" + iso_name + "님은 현재 자가격리 " + iso_id + "일차 입니다※");
 		lbl_day.setFont(new Font("맑은고딕", Font.BOLD, 20));
 		lbl_day.setForeground(Color.RED);
+		lbl_day.setBounds(45, 50, 450, 50);
 		pCenter.add(lbl_day);
 
 		// 생활수칙
 		lbl_rule = new JLabel("<HTML><U>자가격리 대상자 생활수칙</U></HTML>");
 		lbl_rule.setFont(new Font("맑은고딕", Font.BOLD, 18));
 		lbl_rule.setForeground(Color.BLUE);
+		lbl_rule.setBounds(40, 150, 380, 50);
 		lbl_rule.addMouseListener(this);
 		pCenter.add(lbl_rule);
 
@@ -116,6 +119,7 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		lbl_togetherRule = new JLabel("<HTML><U>자가격리대상자의 가족 및 동거인을 위한 생활수칙</U></HTML>");
 		lbl_togetherRule.setFont(new Font("맑은고딕", Font.BOLD, 18));
 		lbl_togetherRule.setForeground(Color.BLUE);
+		lbl_togetherRule.setBounds(40, 250, 420, 50);
 		lbl_togetherRule.addMouseListener(this);
 		pCenter.add(lbl_togetherRule);
 
@@ -123,6 +127,7 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		lbl_symptoms = new JLabel("<HTML><U>코로나19 주요 증상</U></HTML>");
 		lbl_symptoms.setFont(new Font("맑은고딕", Font.BOLD, 18));
 		lbl_symptoms.setForeground(Color.BLUE);
+		lbl_symptoms.setBounds(40, 350, 420, 50);
 		lbl_symptoms.addMouseListener(this);
 		pCenter.add(lbl_symptoms);
 
@@ -130,6 +135,7 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		lbl_monitoring = new JLabel("<HTML><U>자가모니터링 방법</U></HTML>");
 		lbl_monitoring.setFont(new Font("맑은고딕", Font.BOLD, 18));
 		lbl_monitoring.setForeground(Color.BLUE);
+		lbl_monitoring.setBounds(40, 450, 420, 50);
 		lbl_monitoring.addMouseListener(this);
 		pCenter.add(lbl_monitoring);
 

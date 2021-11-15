@@ -22,7 +22,7 @@ public class IsolatedRule extends JFrame implements ActionListener {
 // JFrame을 불러옴
 	public IsolatedRule() {
 		this.setTitle("자가격리 대상자 생활수칙");
-		setSize(600, 600);
+		setSize(500, 600);
 		setLocationRelativeTo(this); // 내 자신으로부터 상대적인 위치 잡음
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false); // 실행후 화면크기 변경 불가
@@ -45,32 +45,34 @@ public class IsolatedRule extends JFrame implements ActionListener {
 		color = new Color(0xE6FFFF);
 
 		pCenter = new JPanel();
-		pCenter.setLayout(new FlowLayout());
+		pCenter.setLayout(new BorderLayout());
+		pCenter.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0));
 		pCenter.setBackground(color);
 		
 		lblRule = new JLabel("<html>◆자가격리 대상자 생활수칙◆<br/>"
-				+ "▶감염 전파 방지를 위해 격리장소 바깥 외출금지<br/>"
-				+ "▶독립된 공간에서 혼자 생활하기<br/>"
-				+ "      -방문 닫은 채로 창문을 열어 자주 환기시키고, 식사는 혼자서 하기<br/>"
-				+ "      -가능한 혼자만 사용할 수 있는 화장실과<br/>"
+				+ "▶ 감염 전파 방지를 위해 격리장소 바깥 외출금지<br/>"
+				+ "▶ 독립된 공간에서 혼자 생활하기<br/>"
+				+ "      - 방문 닫은 채로 창문을 열어 자주 환기시키고, 식사는 혼자서 하기<br/>"
+				+ "      - 가능한 혼자만 사용할 수 있는 화장실과<br/>"
 				+ "       세면대가 있는 공간 사용하기<br/>"
 				+ "          *공용 화장실, 세면대를 사용한다면, 사용 후 소독<br/>"
 				+ "           (락스 등 가정용소독제)하고 다른 사람이 사용하도록 합니다.<br/>"
-				+ "  ▶진료 등 외출이 불가피할 경우 반드시 관할 보건소에<br/>" 
+				+ "  ▶ 진료 등 외출이 불가피할 경우 반드시 관할 보건소에<br/>" 
 				+ "      먼저 연락하기<br/>"
-				+ "  ▶가족 또는 함께 거주하는 분과 대화 등 접촉하지 않기<br/>"
-				+ "      -불가피한 경우, 얼굴을 맞대지 않고<br/>"
+				+ "  ▶ 가족 또는 함께 거주하는 분과 대화 등 접촉하지 않기<br/>"
+				+ "      - 불가피한 경우, 얼굴을 맞대지 않고<br/>"
 				+ "       서로 마스크를 쓰고 2m이상의 거리를 두기<br/>"
-				+ "  ▶개인용품(개인용 수건, 식기류, 휴대전화 등)으로 사용하기<br/>"
-				+ "      -의복 및 침구류는 단독세탁<br/>"
-				+ "      -식기류 등은 별도로 분리하여 깨끗이 씻기 전에<br/>"
+				+ "  ▶ 개인용품(개인용 수건, 식기류, 휴대전화 등)으로 사용하기<br/>"
+				+ "      - 의복 및 침구류는 단독세탁<br/>"
+				+ "      - 식기류 등은 별도로 분리하여 깨끗이 씻기 전에<br/>"
 				+ "       다른 사람이 사용하지 않도록 하기<br/>"
-				+ "  ▶건강수칙 지키기<br/>"
-				+ "      -비누로 30초이상 흐르는 물에 손 씻기, 기침 등 호흡기증상이<br/>"
+				+ "  ▶ 건강수칙 지키기<br/>"
+				+ "      - 비누로 30초이상 흐르는 물에 손 씻기, 기침 등 호흡기증상이<br/>"
 				+ "       있을 경우 마스크 착용, 마스크가 없으면 소매로 가려 기침하며<br/>"
 				+ "       기침, 재채기 후 손 씻거나 손 소독 실시하기</html>");
+		
 		lblRule.setFont(new Font("맑은고딕", Font.BOLD, 14));
-		pCenter.add(lblRule);
+		pCenter.add(lblRule, BorderLayout.CENTER);
 
 		// 모든 패널 붙이기
 		pLast = new JPanel();
