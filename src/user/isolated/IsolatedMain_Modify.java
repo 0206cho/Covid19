@@ -28,11 +28,13 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 	private JLabel lblicon, lbl_rule, lbl_togetherRule, lbl_symptoms, lbl_monitoring;
 	private JTextField txtInput;
 	private JButton btnSend, btnLogout;
-	private Color color1, color2;
-	private String iso_id, iso_name;
+	private Color color;
+	private String iso_id, iso_name, get_id;
+	private IsolatedLogin isolatedLogin;
 
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public IsolatedMain_Modify(String title, int width, int height) {
+	public IsolatedMain_Modify(String title, int width, int height, IsolatedLogin isolatedLogin) {
+		this.isolatedLogin = isolatedLogin;
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); // 화면 가운데 찍음
@@ -58,7 +60,6 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 
 		JPanel penLogout = new JPanel();
 		penLogout.setLayout(null);
-//		penLogout.setBounds(10, 10, 10, 10);
 		penLogout.setBackground(Color.WHITE);
 
 		btnLogout = new JButton(imgLogout);
@@ -73,21 +74,21 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		pUp.add(penLogout);
 
 		// 중앙패널
-		color1 = new Color(0xD4F4FA);
-		color2 = new Color(0xE6FFFF);
+		color = new Color(0xE6FFFF);
 
 		pCenter = new JPanel();
 		pCenter.setLayout(null);
-		pCenter.setBackground(color2);
+		pCenter.setBackground(color);
 
 		// 현재 날짜 구하기 (시스템 시계, 시스템 타임존)
 		LocalDate now = LocalDate.now();
 
 		// 자가격리 날짜
-//		String isolatedDate = "SELECT DATEDIFF('" + now
-//				+ "', (select isolatedDate from isolated where name Like '김민솔'))";
-		String isolatedDate = "SELECT name, DATEDIFF('" + now + "', (select isolatedDate from isolated WHERE isolatedID LIKE 'ISO001')) "
-				+ "from isolated WHERE isolatedID LIKE 'ISO001'";
+		get_id = isolatedLogin.getTx1().getText();
+		System.out.println(get_id);
+		
+		String isolatedDate = "SELECT name, DATEDIFF('" + now + "', (select isolatedDate from isolated WHERE isolatedID LIKE '" + get_id + "')) "
+				+ "from isolated WHERE isolatedID LIKE '" + get_id + "'";
 		
 		// -> 로그인한 사용자 id마다 이름, 자가격리 날짜 다르게 수정,,
 
@@ -151,7 +152,7 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 
 		// 전송 버튼
 		btnSend = new JButton("전송");
-		btnSend.setBackground(color2);
+		btnSend.setBackground(color);
 		btnSend.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		btnSend.addActionListener(this);
 
@@ -188,7 +189,7 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new IsolatedMain_Modify("자가격리자", 510, 720);
+//		new IsolatedMain_Modify("자가격리자", 510, 720, this);
 	}
 
 	// 이벤트

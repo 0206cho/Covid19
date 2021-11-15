@@ -104,9 +104,14 @@ public class IsolatedFindIDPW extends JFrame implements ActionListener {
 		add(last);
 		
 		setVisible(true);
-		
-		
 	}
+	public JLabel getLbl1() {
+		return lbl1;
+	}
+	public JLabel getLbl2() {
+		return lbl2;
+	}
+	
 	public void paint (Graphics g) {
 		super.paint(g);
 		g.drawLine(0, 100, 1050, 100);

@@ -150,7 +150,7 @@ public class IsolatedLogin extends JFrame implements ActionListener {
 				tx2.requestFocus();
 			}else {
 				if(check) {
-					new IsolatedMain("자가격리", 510, 720);
+					new IsolatedMain_Modify("자가격리", 510, 720, this);
 					tx1.setText("");
 					tx2.setText("");
 //					this.dispose();
@@ -167,6 +167,12 @@ public class IsolatedLogin extends JFrame implements ActionListener {
 			new IsolatedFindIDPW("ID/PW 찾기", 450, 350);
 		}
 		
+	}
+	public JTextField getTx1() {
+		return tx1;
+	}
+	public JPasswordField getTx2() {
+		return tx2;
 	}
 	private boolean checkIDPW(String id, String pw) {
 		boolean check = false;
