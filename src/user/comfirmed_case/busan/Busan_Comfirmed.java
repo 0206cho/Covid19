@@ -200,7 +200,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new Busan_Comfirmed("부산 확진자 현황", 880, 615);
+		new Busan_Comfirmed("부산 보건소 현황", 880, 615);
 	}
 
 	public DefaultTableModel getModel() {
@@ -215,7 +215,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 		} else if (obj == b3) {
 			useraddAll(model);
 		} else if (obj == b1) {
-			new Busan_Search("부산 확진자 검색", 350, 250, this);
+			new Busan_Search("부산 보건소 검색", 350, 250, this);
 		}
 	}
 
