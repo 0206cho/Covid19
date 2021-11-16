@@ -19,29 +19,29 @@ public class IsolatedRule extends JFrame implements ActionListener {
 	private JLabel lblicon, lblRule;
 	private Color color;
 
-// JFrameÀ» ºÒ·¯¿È
+// JFrameì„ ë¶ˆëŸ¬ì˜´
 	public IsolatedRule() {
-		this.setTitle("ÀÚ°¡°Ý¸® ´ë»óÀÚ »ýÈ°¼öÄ¢");
+		this.setTitle("ìžê°€ê²©ë¦¬ ëŒ€ìƒìž ìƒí™œìˆ˜ì¹™");
 		setSize(500, 600);
-		setLocationRelativeTo(this); // ³» ÀÚ½ÅÀ¸·ÎºÎÅÍ »ó´ëÀûÀÎ À§Ä¡ ÀâÀ½
+		setLocationRelativeTo(this); // ë‚´ ìžì‹ ìœ¼ë¡œë¶€í„° ìƒëŒ€ì ì¸ ìœ„ì¹˜ ìž¡ìŒ
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false); // ½ÇÇàÈÄ È­¸éÅ©±â º¯°æ ºÒ°¡
+		setResizable(false); // ì‹¤í–‰í›„ í™”ë©´í¬ê¸° ë³€ê²½ ë¶ˆê°€
 
-		// »ó´Ü ÆÐ³Î
+		// ìƒë‹¨ íŒ¨ë„
 		pUp = new JPanel();
 		pUp.setLayout(new BorderLayout());
 		pUp.setBackground(Color.white);
 
-		// ·Î°í
+		// ë¡œê³ 
 		ImageIcon icon = new ImageIcon("images/logo2.JPG");
 		lblicon = new JLabel(icon);
-		lblicon.setToolTipText("¹ã³·¾øÀÌ ¹æ¿ªÀ» À§ÇØ °í»ýÇÏ½Ã´Â °ü°èÀÚºÐµé ÀÀ¿øÇÕ´Ï´Ù!!");
+		lblicon.setToolTipText("ë°¤ë‚®ì—†ì´ ë°©ì—­ì„ ìœ„í•´ ê³ ìƒí•˜ì‹œëŠ” ê´€ê³„ìžë¶„ë“¤ ì‘ì›í•©ë‹ˆë‹¤!!");
 		// lblicon.setPreferredSize(new Dimension(150, 150));
 
 		pUp.add(lblicon, BorderLayout.WEST);
 	
 
-		// Áß¾ÓÆÐ³Î
+		// ì¤‘ì•™íŒ¨ë„
 		color = new Color(0xE6FFFF);
 
 		pCenter = new JPanel();
@@ -49,32 +49,32 @@ public class IsolatedRule extends JFrame implements ActionListener {
 		pCenter.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0));
 		pCenter.setBackground(color);
 		
-		lblRule = new JLabel("<html>¡ßÀÚ°¡°Ý¸® ´ë»óÀÚ »ýÈ°¼öÄ¢¡ß<br/>"
-				+ "¢º °¨¿° ÀüÆÄ ¹æÁö¸¦ À§ÇØ °Ý¸®Àå¼Ò ¹Ù±ù ¿ÜÃâ±ÝÁö<br/>"
-				+ "¢º µ¶¸³µÈ °ø°£¿¡¼­ È¥ÀÚ »ýÈ°ÇÏ±â<br/>"
-				+ "      - ¹æ¹® ´ÝÀº Ã¤·Î Ã¢¹®À» ¿­¾î ÀÚÁÖ È¯±â½ÃÅ°°í, ½Ä»ç´Â È¥ÀÚ¼­ ÇÏ±â<br/>"
-				+ "      - °¡´ÉÇÑ È¥ÀÚ¸¸ »ç¿ëÇÒ ¼ö ÀÖ´Â È­Àå½Ç°ú<br/>"
-				+ "       ¼¼¸é´ë°¡ ÀÖ´Â °ø°£ »ç¿ëÇÏ±â<br/>"
-				+ "          *°ø¿ë È­Àå½Ç, ¼¼¸é´ë¸¦ »ç¿ëÇÑ´Ù¸é, »ç¿ë ÈÄ ¼Òµ¶<br/>"
-				+ "           (¶ô½º µî °¡Á¤¿ë¼Òµ¶Á¦)ÇÏ°í ´Ù¸¥ »ç¶÷ÀÌ »ç¿ëÇÏµµ·Ï ÇÕ´Ï´Ù.<br/>"
-				+ "  ¢º Áø·á µî ¿ÜÃâÀÌ ºÒ°¡ÇÇÇÒ °æ¿ì ¹Ýµå½Ã °üÇÒ º¸°Ç¼Ò¿¡<br/>" 
-				+ "      ¸ÕÀú ¿¬¶ôÇÏ±â<br/>"
-				+ "  ¢º °¡Á· ¶Ç´Â ÇÔ²² °ÅÁÖÇÏ´Â ºÐ°ú ´ëÈ­ µî Á¢ÃËÇÏÁö ¾Ê±â<br/>"
-				+ "      - ºÒ°¡ÇÇÇÑ °æ¿ì, ¾ó±¼À» ¸Â´ëÁö ¾Ê°í<br/>"
-				+ "       ¼­·Î ¸¶½ºÅ©¸¦ ¾²°í 2mÀÌ»óÀÇ °Å¸®¸¦ µÎ±â<br/>"
-				+ "  ¢º °³ÀÎ¿ëÇ°(°³ÀÎ¿ë ¼ö°Ç, ½Ä±â·ù, ÈÞ´ëÀüÈ­ µî)À¸·Î »ç¿ëÇÏ±â<br/>"
-				+ "      - ÀÇº¹ ¹× Ä§±¸·ù´Â ´Üµ¶¼¼Å¹<br/>"
-				+ "      - ½Ä±â·ù µîÀº º°µµ·Î ºÐ¸®ÇÏ¿© ±ú²ýÀÌ ¾Ä±â Àü¿¡<br/>"
-				+ "       ´Ù¸¥ »ç¶÷ÀÌ »ç¿ëÇÏÁö ¾Êµµ·Ï ÇÏ±â<br/>"
-				+ "  ¢º °Ç°­¼öÄ¢ ÁöÅ°±â<br/>"
-				+ "      - ºñ´©·Î 30ÃÊÀÌ»ó Èå¸£´Â ¹°¿¡ ¼Õ ¾Ä±â, ±âÄ§ µî È£Èí±âÁõ»óÀÌ<br/>"
-				+ "       ÀÖÀ» °æ¿ì ¸¶½ºÅ© Âø¿ë, ¸¶½ºÅ©°¡ ¾øÀ¸¸é ¼Ò¸Å·Î °¡·Á ±âÄ§ÇÏ¸ç<br/>"
-				+ "       ±âÄ§, ÀçÃ¤±â ÈÄ ¼Õ ¾Ä°Å³ª ¼Õ ¼Òµ¶ ½Ç½ÃÇÏ±â</html>");
+		lblRule = new JLabel("<html>â—†ìžê°€ê²©ë¦¬ ëŒ€ìƒìž ìƒí™œìˆ˜ì¹™â—†<br/>"
+				+ "â–¶ ê°ì—¼ ì „íŒŒ ë°©ì§€ë¥¼ ìœ„í•´ ê²©ë¦¬ìž¥ì†Œ ë°”ê¹¥ ì™¸ì¶œê¸ˆì§€<br/>"
+				+ "â–¶ ë…ë¦½ëœ ê³µê°„ì—ì„œ í˜¼ìž ìƒí™œí•˜ê¸°<br/>"
+				+ "      - ë°©ë¬¸ ë‹«ì€ ì±„ë¡œ ì°½ë¬¸ì„ ì—´ì–´ ìžì£¼ í™˜ê¸°ì‹œí‚¤ê³ , ì‹ì‚¬ëŠ” í˜¼ìžì„œ í•˜ê¸°<br/>"
+				+ "      - ê°€ëŠ¥í•œ í˜¼ìžë§Œ ì‚¬ìš©í•  ìˆ˜ ìžˆëŠ” í™”ìž¥ì‹¤ê³¼<br/>"
+				+ "       ì„¸ë©´ëŒ€ê°€ ìžˆëŠ” ê³µê°„ ì‚¬ìš©í•˜ê¸°<br/>"
+				+ "          *ê³µìš© í™”ìž¥ì‹¤, ì„¸ë©´ëŒ€ë¥¼ ì‚¬ìš©í•œë‹¤ë©´, ì‚¬ìš© í›„ ì†Œë…<br/>"
+				+ "           (ë½ìŠ¤ ë“± ê°€ì •ìš©ì†Œë…ì œ)í•˜ê³  ë‹¤ë¥¸ ì‚¬ëžŒì´ ì‚¬ìš©í•˜ë„ë¡ í•©ë‹ˆë‹¤.<br/>"
+				+ "  â–¶ ì§„ë£Œ ë“± ì™¸ì¶œì´ ë¶ˆê°€í”¼í•  ê²½ìš° ë°˜ë“œì‹œ ê´€í•  ë³´ê±´ì†Œì—<br/>" 
+				+ "      ë¨¼ì € ì—°ë½í•˜ê¸°<br/>"
+				+ "  â–¶ ê°€ì¡± ë˜ëŠ” í•¨ê»˜ ê±°ì£¼í•˜ëŠ” ë¶„ê³¼ ëŒ€í™” ë“± ì ‘ì´‰í•˜ì§€ ì•Šê¸°<br/>"
+				+ "      - ë¶ˆê°€í”¼í•œ ê²½ìš°, ì–¼êµ´ì„ ë§žëŒ€ì§€ ì•Šê³ <br/>"
+				+ "       ì„œë¡œ ë§ˆìŠ¤í¬ë¥¼ ì“°ê³  2mì´ìƒì˜ ê±°ë¦¬ë¥¼ ë‘ê¸°<br/>"
+				+ "  â–¶ ê°œì¸ìš©í’ˆ(ê°œì¸ìš© ìˆ˜ê±´, ì‹ê¸°ë¥˜, íœ´ëŒ€ì „í™” ë“±)ìœ¼ë¡œ ì‚¬ìš©í•˜ê¸°<br/>"
+				+ "      - ì˜ë³µ ë° ì¹¨êµ¬ë¥˜ëŠ” ë‹¨ë…ì„¸íƒ<br/>"
+				+ "      - ì‹ê¸°ë¥˜ ë“±ì€ ë³„ë„ë¡œ ë¶„ë¦¬í•˜ì—¬ ê¹¨ë—ì´ ì”»ê¸° ì „ì—<br/>"
+				+ "       ë‹¤ë¥¸ ì‚¬ëžŒì´ ì‚¬ìš©í•˜ì§€ ì•Šë„ë¡ í•˜ê¸°<br/>"
+				+ "  â–¶ ê±´ê°•ìˆ˜ì¹™ ì§€í‚¤ê¸°<br/>"
+				+ "      - ë¹„ëˆ„ë¡œ 30ì´ˆì´ìƒ íë¥´ëŠ” ë¬¼ì— ì† ì”»ê¸°, ê¸°ì¹¨ ë“± í˜¸í¡ê¸°ì¦ìƒì´<br/>"
+				+ "       ìžˆì„ ê²½ìš° ë§ˆìŠ¤í¬ ì°©ìš©, ë§ˆìŠ¤í¬ê°€ ì—†ìœ¼ë©´ ì†Œë§¤ë¡œ ê°€ë ¤ ê¸°ì¹¨í•˜ë©°<br/>"
+				+ "       ê¸°ì¹¨, ìž¬ì±„ê¸° í›„ ì† ì”»ê±°ë‚˜ ì† ì†Œë… ì‹¤ì‹œí•˜ê¸°</html>");
 		
-		lblRule.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 14));
+		lblRule.setFont(new Font("ë§‘ì€ê³ ë”•", Font.BOLD, 14));
 		pCenter.add(lblRule, BorderLayout.CENTER);
 
-		// ¸ðµç ÆÐ³Î ºÙÀÌ±â
+		// ëª¨ë“  íŒ¨ë„ ë¶™ì´ê¸°
 		pLast = new JPanel();
 		pLast.setLayout(new BorderLayout());
 		pLast.setBackground(Color.white);
@@ -84,7 +84,7 @@ public class IsolatedRule extends JFrame implements ActionListener {
 
 		add(pLast);
 
-		this.setVisible(true); // È­¸é¿¡ º¸¿©Áö°Ô ÇÔ
+		this.setVisible(true); // í™”ë©´ì— ë³´ì—¬ì§€ê²Œ í•¨
 	}
 
 

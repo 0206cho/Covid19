@@ -19,29 +19,29 @@ public class IsolatedSympthoms extends JFrame implements ActionListener {
 	private JLabel lblicon, lblSymptom;
 	private Color color;
 
-// JFrameÀ» ºÒ·¯¿È
+// JFrameì„ ë¶ˆëŸ¬ì˜´
 	public IsolatedSympthoms() {
-		this.setTitle("ÄÚ·Î³ª19 ÁÖ¿ä Áõ»ó");
+		this.setTitle("ì½”ë¡œë‚˜19 ì£¼ìš” ì¦ìƒ");
 		setSize(500, 450);
-		setLocationRelativeTo(this); // ³» ÀÚ½ÅÀ¸·ÎºÎÅÍ »ó´ëÀûÀÎ À§Ä¡ ÀâÀ½
+		setLocationRelativeTo(this); // ë‚´ ìì‹ ìœ¼ë¡œë¶€í„° ìƒëŒ€ì ì¸ ìœ„ì¹˜ ì¡ìŒ
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false); // ½ÇÇàÈÄ È­¸éÅ©±â º¯°æ ºÒ°¡
+		setResizable(false); // ì‹¤í–‰í›„ í™”ë©´í¬ê¸° ë³€ê²½ ë¶ˆê°€
 
-		// »ó´Ü ÆĞ³Î
+		// ìƒë‹¨ íŒ¨ë„
 		pUp = new JPanel();
 		pUp.setLayout(new BorderLayout());
 		pUp.setBackground(Color.white);
 
-		// ·Î°í
+		// ë¡œê³ 
 		ImageIcon icon = new ImageIcon("images/logo2.JPG");
 		lblicon = new JLabel(icon);
-		lblicon.setToolTipText("¹ã³·¾øÀÌ ¹æ¿ªÀ» À§ÇØ °í»ıÇÏ½Ã´Â °ü°èÀÚºĞµé ÀÀ¿øÇÕ´Ï´Ù!!");
+		lblicon.setToolTipText("ë°¤ë‚®ì—†ì´ ë°©ì—­ì„ ìœ„í•´ ê³ ìƒí•˜ì‹œëŠ” ê´€ê³„ìë¶„ë“¤ ì‘ì›í•©ë‹ˆë‹¤!!");
 		// lblicon.setPreferredSize(new Dimension(150, 150));
 
 		pUp.add(lblicon, BorderLayout.WEST);
 	
 
-		// Áß¾ÓÆĞ³Î
+		// ì¤‘ì•™íŒ¨ë„
 		color = new Color(0xE6FFFF);
 
 		pCenter = new JPanel();
@@ -49,18 +49,18 @@ public class IsolatedSympthoms extends JFrame implements ActionListener {
 		pCenter.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0));
 		pCenter.setBackground(color);
 		
-		lblSymptom = new JLabel("<HTML>¡ßÄÚ·Î³ª19 ÁÖ¿ä Áõ»ó¡ß<BR/><BR/><BR/>"
-				+ "  ¢º ¹ß¿­(37.5¡É)<BR/><BR/>"
-				+ "  ¢º ±âÄ§, È£Èí°ï¶õ<BR/><BR/>"
-				+ "  ¢º ¿ÀÇÑ, ±ÙÀ°Åë, µÎÅë<BR/><BR/>"
-				+ "  ¢º ÀÎÈÄÅë<BR/><BR/>"
-				+ "  ¢º ÈÄ°¢, ¹Ì°¢¼Ò½Ç<BR/><BR/>"
-				+ "  ¢º Æó·Å µî<BR/></HTML>");
+		lblSymptom = new JLabel("<HTML>â—†ì½”ë¡œë‚˜19 ì£¼ìš” ì¦ìƒâ—†<BR/><BR/><BR/>"
+				+ "  â–¶ ë°œì—´(37.5â„ƒ)<BR/><BR/>"
+				+ "  â–¶ ê¸°ì¹¨, í˜¸í¡ê³¤ë€<BR/><BR/>"
+				+ "  â–¶ ì˜¤í•œ, ê·¼ìœ¡í†µ, ë‘í†µ<BR/><BR/>"
+				+ "  â–¶ ì¸í›„í†µ<BR/><BR/>"
+				+ "  â–¶ í›„ê°, ë¯¸ê°ì†Œì‹¤<BR/><BR/>"
+				+ "  â–¶ íë ´ ë“±<BR/></HTML>");
 		
-		lblSymptom.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 14));
+		lblSymptom.setFont(new Font("ë§‘ì€ê³ ë”•", Font.BOLD, 14));
 		pCenter.add(lblSymptom);
 
-		// ¸ğµç ÆĞ³Î ºÙÀÌ±â
+		// ëª¨ë“  íŒ¨ë„ ë¶™ì´ê¸°
 		pLast = new JPanel();
 		pLast.setLayout(new BorderLayout());
 		pLast.setBackground(Color.white);
@@ -75,7 +75,7 @@ public class IsolatedSympthoms extends JFrame implements ActionListener {
 
 
 	public static void main(String[] args) {
-		new IsolatedSympthoms(); // MyFrame() »ı¼ºÀÚ ºÒ·¯¿È
+		new IsolatedSympthoms(); // MyFrame() ìƒì„±ì ë¶ˆëŸ¬ì˜´
 	}
 
 	@Override
