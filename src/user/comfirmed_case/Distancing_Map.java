@@ -397,25 +397,25 @@ public class Distancing_Map extends JFrame implements ActionListener {
 		if(obj == seoul_btn) {
 			new Seoul_Comfirmed("서울 확진자 현황", 880, 615);
 		}else if(obj == incheon_btn) {
-			new Gyeongnam_Comfirmed("인천 확진자 현황", 880, 615);
+			new Incheon_Comfirmed("인천 확진자 현황", 880, 615);
 		}else if(obj == gyeonggi_btn) {
-			new Gyeongbuk_Comfirmed("경기 확진자 현황", 880, 615);
+			new Gyeonggi_Comfirmed("경기 확진자 현황", 880, 615);
 		}else if(obj == chungnam_btn) {
 			new Chungnam_Comfirmed("충남 확진자 현황", 880, 615);
 		}else if(obj == seojong_btn) {
 			new Sejong_Comfirmed("세종 확진자 현황", 880, 615);
 		}else if(obj == daejeon_btn) {
-			new Daegu_Comfirmed("대전 확진자 현황", 880, 615);
+			new Daejeon_Comfirmed("대전 확진자 현황", 880, 615);
 		}else if(obj == jeonbuk_btn) {
 			new Jeonbuk_Comfirmed("전북 확진자 현황", 880, 615);
 		}else if(obj == gwangju_btn) {
-			new Gangwon_Comfirmed("광주 확진자 현황", 880, 615);
+			new Gwangju_Comfirmed("광주 확진자 현황", 880, 615);
 		}else if(obj == jeonnam_btn) {
 			new Jeonnam_Comfirmed("전남 확진자 현황", 880, 615);
 		}else if(obj == jeju_btn) {
 			new Jeju_Comfirmed("제주 확진자 현황", 880, 615);
 		}else if(obj == gyeongnam_btn) {
-			new Gyeonggi_Comfirmed("경남 확진자 현황", 880, 615);
+			new Gyeongnam_Comfirmed("경남 확진자 현황", 880, 615);
 		}else if(obj == busan_btn) {
 			new Busan_Comfirmed("부산 확진자 현황", 880, 615);
 		}else if(obj == ulsan_btn) {
@@ -425,7 +425,7 @@ public class Distancing_Map extends JFrame implements ActionListener {
 		}else if(obj == gyeongbuk_btn) {
 			new Gyeongbuk_Comfirmed("경북 확진자 현황", 880, 615);
 		}else if(obj == chungbuk_btn) {
-			new Busan_Comfirmed("충북 확진자 현황", 880, 615);
+			new Chungbuk_Comfirmed("충북 확진자 현황", 880, 615);
 		}else if(obj == gangwon_btn) {
 			new Gangwon_Comfirmed("강원 확진자 현황", 880, 615);
 		}
@@ -476,16 +476,16 @@ public class Distancing_Map extends JFrame implements ActionListener {
 			gangwon_vaccine = gangwon_vaccine.format("%.2f%%%n", Double.parseDouble(gangwon_vaccine.replace(",",""))  / 1529586 * 100.0);
 			String chungbuk_vaccine = chungbuk_elm.text();
 			chungbuk_vaccine = chungbuk_vaccine.format("%.2f%%%n", Double.parseDouble(chungbuk_vaccine.replace(",",""))  / 1591009 * 100.0);
-			String chungnam_vaccine = chungbuk_elm.text();
-			chungnam_vaccine = chungnam_vaccine.format("%.2f%%%n", Double.parseDouble(chungnam_vaccine.replace(",",""))  / 2106946 * 100.0);
+			String chungnam_vaccine = chungnam_elm.text();
+			chungnam_vaccine = chungnam_vaccine.format("%.2f%%%n", Double.parseDouble(chungnam_vaccine.replace(",",""))  / 2120347 * 100.0);
 			String jeonbuk_vaccine = jeonbuk_elm.text();
 			jeonbuk_vaccine = jeonbuk_vaccine.format("%.2f%%%n", Double.parseDouble(jeonbuk_vaccine.replace(",",""))  / 1792694 * 100.0);
 			String jeonnam_vaccine = jeonnam_elm.text();
 			jeonnam_vaccine = jeonnam_vaccine.format("%.2f%%%n", Double.parseDouble(jeonnam_vaccine.replace(",",""))  / 1839432 * 100.0);
 			String gyeongbuk_vaccine = gyeongbuk_elm.text();
 			gyeongbuk_vaccine = gyeongbuk_vaccine.format("%.2f%%%n", Double.parseDouble(gyeongbuk_vaccine.replace(",",""))  / 2623028 * 100.0);
-			String gyeongnam_vaccine = gyeongbuk_elm.text();
-			gyeongnam_vaccine = gyeongnam_vaccine.format("%.2f%%%n", Double.parseDouble(gyeongnam_vaccine.replace(",",""))  / 3321362 * 100.0);
+			String gyeongnam_vaccine = gyeongnam_elm.text();
+			gyeongnam_vaccine = gyeongnam_vaccine.format("%.2f%%%n", Double.parseDouble(gyeongnam_vaccine.replace(",",""))  / 3342831 * 100.0);
 			String jeju_vaccine = jeju_elm.text();
 			jeju_vaccine = jeju_vaccine.format("%.2f%%%n", Double.parseDouble(jeju_vaccine.replace(",",""))  / 669177 * 100.0);
 			
@@ -508,8 +508,7 @@ public class Distancing_Map extends JFrame implements ActionListener {
 			jeonbuk_btn.setText("<html><body><center>"+ "전라북도" +"<br>"+ jeonbuk_vaccine + "</body></html>");
 			jeonnam_btn.setText("<html><body><center>"+ "전라남도" +"<br>"+ jeonnam_vaccine + "</body></html>");
 			gyeongbuk_btn.setText("<html><body><center>"+ "경상북도" +"<br>"+ gyeongbuk_vaccine + "</body></html>");
-			gyeongnam_btn.setText("<html><body><center>"+ "경상남도" +"<br>"+ gyeongbuk_vaccine + "</body></html>");
-			gyeongnam_btn.setText("<html><body><center>"+ "경상남도" +"<br>"+ gyeongbuk_vaccine + "</body></html>");
+			gyeongnam_btn.setText("<html><body><center>"+ "경상남도" +"<br>"+ gyeongnam_vaccine + "</body></html>");
 			jeju_btn.setText("<html><body><center>"+ "제주도" +"<br>"+ jeju_vaccine + "</body></html>");
 			
 		} catch (IOException e) {

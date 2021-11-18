@@ -22,7 +22,7 @@ public class Intro extends JFrame implements ActionListener {
 	public Intro(String title, int width, int height) {
 		setTitle(title); // 타이틀
 		setSize(width, height); // 크기
-//		setLocation(500, 500); //실행위치
+//	setLocation(500, 500); //실행위치
 		setLocationRelativeTo(this); // 모니터 가운데
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//프로그램 종료
 		setResizable(false);
