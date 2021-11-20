@@ -22,7 +22,7 @@ public class IsolatedMonitoring extends JFrame implements ActionListener {
 // JFrame을 불러옴
 	public IsolatedMonitoring() {
 		this.setTitle("자가모니터링 방법");
-		setSize(500, 350);
+		setSize(500, 380);
 		setLocationRelativeTo(this); // 내 자신으로부터 상대적인 위치 잡음
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false); // 실행후 화면크기 변경 불가
