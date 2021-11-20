@@ -22,7 +22,7 @@ public class IsolatedSympthoms extends JFrame implements ActionListener {
 // JFrame을 불러옴
 	public IsolatedSympthoms() {
 		this.setTitle("코로나19 주요 증상");
-		setSize(500, 450);
+		setSize(500, 430);
 		setLocationRelativeTo(this); // 내 자신으로부터 상대적인 위치 잡음
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false); // 실행후 화면크기 변경 불가
@@ -49,7 +49,7 @@ public class IsolatedSympthoms extends JFrame implements ActionListener {
 		pCenter.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0));
 		pCenter.setBackground(color);
 		
-		lblSymptom = new JLabel("<HTML>◆코로나19 주요 증상◆<BR/><BR/><BR/>"
+		lblSymptom = new JLabel("<HTML><span style = 'font:bold 20px;'>◆코로나19 주요 증상◆</span><BR/><BR/><BR/>"
 				+ "  ▶ 발열(37.5℃)<BR/><BR/>"
 				+ "  ▶ 기침, 호흡곤란<BR/><BR/>"
 				+ "  ▶ 오한, 근육통, 두통<BR/><BR/>"
@@ -57,7 +57,7 @@ public class IsolatedSympthoms extends JFrame implements ActionListener {
 				+ "  ▶ 후각, 미각소실<BR/><BR/>"
 				+ "  ▶ 폐렴 등<BR/></HTML>");
 		
-		lblSymptom.setFont(new Font("맑은고딕", Font.BOLD, 14));
+		lblSymptom.setFont(new Font("맑은고딕", Font.PLAIN, 14));
 		pCenter.add(lblSymptom);
 
 		// 모든 패널 붙이기

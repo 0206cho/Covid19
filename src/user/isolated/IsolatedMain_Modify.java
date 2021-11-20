@@ -24,9 +24,8 @@ import jdbc.DB;
 
 public class IsolatedMain_Modify extends JFrame implements ActionListener, MouseListener {
 
-	private JPanel pUp, pCenter, pDown, pLast;
+	private JPanel pUp, pCenter, pLast;
 	private JLabel lblicon, lbl_rule, lbl_togetherRule, lbl_symptoms, lbl_monitoring;
-	private JTextField txtInput;
 	private JButton btnSend, btnLogout;
 	private Color color;
 	private String iso_id, iso_name, get_id;
@@ -86,10 +85,11 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		// 자가격리 날짜
 		get_id = isolatedLogin.getTx1().getText();
 		System.out.println(get_id);
-		
-		String isolatedDate = "SELECT name, DATEDIFF('" + now + "', (select isolatedDate from isolated WHERE isolatedID LIKE '" + get_id + "')) "
+
+		String isolatedDate = "SELECT name, DATEDIFF('" + now
+				+ "', (select isolatedDate from isolated WHERE isolatedID LIKE '" + get_id + "')) "
 				+ "from isolated WHERE isolatedID LIKE '" + get_id + "'";
-		
+
 		// -> 로그인한 사용자 id마다 이름, 자가격리 날짜 다르게 수정,,
 
 		try {
@@ -101,18 +101,18 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		JLabel lbl_day = new JLabel("※" + iso_name + "님은 현재 자가격리 " + iso_id + "일차 입니다※");
 		lbl_day.setFont(new Font("맑은고딕", Font.BOLD, 20));
 		lbl_day.setForeground(Color.RED);
-		lbl_day.setBounds(45, 50, 450, 50);
+		lbl_day.setBounds(45, 30, 450, 50);
 		pCenter.add(lbl_day);
 
 		// 생활수칙
 		lbl_rule = new JLabel("<HTML><U>자가격리 대상자 생활수칙</U></HTML>");
 		lbl_rule.setFont(new Font("맑은고딕", Font.BOLD, 18));
 		lbl_rule.setForeground(Color.BLUE);
-		lbl_rule.setBounds(40, 150, 380, 50);
+		lbl_rule.setBounds(40, 130, 380, 50);
 		lbl_rule.addMouseListener(this);
 		pCenter.add(lbl_rule);
 
@@ -120,7 +120,7 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		lbl_togetherRule = new JLabel("<HTML><U>자가격리대상자의 가족 및 동거인을 위한 생활수칙</U></HTML>");
 		lbl_togetherRule.setFont(new Font("맑은고딕", Font.BOLD, 18));
 		lbl_togetherRule.setForeground(Color.BLUE);
-		lbl_togetherRule.setBounds(40, 250, 420, 50);
+		lbl_togetherRule.setBounds(40, 230, 420, 50);
 		lbl_togetherRule.addMouseListener(this);
 		pCenter.add(lbl_togetherRule);
 
@@ -128,7 +128,7 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		lbl_symptoms = new JLabel("<HTML><U>코로나19 주요 증상</U></HTML>");
 		lbl_symptoms.setFont(new Font("맑은고딕", Font.BOLD, 18));
 		lbl_symptoms.setForeground(Color.BLUE);
-		lbl_symptoms.setBounds(40, 350, 420, 50);
+		lbl_symptoms.setBounds(40, 330, 420, 50);
 		lbl_symptoms.addMouseListener(this);
 		pCenter.add(lbl_symptoms);
 
@@ -136,28 +136,9 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		lbl_monitoring = new JLabel("<HTML><U>자가모니터링 방법</U></HTML>");
 		lbl_monitoring.setFont(new Font("맑은고딕", Font.BOLD, 18));
 		lbl_monitoring.setForeground(Color.BLUE);
-		lbl_monitoring.setBounds(40, 450, 420, 50);
+		lbl_monitoring.setBounds(40, 430, 420, 50);
 		lbl_monitoring.addMouseListener(this);
 		pCenter.add(lbl_monitoring);
-
-		// 채팅창 하단
-		// 하단 패널
-		pDown = new JPanel();
-		pDown.setBackground(Color.WHITE);
-
-		// 입력창
-		txtInput = new JTextField(18);
-		txtInput.setFont(new Font("맑은 고딕", 0, 17));
-		txtInput.addActionListener(this);
-
-		// 전송 버튼
-		btnSend = new JButton("전송");
-		btnSend.setBackground(color);
-		btnSend.setFont(new Font("맑은 고딕", Font.BOLD, 12));
-		btnSend.addActionListener(this);
-
-		pDown.add(txtInput);
-		pDown.add(btnSend);
 
 		// 모든 패널 붙이기
 		pLast = new JPanel();
@@ -166,13 +147,10 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 
 		pLast.add(pUp, BorderLayout.NORTH);
 		pLast.add(pCenter, BorderLayout.CENTER);
-		pLast.add(pDown, BorderLayout.SOUTH);
 
 		add(pLast);
 
 		setVisible(true);
-		txtInput.requestFocus();
-
 	}
 
 	public void paint(Graphics g) {
@@ -196,6 +174,10 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
+		if (obj == btnLogout) {
+			// 로그아웃 버튼
+			this.dispose();
+		}
 	}
 
 	@Override
@@ -207,10 +189,10 @@ public class IsolatedMain_Modify extends JFrame implements ActionListener, Mouse
 		} else if (obj == lbl_togetherRule) {
 			lbl_togetherRule.setForeground(new Color(0x8B008B));
 			new IsolatedTogether();
-		}  else if (obj == lbl_symptoms) {
+		} else if (obj == lbl_symptoms) {
 			lbl_symptoms.setForeground(new Color(0x8B008B));
 			new IsolatedSympthoms();
-		}  else if (obj == lbl_monitoring) {
+		} else if (obj == lbl_monitoring) {
 			lbl_monitoring.setForeground(new Color(0x8B008B));
 			new IsolatedMonitoring();
 		}
