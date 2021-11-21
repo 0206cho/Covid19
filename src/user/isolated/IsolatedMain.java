@@ -83,6 +83,21 @@ public class IsolatedMain extends JFrame implements ActionListener, MouseListene
       btnCheckList.addActionListener(this);
 
       penLogout.add(btnCheckList);
+      
+   // 자가진단 채팅 버튼
+      ImageIcon imgIconchat = new ImageIcon("images/IsolatedChat.png");
+      Image imgChat = imgIconchat.getImage();
+      Image changeChatImg = imgChat.getScaledInstance(55, 55, Image.SCALE_SMOOTH);
+      ImageIcon changeChatIcon = new ImageIcon(changeChatImg);
+
+      btnCheckList = new JButton(changeChatIcon);
+      btnCheckList.setBackground(Color.WHITE);
+      btnCheckList.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+      btnCheckList.setFocusPainted(false);
+      btnCheckList.setBounds(80, 8, 60, 50);
+      btnCheckList.addActionListener(this);
+
+      penLogout.add(btnCheckList);
       pUp.add(penLogout);
       
       // 중앙패널
