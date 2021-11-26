@@ -2,6 +2,7 @@ package user.isolated;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -9,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 
@@ -29,6 +33,10 @@ public class IsolatedMain extends JFrame implements ActionListener, MouseListene
    private Color color;
    private String iso_id, iso_name, get_id;
    private IsolatedLogin isolatedLogin;
+   private JButton btnChat;
+   
+   java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+   URI uri;
 
    // JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
    public IsolatedMain(String title, int width, int height, IsolatedLogin isolatedLogin) {
@@ -90,14 +98,15 @@ public class IsolatedMain extends JFrame implements ActionListener, MouseListene
       Image changeChatImg = imgChat.getScaledInstance(55, 55, Image.SCALE_SMOOTH);
       ImageIcon changeChatIcon = new ImageIcon(changeChatImg);
 
-      btnCheckList = new JButton(changeChatIcon);
-      btnCheckList.setBackground(Color.WHITE);
-      btnCheckList.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-      btnCheckList.setFocusPainted(false);
-      btnCheckList.setBounds(80, 8, 60, 50);
-      btnCheckList.addActionListener(this);
+      btnChat = new JButton(changeChatIcon);
+      btnChat.setBackground(Color.WHITE);
+      btnChat.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+      btnChat.setFocusPainted(false);
+      btnChat.setBounds(80, 8, 60, 50);
+      btnChat.addActionListener(this);
 
       penLogout.add(btnCheckList);
+      penLogout.add(btnChat);
       pUp.add(penLogout);
       
       // 중앙패널
@@ -205,6 +214,18 @@ public class IsolatedMain extends JFrame implements ActionListener, MouseListene
       if (obj == btnLogout) {
          // 로그아웃 버튼
          this.dispose();
+      }
+      else if (obj == btnChat) {
+		try {
+			//채팅 버튼 클릭시 웹 브라우저 출력 
+			uri = new URI("http://localhost:8080");
+			desktop.browse(uri);
+		} catch (URISyntaxException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	  
+    	  
       }
    }
 
