@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -68,7 +69,11 @@ public class IsolatedMonitoring extends JFrame implements ActionListener {
 
 		this.setVisible(true); // 화면에 보여지게 함
 	}
-
+	
+	public void paint(Graphics g) {
+	      super.paint(g);
+	      g.drawLine(0, 98, 1050, 98);
+	   }
 
 	public static void main(String[] args) {
 		new IsolatedMonitoring(); 
