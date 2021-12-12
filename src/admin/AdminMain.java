@@ -85,7 +85,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 		
 		
 		
-		b1 = new JButton("확진자현황");
+		b1 = new JButton("백신접종현황");
 		b1.setBounds(230, 100, 120, 100);
 		b1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		b1.setFocusPainted(false);
@@ -119,14 +119,10 @@ public class AdminMain extends JFrame implements ActionListener  {
 		//p2.add(b4);
 		p2.add(b5);
 		
-		
-		
 		add(p4,BorderLayout.NORTH);
 		add(p2);
 	
 		setVisible(true);
-		
-		
 	}
 	public void paint (Graphics g) {
 		super.paint(g);
@@ -148,7 +144,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 				if(obj == b1) {
-					new ComfirmedAdmin("확진자명단관리", 600, 620);
+					new ComfirmedAdmin("백신접종관리", 900, 620);
 				}
 				else if(obj == b6) {
 					dispose();

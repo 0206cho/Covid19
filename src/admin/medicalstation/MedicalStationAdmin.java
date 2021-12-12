@@ -116,7 +116,7 @@ public class MedicalStationAdmin extends JFrame implements ActionListener {
 
 		table = new JTable(model);
 		sp = new JScrollPane(table);
-		sp.setPreferredSize(new Dimension(1380, 500));
+		sp.setPreferredSize(new Dimension(1780, 760));
 
 		// DefaultCellHeaderRender 생성 (가운데 정렬을 위한)
 		tbCellRender = new DefaultTableCellRenderer();
@@ -188,7 +188,7 @@ public class MedicalStationAdmin extends JFrame implements ActionListener {
 
 	public void paint(Graphics g) {
 		super.paint(g);
-		g.drawLine(0, 100, 1400, 100);
+		g.drawLine(0, 100, 1800, 100);
 
 	}
 

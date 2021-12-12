@@ -19,7 +19,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 
 import jdbc.DB;
 
@@ -47,6 +51,7 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 	private JButton btnDelete;
 	private JButton btnModify;
 	private JButton btnLevel;
+	private DefaultTableCellRenderer tbCellRender;
 
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public ComfirmedAdmin(String title, int width, int height) {
@@ -95,13 +100,13 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 		btnModify.addActionListener(this);
 		p2.add(btnModify);
 		
-		btnLevel = new JButton("단계조절");
-		btnLevel.setBorderPainted(false);
-		btnLevel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		btnLevel.setBackground(Color.white);
-		btnLevel.setFocusPainted(false);
-		btnLevel.addActionListener(this);
-		p2.add(btnLevel);
+//		btnLevel = new JButton("단계조절");
+//		btnLevel.setBorderPainted(false);
+//		btnLevel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+//		btnLevel.setBackground(Color.white);
+//		btnLevel.setFocusPainted(false);
+//		btnLevel.addActionListener(this);
+//		p2.add(btnLevel);
 		
 		pNor = new JPanel();
 		pNor.setLayout(new BorderLayout());
@@ -116,12 +121,38 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 		pCen.setBackground(Color.white);
 		
 		
-		String [] column = { "번호", "날짜", "지역", "접촉력", "노출여부"};
+		String[] header = { "보건소", "1차-당일접종", "1차-당일누계", "2차-당일접종", "2차-당일누계", "부스터샷-당일접종", "부스터샷-당일누계" };
 		
-		model = new DefaultTableModel(column, 0);
+		model = new DefaultTableModel(header, 0);
 		table = new JTable(model);
 		sp = new JScrollPane(table);
-		sp.setPreferredSize(new Dimension(580, 500));
+		sp.setPreferredSize(new Dimension(880, 500));
+		
+		// DefaultCellHeaderRender 생성 (가운데 정렬을 위한)
+		tbCellRender = new DefaultTableCellRenderer();
+		// DefaultTableCellHeaderRender의 정렬을 가운데 정렬로 지정
+		tbCellRender.setHorizontalAlignment(SwingConstants.CENTER);
+		// 정렬한 테이블의 ColumnModel을 가져옴
+		TableColumnModel tbColModel = table.getColumnModel();
+		// 반복문을 이용하여 테이블을 가운데 정렬로 지정
+		for (int i = 0; i < tbColModel.getColumnCount(); i++) {
+			tbColModel.getColumn(i).setCellRenderer(tbCellRender);
+		}
+
+		// 머리글(컬럼헤더) 클릭시 필드를 기준으로 오름차순, 내림차순
+		table.setAutoCreateRowSorter(true);
+		TableRowSorter tablesorter = new TableRowSorter(table.getModel());
+		table.setRowSorter(tablesorter);
+		
+		//컬럼 길이조절
+		table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		table.getColumnModel().getColumn(1).setPreferredWidth(0);
+		table.getColumnModel().getColumn(2).setPreferredWidth(0);
+		table.getColumnModel().getColumn(3).setPreferredWidth(0);
+		table.getColumnModel().getColumn(4).setPreferredWidth(0);
+		table.getColumnModel().getColumn(5).setPreferredWidth(0);
+		table.getColumnModel().getColumn(6).setPreferredWidth(0);
+		
 		
 		SelectAll(model);
 		
@@ -146,7 +177,7 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 		
 	}
 	public void SelectAll(DefaultTableModel model) {
-		String sql = "select * from confirmed";
+		String sql = "select * from vaccinationstatus";
 		
 		try {
 			ResultSet rs = DB.getResultSet(sql);
@@ -156,9 +187,8 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 			}
 			
 			while(rs.next()) {
-				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), 
-						rs.getString(4), rs.getString(5)
-				};
+				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7) };
+				
 				model.addRow(data);
 			}
 		} catch (Exception e) {
@@ -187,7 +217,7 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 		
-		new ComfirmedAdmin("확진자명단괸리", 600, 620);
+		new ComfirmedAdmin("백신접종관리", 900, 620);
 	}
 	
 	//이벤트 처리
@@ -196,11 +226,11 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 		Object obj = e.getSource();
 		
 		if(obj == btnAdd) {
-			new ComfirmedAdd("확진자삽입", 300, 320, this);
+			new ComfirmedAdd("백신접종삽입", 300, 320, this);
 		}else if(obj == btnDelete) {
-			new ComfirmedDelete("확진자삭제", 300, 300, this);
+			new ComfirmedDelete("백신접종삭제", 300, 300, this);
 		}else if(obj == btnModify) {
-			new ComfirmedModify("확진자수정", 300, 320, this);
+			new ComfirmedModify("백신접종수정", 300, 320, this);
 		}else if(obj==btnLevel) {
 			new ComfirmedLevel("지역별거리단계관리", 300, 400);
 		}

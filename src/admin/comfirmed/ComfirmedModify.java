@@ -45,6 +45,7 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 	private JButton btnCancel;
 	private ComfirmedAdmin comfirmedAdmin;
 	private JButton btnModify;
+	private JTextField tf7;
 
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public ComfirmedModify(String title, int width, int height, ComfirmedAdmin comfirmedAdmin) {
@@ -82,20 +83,25 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 		
 		//중앙패널
 		pCen = new JPanel();
-		pCen.setLayout(new GridLayout(5, 2));
+		pCen.setLayout(new GridLayout(7, 2));
 		pCen.setBackground(Color.white);
 		
-		JLabel lbl1 = new JLabel("   번호 :");
+		JLabel lbl1 = new JLabel("   보건소 ");
 		lbl1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl2 = new JLabel("   날짜:");
+		JLabel lbl2 = new JLabel("   1차-당일접종");
 		lbl2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl3 = new JLabel("   시군구 :");
+		JLabel lbl3 = new JLabel("   1차-당일누계");
 		lbl3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl4 = new JLabel("   접촉력 :");
+		JLabel lbl4 = new JLabel("   2차-당일접종");
 		lbl4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl5 = new JLabel("   노출여부 :");
+		JLabel lbl5 = new JLabel("   2차-당일누계");
 		lbl5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		JLabel lbl6 = new JLabel("   부스터샷-당일접종");
+		lbl6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		JLabel lbl7 = new JLabel("   부스터샷-당일누계");
+		lbl7.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 
+		
 		
 		tf1 = new JTextField();
 		tf1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
@@ -107,7 +113,10 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 		tf4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		tf5 = new JTextField();
 		tf5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-
+		tf6 = new JTextField();
+		tf6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		tf7 = new JTextField();
+		tf7.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		
 		pCen.add(lbl1);
 		pCen.add(tf1);
@@ -119,6 +128,10 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 		pCen.add(tf4);
 		pCen.add(lbl5);
 		pCen.add(tf5);
+		pCen.add(lbl6);
+		pCen.add(tf6);
+		pCen.add(lbl7);
+		pCen.add(tf7);
 
 
 		
@@ -187,9 +200,9 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 		
 		if(obj == btnSearch) {
 			if(tf1.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "번호를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "보건소를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 			}else {
-				String sql = "SELECT * FROM confirmed WHERE PERSON= '" + tf1.getText() + "' ";
+				String sql = "SELECT * FROM vaccinationstatus WHERE name= '" + tf1.getText() + "' ";
 				IDSearchDB(sql);
 				JOptionPane.showMessageDialog(this,"검색이 완료되었습니다.","메시지",JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -197,20 +210,26 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 			
 		}else if(obj == btnModify) {
 			if(tf2.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "날짜를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "1차-당일접종을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf2.requestFocus();
 			}else if(tf3.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "시군구를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "1차-당일누계를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf3.requestFocus();
 			}else if(tf4.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "접촉력을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "2차-당일접종을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf4.requestFocus();
 			}else if(tf5.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "노출여부를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "2차-당일누계를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf5.requestFocus();
-			}else {
-				String sql = "UPDATE confirmed SET DATE='" + tf2.getText() + "', " + "LOCAL='" + tf3.getText() + "', "
-						+ "ROUTE='" + tf4.getText() + "', " + "SYMPTOM='" + tf5.getText()  + "' WHERE PERSON = '" + tf1.getText() + "' ";
+			}else if(tf6.getText().equals("")) {
+				JOptionPane.showMessageDialog(this, "부스터샷-당일접종을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				tf6.requestFocus();
+			}else if(tf7.getText().equals("")) {
+				JOptionPane.showMessageDialog(this, "부스터샷-당일누계를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				tf7.requestFocus();
+			}
+			else {
+				String sql = "UPDATE vaccinationstatus SET first_today = '"+ tf2.getText() + "', first_total = '" +tf3.getText()+ "', second_today = '"+tf4.getText()+"', second_total = '"+tf5.getText()+"', booster_today = '"+tf6.getText()+"', booster_total = '"+tf7.getText()+"' WHERE name = '"+tf1.getText()+"'"; 
 				updateDB(sql);
 				JOptionPane.showMessageDialog(this,"수정이 완료되었습니다.","메시지",JOptionPane.INFORMATION_MESSAGE);
 				
@@ -220,6 +239,8 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 				tf3.setText("");
 				tf4.setText("");
 				tf5.setText("");
+				tf6.setText("");
+				tf7.setText("");
 			}
 			
 			
@@ -239,6 +260,8 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 				tf3.setText(rs.getString(3));
 				tf4.setText(rs.getString(4));
 				tf5.setText(rs.getString(5));
+				tf6.setText(rs.getString(6));
+				tf7.setText(rs.getString(7));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
