@@ -70,9 +70,6 @@ public class IsolatedModify extends JFrame implements ActionListener {
 		p2.setBackground(Color.WHITE);
 		p2.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
 		
-
-		
-		
 		pNor = new JPanel();
 		pNor.setLayout(new BorderLayout());
 		pNor.add(p1, BorderLayout.WEST);

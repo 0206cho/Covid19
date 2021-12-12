@@ -12,6 +12,7 @@ encoding//src/admin/isolated/IsolatedAdmin.java=UTF-8
 encoding//src/admin/isolated/IsolatedCheckListAdd.java=UTF-8
 encoding//src/admin/isolated/IsolatedCheckListAdmin.java=UTF-8
 encoding//src/admin/isolated/IsolatedCheckListDelete.java=UTF-8
+encoding//src/admin/isolated/IsolatedCheckListModify.java=UTF-8
 encoding//src/admin/isolated/IsolatedDelete.java=UTF-8
 encoding//src/admin/isolated/IsolatedModify.java=UTF-8
 encoding//src/admin/medicalstation/MedicalStationAdd.java=UTF-8

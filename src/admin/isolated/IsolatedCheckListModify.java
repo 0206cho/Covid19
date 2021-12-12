@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import jdbc.DB;
 
-public class IsolatedCheckListAdd extends JFrame implements ActionListener {
+public class IsolatedCheckListModify extends JFrame implements ActionListener {
 	
 	private JPanel p1;
 	private JLabel lblicon;
@@ -41,19 +41,18 @@ public class IsolatedCheckListAdd extends JFrame implements ActionListener {
 	private JTextField tf4;
 	private JTextField tf5;
 	private JTextField tf6;
-	private JButton btnOK;
+	private JButton btnSearch;
 	private JButton btnCancel;
-	private IsolatedCheckListAdmin isolatedCheckListAdmin;
-	private JTextField tf7;
-	private JTextField tf8;
+	private IsolatedAdmin isolatedAdmin;
+	private JButton btnModify;
 
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public IsolatedCheckListAdd(String title, int width, int height, IsolatedCheckListAdmin isolatedCheckListAdmin) {
+	public IsolatedCheckListModify(String title, int width, int height, IsolatedAdmin isolatedAdmin) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //닫을수 있는 특정 상수값을 주었기 때문에 프레임 종료버튼이 클릭될때 프로그램도 같이 사라짐 
-		this.isolatedCheckListAdmin = isolatedCheckListAdmin;
+		this.isolatedAdmin = isolatedAdmin;
 		
 		
 		//상단 패널
@@ -83,25 +82,21 @@ public class IsolatedCheckListAdd extends JFrame implements ActionListener {
 		
 		//중앙패널
 		pCen = new JPanel();
-		pCen.setLayout(new GridLayout(8, 2));
+		pCen.setLayout(new GridLayout(6, 2));
 		pCen.setBackground(Color.white);
 		
-		JLabel lbl1 = new JLabel("   ID  ");
+		JLabel lbl1 = new JLabel("   ID :");
 		lbl1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl2 = new JLabel("   일시 ");
+		JLabel lbl2 = new JLabel("   이름:");
 		lbl2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl3 = new JLabel("   발열  ");
+		JLabel lbl3 = new JLabel("   PW :");
 		lbl3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl4 = new JLabel("   체온  ");
+		JLabel lbl4 = new JLabel("   지역 :");
 		lbl4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl5 = new JLabel("   기침  ");
+		JLabel lbl5 = new JLabel("   휴대폰 :");
 		lbl5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl6 = new JLabel("   인후통  ");
+		JLabel lbl6 = new JLabel("   격리날짜 :");
 		lbl6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl7 = new JLabel("   호흡곤란  ");
-		lbl7.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl8 = new JLabel("   특이사항  ");
-		lbl8.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		
 		tf1 = new JTextField();
 		tf1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
@@ -115,10 +110,6 @@ public class IsolatedCheckListAdd extends JFrame implements ActionListener {
 		tf5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		tf6 = new JTextField();
 		tf6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		tf7 = new JTextField();
-		tf7.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		tf8 = new JTextField();
-		tf8.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		
 		pCen.add(lbl1);
 		pCen.add(tf1);
@@ -132,10 +123,6 @@ public class IsolatedCheckListAdd extends JFrame implements ActionListener {
 		pCen.add(tf5);
 		pCen.add(lbl6);
 		pCen.add(tf6);
-		pCen.add(lbl7);
-		pCen.add(tf7);
-		pCen.add(lbl8);
-		pCen.add(tf8);
 
 		
 		
@@ -143,12 +130,19 @@ public class IsolatedCheckListAdd extends JFrame implements ActionListener {
 		JPanel pSou = new JPanel();
 		pSou.setBackground(Color.WHITE);
 		
-		btnOK = new JButton("확인");
-		btnOK.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		btnOK.setBackground(Color.WHITE);
-		btnOK.setFocusPainted(false);
-		btnOK.addActionListener(this);
-		pSou.add(btnOK);
+		btnSearch = new JButton("검색");
+		btnSearch.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		btnSearch.setBackground(Color.WHITE);
+		btnSearch.setFocusPainted(false);
+		btnSearch.addActionListener(this);
+		pSou.add(btnSearch);
+		
+		btnModify = new JButton("수정");
+		btnModify.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		btnModify.setBackground(Color.WHITE);
+		btnModify.setFocusPainted(false);
+		btnModify.addActionListener(this);
+		pSou.add(btnModify);
 		
 		btnCancel = new JButton("취소");
 		btnCancel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
@@ -194,43 +188,48 @@ public class IsolatedCheckListAdd extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		
-		if(obj == btnOK) {
+		if(obj == btnSearch) {
 			if(tf1.getText().equals("")) {
 				JOptionPane.showMessageDialog(this, "ID를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
-				tf1.requestFocus();
-			}else if(tf2.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "일시를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+			}else {
+				String sql = "SELECT * FROM isolated WHERE isolatedID= '" + tf1.getText() + "' ";
+				IDSearchDB(sql);
+				JOptionPane.showMessageDialog(this,"검색이 완료되었습니다.","메시지",JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			
+		}else if(obj == btnModify) {
+			if(tf2.getText().equals("")) {
+				JOptionPane.showMessageDialog(this, "이름을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf2.requestFocus();
 			}else if(tf3.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "발열여부를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "PW를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf3.requestFocus();
 			}else if(tf4.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "체온을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "지역을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf4.requestFocus();
 			}else if(tf5.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "기침여부를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "휴대폰번호를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf5.requestFocus();
 			}else if(tf6.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "인후통여부를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "날짜를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf6.requestFocus();
-			}else if(tf7.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "호흡곤란여부를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
-				tf7.requestFocus();
 			}else {
-				String sql = "INSERT INTO isolatedCheckList (isolatedID, DateTime, heat, bodyTemperature, cough, soreThroat, displayable, note) VALUES('" + tf1.getText() +"', '" + tf2.getText() + "', '" + tf3.getText() + "', '"
-						+ tf4.getText() + "', '" + tf5.getText() + "', '" + tf6.getText() + "', '" + tf7.getText() + "', '" + tf8.getText() + "' )";
-				setInsertDB(sql);
-				JOptionPane.showMessageDialog(this,"처리가 완료되었습니다.","메시지",JOptionPane.INFORMATION_MESSAGE);
+				String sql = "UPDATE isolated SET name='" + tf2.getText() + "', " + "isolatedPW='" + tf3.getText() + "', "
+						+ "local='" + tf4.getText() + "', " + "phone='" + tf5.getText() + "', " + " isolatedDate='" + tf6.getText() 
+						+ "' WHERE isolatedID = '" + tf1.getText() + "' ";
+				updateDB(sql);
+				JOptionPane.showMessageDialog(this,"수정이 완료되었습니다.","메시지",JOptionPane.INFORMATION_MESSAGE);
+				
+				isolatedAdmin.SelectAll(isolatedAdmin.getModel());
 				tf1.setText("");
 				tf2.setText("");
 				tf3.setText("");
 				tf4.setText("");
 				tf5.setText("");
 				tf6.setText("");
-				tf7.setText("");
-				tf8.setText("");
-				isolatedCheckListAdmin.SelectAll(isolatedCheckListAdmin.getModel());
 			}
+			
 			
 		}else if(obj == btnCancel) {
 			this.dispose();
@@ -239,7 +238,25 @@ public class IsolatedCheckListAdd extends JFrame implements ActionListener {
 		
 	}
 
-	private void setInsertDB(String sql) {
+	private void IDSearchDB(String sql) {
+		try {
+			ResultSet rs = DB.getResultSet(sql);
+			
+			while(rs.next()) {
+				tf2.setText(rs.getString(2));
+				tf3.setText(rs.getString(3));
+				tf4.setText(rs.getString(4));
+				tf5.setText(rs.getString(5));
+				tf6.setText(rs.getString(6));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void updateDB(String sql) {
 		DB.executeQuery(sql);
 		
 	}
