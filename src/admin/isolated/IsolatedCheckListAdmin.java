@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -18,8 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 
 import jdbc.DB;
 
@@ -29,23 +31,15 @@ public class IsolatedCheckListAdmin extends JFrame implements ActionListener {
 	private JLabel lblicon;
 	private JPanel last;
 	private JPanel pCen;
-	private JButton b1;
-	private JButton b2;
 	private DefaultTableModel model;
 	private JTable table;
-	private JPanel p3;
-	private JTextField tfID;
-	private JTextField tfName;
-	private JTextField tfPW;
-	private JTextField tfLocal;
-	private JTextField tfPhone;
-	private JTextField tfDate;
 	private JScrollPane sp;
 	private JPanel pNor;
 	private JPanel p2;
 	private JButton btnAdd;
 	private JButton btnDelete;
 	private JButton btnModify;
+	private DefaultTableCellRenderer tbCellRender;
 
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public IsolatedCheckListAdmin(String title, int width, int height) {
@@ -105,7 +99,7 @@ public class IsolatedCheckListAdmin extends JFrame implements ActionListener {
 //		p2.setLayout(new BorderLayout());
 		pCen.setBackground(Color.white);
 
-		String[] column = { "ID", "일시", "PW", "지역", "휴대폰", "날짜" };
+		String[] column = { "연번","ID", "일시", "발열", "체온", "기침", "인후통", "호흡곤란", "특이사항" };
 
 		model = new DefaultTableModel(column, 0) { // 테이블 더블 클릭시 내용 수정 불가
 			public boolean isCellEditable(int i, int c) {
@@ -115,8 +109,27 @@ public class IsolatedCheckListAdmin extends JFrame implements ActionListener {
 
 		table = new JTable(model);
 		table.getTableHeader().setReorderingAllowed(false); // 테이블 열 이동 불가
+		table.getColumn("일시").setPreferredWidth(160); // 컬럼 사이즈 조정
+		table.getColumn("특이사항").setPreferredWidth(140); // 컬럼 사이즈 조정
+
+		// DefaultCellHeaderRender 생성 (가운데 정렬을 위한)
+		tbCellRender = new DefaultTableCellRenderer();
+		// DefaultTableCellHeaderRender의 정렬을 가운데 정렬로 지정
+		tbCellRender.setHorizontalAlignment(SwingConstants.CENTER);
+		// 정렬한 테이블의 ColumnModel을 가져옴
+		TableColumnModel tbColModel = table.getColumnModel();
+		// 반복문을 이용하여 테이블을 가운데 정렬로 지정
+		for (int i = 0; i < tbColModel.getColumnCount(); i++) {
+			tbColModel.getColumn(i).setCellRenderer(tbCellRender);
+		}
+
+		// 머리글(컬럼헤더) 클릭시 필드를 기준으로 오름차순, 내림차순
+		table.setAutoCreateRowSorter(true);
+		TableRowSorter tablesorter = new TableRowSorter(table.getModel());
+		table.setRowSorter(tablesorter);
+
 		sp = new JScrollPane(table);
-		sp.setPreferredSize(new Dimension(580, 500));
+		sp.setPreferredSize(new Dimension(620, 500));
 
 		SelectAll(model);
 
@@ -146,7 +159,7 @@ public class IsolatedCheckListAdmin extends JFrame implements ActionListener {
 
 			while (rs.next()) {
 				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getString(7), rs.getString(8) };
+						rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9) };
 				model.addRow(data);
 			}
 		} catch (Exception e) {
@@ -173,7 +186,7 @@ public class IsolatedCheckListAdmin extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 
-		new IsolatedCheckListAdmin("자가진단관리", 600, 620);
+		new IsolatedCheckListAdmin("자가진단관리", 640, 620);
 	}
 
 	// 이벤트 처리
@@ -181,11 +194,12 @@ public class IsolatedCheckListAdmin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 
-//		if (obj == btnAdd) {
-//			new IsolatedAdd("격리자삽입", 300, 320, this);
-//		} else if (obj == btnDelete) {
-//			new IsolatedDelete("격리자삭제", 300, 300, this);
-//		} else if (obj == btnModify) {
+		if (obj == btnAdd) {
+			new IsolatedCheckListAdd("자가진단삽입", 300, 350, this);
+		} else if (obj == btnDelete) {
+			new IsolatedCheckListDelete("자가진단삭제", 300, 300, this);
+		} 
+//		else if (obj == btnModify) {
 //			new IsolatedModify("격리자수정", 300, 320, this);
 //		}
 

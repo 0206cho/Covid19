@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import jdbc.DB;
 
-public class IsolatedDelete extends JFrame implements ActionListener {
+public class IsolatedCheckListDelete extends JFrame implements ActionListener {
 	
 	private JPanel p1;
 	private JLabel lblicon;
@@ -36,18 +36,16 @@ public class IsolatedDelete extends JFrame implements ActionListener {
 	private JPanel pNor;
 	private JPanel p2;
 	private JTextField tf1;
-	private JTextField tf2;
 	private JButton btnDelete;
 	private JButton btnCancel;
-	private IsolatedAdmin isolatedAdmin;
+	private IsolatedCheckListAdmin isolatedCheckListAdmin;
 
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public IsolatedDelete(String title, int width, int height, IsolatedAdmin isolatedAdmin) {
+	public IsolatedCheckListDelete(String title, int width, int height, IsolatedCheckListAdmin isolatedCheckListAdmin) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //닫을수 있는 특정 상수값을 주었기 때문에 프레임 종료버튼이 클릭될때 프로그램도 같이 사라짐 
-		this.isolatedAdmin = isolatedAdmin;
 		
 		
 		//상단 패널
@@ -80,30 +78,16 @@ public class IsolatedDelete extends JFrame implements ActionListener {
 		pCen.setLayout(null);
 		pCen.setBackground(Color.white);
 		
-		JLabel lbl1 = new JLabel("   ID :");
+		JLabel lbl1 = new JLabel("   ID  ");
 		lbl1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lbl1.setBounds(50, 50, 70, 20);
-		
-		JLabel lbl2 = new JLabel("   휴대폰 :");
-		lbl2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lbl2.setBounds(50, 80, 70, 20);
-
 		
 		tf1 = new JTextField();
 		tf1.setBounds(120, 50, 100, 25);
 		tf1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		
-		tf2 = new JTextField();
-		tf2.setBounds(120, 80, 100, 25);
-		tf2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		
 		pCen.add(lbl1);
 		pCen.add(tf1);
-		pCen.add(lbl2);
-		pCen.add(tf2);
-
-
-		
 		
 		//하단 패널
 		JPanel pSou = new JPanel();
@@ -165,16 +149,12 @@ public class IsolatedDelete extends JFrame implements ActionListener {
 			if(tf1.getText().equals("")) {
 				JOptionPane.showMessageDialog(this, "ID를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf1.requestFocus();
-			}else if(tf2.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "휴대폰번호를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
-				tf2.requestFocus();
 			}else {
-				String sql = "DELETE FROM isolated WHERE isolatedID = '" + tf1.getText() +"' AND  phone ='" + tf2.getText() + "' ";
+				String sql = "DELETE FROM isolatedCheckList WHERE isolatedID = '" + tf1.getText() + "' ";
 				deleteDB(sql);
 				
 				tf1.setText("");
-				tf2.setText("");
-				isolatedAdmin.SelectAll(isolatedAdmin.getModel());
+				isolatedCheckListAdmin.SelectAll(isolatedCheckListAdmin.getModel());
 			}
 			
 		}else if(obj == btnCancel) {

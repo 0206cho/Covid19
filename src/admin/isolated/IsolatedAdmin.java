@@ -19,9 +19,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 
 import jdbc.DB;
+import user.isolated.IsolatedCheckList;
 
 public class IsolatedAdmin extends JFrame implements ActionListener {
 
@@ -46,6 +51,8 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 	private JButton btnAdd;
 	private JButton btnDelete;
 	private JButton btnModify;
+	private DefaultTableCellRenderer tbCellRender;
+	private JButton btnCheck;
 
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public IsolatedAdmin(String title, int width, int height) {
@@ -70,6 +77,14 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 		p2.setBackground(Color.WHITE);
 		p2.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
 
+		btnCheck = new JButton("자가진단관리");
+		btnCheck.setBorderPainted(false);
+		btnCheck.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		btnCheck.setBackground(Color.white);
+		btnCheck.setFocusPainted(false);
+		btnCheck.addActionListener(this);
+		p2.add(btnCheck);
+		
 		btnAdd = new JButton("삽입");
 		btnAdd.setBorderPainted(false);
 		btnAdd.setFont(new Font("맑은 고딕", Font.BOLD, 13));
@@ -115,6 +130,23 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 
 		table = new JTable(model);
 		table.getTableHeader().setReorderingAllowed(false); // 테이블 열 이동 불가
+
+		// DefaultCellHeaderRender 생성 (가운데 정렬을 위한)
+		tbCellRender = new DefaultTableCellRenderer();
+		// DefaultTableCellHeaderRender의 정렬을 가운데 정렬로 지정
+		tbCellRender.setHorizontalAlignment(SwingConstants.CENTER);
+		// 정렬한 테이블의 ColumnModel을 가져옴
+		TableColumnModel tbColModel = table.getColumnModel();
+		// 반복문을 이용하여 테이블을 가운데 정렬로 지정
+		for (int i = 0; i < tbColModel.getColumnCount(); i++) {
+			tbColModel.getColumn(i).setCellRenderer(tbCellRender);
+		}
+
+		// 머리글(컬럼헤더) 클릭시 필드를 기준으로 오름차순, 내림차순
+		table.setAutoCreateRowSorter(true);
+		TableRowSorter tablesorter = new TableRowSorter(table.getModel());
+		table.setRowSorter(tablesorter);
+
 		sp = new JScrollPane(table);
 		sp.setPreferredSize(new Dimension(580, 500));
 
@@ -187,6 +219,8 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 			new IsolatedDelete("격리자삭제", 300, 300, this);
 		} else if (obj == btnModify) {
 			new IsolatedModify("격리자수정", 300, 320, this);
+		} else if (obj == btnCheck) {
+			new IsolatedCheckListAdmin("자가진단관리", 640, 620); 
 		}
 
 	}

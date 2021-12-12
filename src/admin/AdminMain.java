@@ -148,7 +148,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 				if(obj == b1) {
-					new ComfirmedAdmin("확진자명단괸리", 600, 620);
+					new ComfirmedAdmin("확진자명단관리", 600, 620);
 				}
 				else if(obj == b6) {
 					dispose();
@@ -157,10 +157,10 @@ public class AdminMain extends JFrame implements ActionListener  {
 					new VaccineAdmin("백신 관리자", 700, 700);
 				}
 				else if(obj == b3) {
-					new MedicalStationAdmin("선별진료소괸리", 1400, 620);
+					new MedicalStationAdmin("선별진료소관리", 1800, 870);
 				}
 				else if(obj == b5) {
-					new IsolatedAdmin("자가격리괸리", 600, 620);
+					new IsolatedAdmin("자가격리관리", 600, 620);
 				}
 	}
 

@@ -47,7 +47,7 @@ public class Server {
 				displayable = reader.readLine();
 				note = reader.readLine();
 				
-				String sql = "INSERT INTO isolatedCheckList VALUES('" + id +"', '" + date + "', '" + heat + "', '"
+				String sql = "INSERT INTO isolatedCheckList (isolatedID, `DateTime`, heat, bodyTemperature, cough, soreThroat, displayable, note) VALUES('" + id +"', '" + date + "', '" + heat + "', '"
 						+ bt + "', '" + cough + "', '" + st+ "', '" + displayable+ "', '" + note + "' )";
 				setInsertDB(sql);
 				System.out.println("처리완료");
