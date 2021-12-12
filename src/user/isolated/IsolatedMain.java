@@ -230,7 +230,7 @@ public class IsolatedMain extends JFrame implements ActionListener, MouseListene
 		}
 
 		if (obj == btnCheckList) {
-			new IsolatedCheckList();
+			new IsolatedCheckList(this);
 		}
 	}
 

@@ -32,9 +32,14 @@ public class IsolatedCheckList extends JFrame implements ActionListener {
 	
 	private JTextField tfBT;
 	private LineBorder bb = new LineBorder(Color.black, 1, true);
-	private IsolatedMain isolatedMain;
 	private String formatedNow;
+	private String iso_id;
+	private IsolatedMain isolatedMain;
 	
+	public String getIso_id() {
+		return isolatedMain.getGet_id();
+	}
+
 	public String getFormatedNow() {
 		return formatedNow;
 	}
@@ -66,7 +71,8 @@ public class IsolatedCheckList extends JFrame implements ActionListener {
 	
 
 //JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public IsolatedCheckList() {
+	public IsolatedCheckList(IsolatedMain isolatedMain) {
+		this.isolatedMain = isolatedMain;
 		this.setTitle("자가진단하기");
 		setSize(510, 750);
 		setLocationRelativeTo(this); // 화면 가운데 찍음
@@ -247,7 +253,7 @@ public class IsolatedCheckList extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new IsolatedCheckList();
+		//new IsolatedCheckList(IsolatedMain isolatedMain);
 	}
 
 	@Override
@@ -307,10 +313,10 @@ public class IsolatedCheckList extends JFrame implements ActionListener {
 			formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd / HH:mm"));
 			
 			// 포맷팅 현재 날짜/시간 출력
-			System.out.println(formatedNow); // 년-월-일 / 시:분
+			//System.out.println(formatedNow); // 년-월-일 / 시:분
 
 			new Client(this);			
-			//System.exit(0);
+			dispose();
 
 		}
 	}

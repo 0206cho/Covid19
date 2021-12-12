@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 import jdbc.DB;
 
-public class IsolatedAdmin extends JFrame implements ActionListener {
+public class IsolatedCheckListAdmin extends JFrame implements ActionListener {
 
 	private JPanel p1;
 	private JLabel lblicon;
@@ -48,7 +48,7 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 	private JButton btnModify;
 
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public IsolatedAdmin(String title, int width, int height) {
+	public IsolatedCheckListAdmin(String title, int width, int height) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); // 화면 가운데 찍음
@@ -105,7 +105,7 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 //		p2.setLayout(new BorderLayout());
 		pCen.setBackground(Color.white);
 
-		String[] column = { "ID", "이름", "PW", "지역", "휴대폰", "날짜" };
+		String[] column = { "ID", "일시", "PW", "지역", "휴대폰", "날짜" };
 
 		model = new DefaultTableModel(column, 0) { // 테이블 더블 클릭시 내용 수정 불가
 			public boolean isCellEditable(int i, int c) {
@@ -135,7 +135,7 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 	}
 
 	public void SelectAll(DefaultTableModel model) {
-		String sql = "select * from isolated";
+		String sql = "select * from isolatedCheckList";
 
 		try {
 			ResultSet rs = DB.getResultSet(sql);
@@ -146,7 +146,7 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 
 			while (rs.next()) {
 				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6) };
+						rs.getString(6), rs.getString(7), rs.getString(8) };
 				model.addRow(data);
 			}
 		} catch (Exception e) {
@@ -173,7 +173,7 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 
-		new IsolatedAdmin("자가격리관리", 600, 620);
+		new IsolatedCheckListAdmin("자가진단관리", 600, 620);
 	}
 
 	// 이벤트 처리
@@ -181,13 +181,13 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 
-		if (obj == btnAdd) {
-			new IsolatedAdd("격리자삽입", 300, 320, this);
-		} else if (obj == btnDelete) {
-			new IsolatedDelete("격리자삭제", 300, 300, this);
-		} else if (obj == btnModify) {
-			new IsolatedModify("격리자수정", 300, 320, this);
-		}
+//		if (obj == btnAdd) {
+//			new IsolatedAdd("격리자삽입", 300, 320, this);
+//		} else if (obj == btnDelete) {
+//			new IsolatedDelete("격리자삭제", 300, 300, this);
+//		} else if (obj == btnModify) {
+//			new IsolatedModify("격리자수정", 300, 320, this);
+//		}
 
 	}
 

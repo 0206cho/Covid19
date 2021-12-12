@@ -9,8 +9,13 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.swing.JOptionPane;
+
+import jdbc.DB;
+
 // 서버
 public class Server {
+	private String id, date, heat, bt, cough, st, displayable, note;
 	public Server() {
 		try {
 			int socketPort = 1234;
@@ -33,14 +38,19 @@ public class Server {
 				// BufferedReader에 위 InputStream을 담아 사용
 
 				// 클라이언트에서 온 메세지 확인
-				//System.out.println(reader.readLine());
-				System.out.println(reader.readLine());
-				System.out.println(reader.readLine());
-				System.out.println(reader.readLine());
-				System.out.println(reader.readLine());
-				System.out.println(reader.readLine());
-				System.out.println(reader.readLine());
-				System.out.println(reader.readLine());
+				id = reader.readLine();
+				date = reader.readLine();
+				heat = reader.readLine();
+				bt = reader.readLine();
+				cough = reader.readLine();
+				st = reader.readLine();
+				displayable = reader.readLine();
+				note = reader.readLine();
+				
+				String sql = "INSERT INTO isolatedCheckList VALUES('" + id +"', '" + date + "', '" + heat + "', '"
+						+ bt + "', '" + cough + "', '" + st+ "', '" + displayable+ "', '" + note + "' )";
+				setInsertDB(sql);
+				System.out.println("처리완료");
 
 				// OutputStream - 서버에서 클라이언트로
 				OutputStream out = socketUser.getOutputStream();
@@ -60,7 +70,19 @@ public class Server {
 	}
 
 	public static void main(String[] args) {
+		try {
+			DB.init();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		new Server();
+		
 	}
 
+	private void setInsertDB(String sql) {
+		DB.executeQuery(sql);
+		
+	}
 }

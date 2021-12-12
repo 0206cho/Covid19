@@ -17,7 +17,6 @@ public class Client {
 
 	public Client(IsolatedCheckList isolatedCheckList) {
 		this.isolatedCheckList = isolatedCheckList;
-		//this.isolatedMain = isolatedMain;
 		
 		try {
 			Socket socket = new Socket("127.0.0.1", 1234); // 소켓 서버에 접속
@@ -29,26 +28,16 @@ public class Client {
 			PrintWriter writer = new PrintWriter(out, true);
 			// PrintWriter에 위 OutputStream을 담아 사용
 
-			/*
-			System.out.println("발열 여부 " + isolatedCheckList.isHeat());
-			System.out.println("체온 : " + isolatedCheckList.getTfBT().getText());			
-			System.out.println("기침 여부 : " + isolatedCheckList.isCough());
-			System.out.println("인후통 여부 : " + isolatedCheckList.isSt());
-			System.out.println("호흡곤란 여부 : " + isolatedCheckList.isDisplayable());
-			System.out.println("특이사항 : " + isolatedCheckList.getTaNotee().getText());
-*/
 			//writer.println("CLIENT TO SERVER");
 			// 클라이언트에서 서버로 메세지 보내기
-			//writer.println("id : " + isolatedMain.getGet_id());
-			writer.println("일시 : " + isolatedCheckList.getFormatedNow());
-			writer.println("발열 여부 :" + isolatedCheckList.isHeat());
-			writer.println("체온 : " + isolatedCheckList.getTfBT().getText());
-			writer.println("기침 여부 : " + isolatedCheckList.isCough());
-			writer.println("인후통 여부 : " + isolatedCheckList.isSt());
-			writer.println("호흡곤란 여부 : " + isolatedCheckList.isDisplayable());
-			writer.println("특이사항 : " + isolatedCheckList.getTaNotee().getText());
-			
-			//System.out.println(isolatedMain.getGet_id());
+			writer.println(isolatedCheckList.getIso_id());  //id
+			writer.println(isolatedCheckList.getFormatedNow());  //일시
+			writer.println(isolatedCheckList.isHeat());  //발열여부
+			writer.println(isolatedCheckList.getTfBT().getText());  //체온
+			writer.println(isolatedCheckList.isCough());  //기침여부
+			writer.println(isolatedCheckList.isSt());  //인후통 여부
+			writer.println(isolatedCheckList.isDisplayable());  //호흡곤란여부
+			writer.println(isolatedCheckList.getTaNotee().getText());  //특이사항
 
 			// InputStream - Server에서 보낸 메세지 클라이언트로 가져옴
 			InputStream input = socket.getInputStream();
@@ -66,7 +55,6 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
-
 
 	public static void main(String[] args) {
 		//new Client(IsolatedCheckList isolatedCheckList);

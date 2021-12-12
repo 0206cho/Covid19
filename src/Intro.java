@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import admin.AdminLogin;
-import basic.Server;
 import jdbc.DB;
 import user.UserMain;
 
@@ -75,7 +74,7 @@ public class Intro extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 		new Intro("코로나 종합 관리 시스템", 1210, 630);
-		new Server();
+//		new Server();
 	}
 
 	@Override
