@@ -76,13 +76,13 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 		p2.setBackground(Color.WHITE);
 		p2.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
 		
-		btnAdd = new JButton("삽입");
-		btnAdd.setBorderPainted(false);
-		btnAdd.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		btnAdd.setBackground(Color.white);
-		btnAdd.setFocusPainted(false);
-		btnAdd.addActionListener(this);
-		p2.add(btnAdd);
+//		btnAdd = new JButton("삽입");
+//		btnAdd.setBorderPainted(false);
+//		btnAdd.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+//		btnAdd.setBackground(Color.white);
+//		btnAdd.setFocusPainted(false);
+//		btnAdd.addActionListener(this);
+//		p2.add(btnAdd);
 		
 		btnDelete = new JButton("삭제");
 		btnDelete.setBorderPainted(false);

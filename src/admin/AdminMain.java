@@ -86,42 +86,49 @@ public class AdminMain extends JFrame implements ActionListener  {
 		
 		
 		b1 = new JButton("백신접종현황");
-		b1.setBounds(230, 100, 120, 100);
+		b1.setBounds(140, 100, 120, 100);
 		b1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		b1.setFocusPainted(false);
 		b1.setBackground(Color.white);
 		b1.addActionListener(this);
 		
 		b2 = new JButton("백신예약");
-		b2.setBounds(380, 100, 120, 100);
+		b2.setBounds(290, 100, 120, 100);
 		b2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		b2.setFocusPainted(false);
 		b2.setBackground(Color.white);
 		b2.addActionListener(this);
 		
 		b3 = new JButton("선별진료소");
-		b3.setBounds(530, 100, 120, 100);
+		b3.setBounds(440, 100, 120, 100);
 		b3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		b3.setFocusPainted(false);
 		b3.setBackground(Color.white);
 		b3.addActionListener(this);
 		
 		b5 = new JButton("자가격리자");
-		b5.setBounds(680, 100, 120, 100);
+		b5.setBounds(590, 100, 120, 100);
 		b5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		b5.setFocusPainted(false);
 		b5.setBackground(Color.white);
 		b5.addActionListener(this);
 		
+		b6 = new JButton("비인가 분석 확인");
+		b6.setBounds(740, 100, 140, 100);
+		b6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		b6.setFocusPainted(false);
+		b6.setBackground(Color.white);
+		b6.addActionListener(this);
+		
 		p2.add(b1);
 		p2.add(b2);
 		p2.add(b3);
-		//p2.add(b4);
 		p2.add(b5);
+		p2.add(b6);
 		
 		add(p4,BorderLayout.NORTH);
 		add(p2);
-	
+		
 		setVisible(true);
 	}
 	public void paint (Graphics g) {
