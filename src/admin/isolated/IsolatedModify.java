@@ -26,25 +26,11 @@ import jdbc.DB;
 
 public class IsolatedModify extends JFrame implements ActionListener {
 	
-	private JPanel p1;
 	private JLabel lblicon;
-	private JPanel last;
-	private JPanel pCen;
-	private JButton b1;
-	private JButton b2;
-	private JPanel p3;
-	private JPanel pNor;
-	private JPanel p2;
-	private JTextField tf1;
-	private JTextField tf2;
-	private JTextField tf3;
-	private JTextField tf4;
-	private JTextField tf5;
-	private JTextField tf6;
-	private JButton btnSearch;
-	private JButton btnCancel;
+	private JPanel p1, last, pCen, pNor, p2;
+	private JTextField tf1, tf2, tf3, tf4, tf5, tf6;
+	private JButton btnSearch, btnCancel, btnModify;
 	private IsolatedAdmin isolatedAdmin;
-	private JButton btnModify;
 
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public IsolatedModify(String title, int width, int height, IsolatedAdmin isolatedAdmin) {
@@ -52,6 +38,7 @@ public class IsolatedModify extends JFrame implements ActionListener {
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //닫을수 있는 특정 상수값을 주었기 때문에 프레임 종료버튼이 클릭될때 프로그램도 같이 사라짐 
+		setResizable(false); // 실행후 화면크기 변경 불가
 		this.isolatedAdmin = isolatedAdmin;
 		
 		

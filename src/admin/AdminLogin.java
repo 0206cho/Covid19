@@ -38,6 +38,7 @@ public class AdminLogin extends JFrame implements ActionListener {
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //닫을수 있는 특정 상수값을 주었기 때문에 프레임 종료버튼이 클릭될때 프로그램도 같이 사라짐 
+		setResizable(false); // 실행후 화면크기 변경 불가
 		
 		p1 = new JPanel();
 		p1.setLayout(new BorderLayout());
@@ -62,6 +63,7 @@ public class AdminLogin extends JFrame implements ActionListener {
 		tx1.setBounds(240, 140, 200, 30);
 		lbl2.setBounds(193, 40, 300, 300);
 		tx2.setBounds(240, 180, 200, 30);
+		tx2.addActionListener(this);
 		lbl2.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		b1 = new JButton("로그인");
 		b1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -125,7 +127,7 @@ public class AdminLogin extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if(obj == b1) {
+		if(obj == b1 || obj == tx2) {
 			//로그인 버튼클릭시
 			String id = tx1.getText();
 			String pw = tx2.getText();

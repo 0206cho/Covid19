@@ -30,29 +30,22 @@ public class IsolatedCheckListModify extends JFrame implements ActionListener {
 	private JLabel lblicon;
 	private JPanel last;
 	private JPanel pCen;
-	private JButton b1;
-	private JButton b2;
-	private JPanel p3;
 	private JPanel pNor;
 	private JPanel p2;
-	private JTextField tf1;
-	private JTextField tf2;
-	private JTextField tf3;
-	private JTextField tf4;
-	private JTextField tf5;
-	private JTextField tf6;
+	private JTextField tf1, tf2, tf3, tf4, tf5, tf6, tf7, tf8, tf9;
 	private JButton btnSearch;
 	private JButton btnCancel;
-	private IsolatedAdmin isolatedAdmin;
+	private IsolatedCheckListAdmin isolatedCheckListAdmin;
 	private JButton btnModify;
 
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public IsolatedCheckListModify(String title, int width, int height, IsolatedAdmin isolatedAdmin) {
+	public IsolatedCheckListModify(String title, int width, int height, IsolatedCheckListAdmin isolatedCheckListAdmin) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //닫을수 있는 특정 상수값을 주었기 때문에 프레임 종료버튼이 클릭될때 프로그램도 같이 사라짐 
-		this.isolatedAdmin = isolatedAdmin;
+		setResizable(false); // 실행후 화면크기 변경 불가
+		this.isolatedCheckListAdmin = isolatedCheckListAdmin;
 		
 		
 		//상단 패널
@@ -82,21 +75,27 @@ public class IsolatedCheckListModify extends JFrame implements ActionListener {
 		
 		//중앙패널
 		pCen = new JPanel();
-		pCen.setLayout(new GridLayout(6, 2));
+		pCen.setLayout(new GridLayout(9, 2));
 		pCen.setBackground(Color.white);
 		
-		JLabel lbl1 = new JLabel("   ID :");
+		JLabel lbl1 = new JLabel("   연번  ");		
 		lbl1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl2 = new JLabel("   이름:");
+		JLabel lbl2 = new JLabel("   ID ");
 		lbl2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl3 = new JLabel("   PW :");
+		JLabel lbl3 = new JLabel("   일시  ");
 		lbl3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl4 = new JLabel("   지역 :");
+		JLabel lbl4 = new JLabel("   발열  ");
 		lbl4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl5 = new JLabel("   휴대폰 :");
+		JLabel lbl5 = new JLabel("   체온  ");
 		lbl5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl6 = new JLabel("   격리날짜 :");
+		JLabel lbl6 = new JLabel("   기침  ");
 		lbl6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		JLabel lbl7 = new JLabel("   인후통  ");
+		lbl7.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		JLabel lbl8 = new JLabel("   호흡곤란  ");
+		lbl8.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		JLabel lbl9 = new JLabel("   특이사항  ");
+		lbl9.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		
 		tf1 = new JTextField();
 		tf1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
@@ -110,6 +109,12 @@ public class IsolatedCheckListModify extends JFrame implements ActionListener {
 		tf5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		tf6 = new JTextField();
 		tf6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		tf7 = new JTextField();
+		tf7.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		tf8 = new JTextField();
+		tf8.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		tf9 = new JTextField();
+		tf9.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		
 		pCen.add(lbl1);
 		pCen.add(tf1);
@@ -123,8 +128,12 @@ public class IsolatedCheckListModify extends JFrame implements ActionListener {
 		pCen.add(tf5);
 		pCen.add(lbl6);
 		pCen.add(tf6);
-
-		
+		pCen.add(lbl7);
+		pCen.add(tf7);
+		pCen.add(lbl8);
+		pCen.add(tf8);		
+		pCen.add(lbl9);
+		pCen.add(tf9);		
 		
 		//하단 패널
 		JPanel pSou = new JPanel();
@@ -162,16 +171,13 @@ public class IsolatedCheckListModify extends JFrame implements ActionListener {
 		add(last);
 		
 		setVisible(true);
-		
-		
 	}
 
 	public void paint (Graphics g) {
 		super.paint(g);
 		g.drawLine(0, 94, 1050, 94);
-		
-
 	}
+	
 	public static void main(String[] args) {
 		try {
 			DB.init();
@@ -179,8 +185,6 @@ public class IsolatedCheckListModify extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-//		new IsolatedAdd("자가격리괸리", 300, 320);
 	}
 	
 	//이벤트 처리
@@ -190,9 +194,9 @@ public class IsolatedCheckListModify extends JFrame implements ActionListener {
 		
 		if(obj == btnSearch) {
 			if(tf1.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "ID를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "연번을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 			}else {
-				String sql = "SELECT * FROM isolated WHERE isolatedID= '" + tf1.getText() + "' ";
+				String sql = "SELECT * FROM isolatedCheckList WHERE isolatedCheckListID= '" + tf1.getText() + "' ";
 				IDSearchDB(sql);
 				JOptionPane.showMessageDialog(this,"검색이 완료되었습니다.","메시지",JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -200,42 +204,48 @@ public class IsolatedCheckListModify extends JFrame implements ActionListener {
 			
 		}else if(obj == btnModify) {
 			if(tf2.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "이름을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "ID를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf2.requestFocus();
 			}else if(tf3.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "PW를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "일시를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf3.requestFocus();
 			}else if(tf4.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "지역을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "발열여부를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf4.requestFocus();
 			}else if(tf5.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "휴대폰번호를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "체온을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf5.requestFocus();
 			}else if(tf6.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "날짜를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "기침여부를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf6.requestFocus();
+			}else if(tf7.getText().equals("")) {
+				JOptionPane.showMessageDialog(this, "인후통여부를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				tf7.requestFocus();
+			}else if(tf8.getText().equals("")) {
+				JOptionPane.showMessageDialog(this, "호흡곤란여부를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				tf8.requestFocus();
 			}else {
-				String sql = "UPDATE isolated SET name='" + tf2.getText() + "', " + "isolatedPW='" + tf3.getText() + "', "
-						+ "local='" + tf4.getText() + "', " + "phone='" + tf5.getText() + "', " + " isolatedDate='" + tf6.getText() 
-						+ "' WHERE isolatedID = '" + tf1.getText() + "' ";
+				String sql = "UPDATE isolatedCheckList SET isolatedID='" + tf2.getText() + "', " + "DateTime='" + tf3.getText() + "', "
+						+ "heat='" + tf4.getText() + "', " + "bodyTemperature='" + tf5.getText() + "', " + "cough='" + tf6.getText()+ "', " + "displayable='" + tf7.getText()+ "', " + "soreThroat='" + tf8.getText()+ "', " + " note='" + tf9.getText() 
+						+ "' WHERE isolatedCheckListID = '" + tf1.getText() + "' ";
 				updateDB(sql);
 				JOptionPane.showMessageDialog(this,"수정이 완료되었습니다.","메시지",JOptionPane.INFORMATION_MESSAGE);
 				
-				isolatedAdmin.SelectAll(isolatedAdmin.getModel());
+				isolatedCheckListAdmin.SelectAll(isolatedCheckListAdmin.getModel());
 				tf1.setText("");
 				tf2.setText("");
 				tf3.setText("");
 				tf4.setText("");
 				tf5.setText("");
 				tf6.setText("");
+				tf7.setText("");
+				tf8.setText("");
+				tf9.setText("");
 			}
-			
 			
 		}else if(obj == btnCancel) {
 			this.dispose();
 		}
-
-		
 	}
 
 	private void IDSearchDB(String sql) {
@@ -248,6 +258,9 @@ public class IsolatedCheckListModify extends JFrame implements ActionListener {
 				tf4.setText(rs.getString(4));
 				tf5.setText(rs.getString(5));
 				tf6.setText(rs.getString(6));
+				tf7.setText(rs.getString(7));
+				tf8.setText(rs.getString(8));
+				tf9.setText(rs.getString(9));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

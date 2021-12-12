@@ -48,6 +48,7 @@ public class IsolatedCheckListAdmin extends JFrame implements ActionListener {
 		setLocationRelativeTo(this); // 화면 가운데 찍음
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //닫을수 있는 특정 상수값을 주었기 때문에 프레임
 		// 종료버튼이 클릭될때 프로그램도 같이 사라짐
+		setResizable(false); // 실행후 화면크기 변경 불가
 
 		// 상단 패널
 		p1 = new JPanel();
@@ -198,10 +199,9 @@ public class IsolatedCheckListAdmin extends JFrame implements ActionListener {
 			new IsolatedCheckListAdd("자가진단삽입", 300, 350, this);
 		} else if (obj == btnDelete) {
 			new IsolatedCheckListDelete("자가진단삭제", 300, 300, this);
-		} 
-//		else if (obj == btnModify) {
-//			new IsolatedModify("격리자수정", 300, 320, this);
-//		}
+		} else if (obj == btnModify) {
+			new IsolatedCheckListModify("격리자수정", 300, 320, this);
+		}
 
 	}
 
