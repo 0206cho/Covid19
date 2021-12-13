@@ -344,9 +344,6 @@ public class Distancing_Map extends JFrame implements ActionListener {
 		p1.add(lblicon);
 		
 		
-		
-		
-		
 		add(p2,BorderLayout.NORTH);
 		add(p1);
 		
