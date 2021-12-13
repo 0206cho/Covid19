@@ -137,7 +137,7 @@ public class VaccineIntro extends JFrame implements ActionListener {
 		last.add(p2);
 		add(last);
 		
-		
+		setResizable(false);
 		setVisible(true);
 		
 		

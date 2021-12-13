@@ -185,7 +185,7 @@ public class IsolatedMain extends JFrame implements ActionListener, MouseListene
 		pLast.add(pCenter, BorderLayout.CENTER);
 
 		add(pLast);
-
+		setResizable(false);
 		setVisible(true);
 	}
 

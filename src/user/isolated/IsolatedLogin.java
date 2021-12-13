@@ -103,7 +103,7 @@ public class IsolatedLogin extends JFrame implements ActionListener {
 		last.add(p1, BorderLayout.NORTH);
 		last.add(p2);
 		add(last);
-
+		setResizable(false);
 		setVisible(true);
 
 	}

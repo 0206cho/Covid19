@@ -150,7 +150,7 @@ public class VaccineInquiry extends JFrame implements ActionListener {
 		last.add(p3, BorderLayout.NORTH);
 		last.add(p7);
 		add(last);
-
+		setResizable(false);
 		setVisible(true);
 
 	}

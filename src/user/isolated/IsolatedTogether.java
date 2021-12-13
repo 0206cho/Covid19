@@ -62,7 +62,6 @@ public class IsolatedTogether extends JFrame implements ActionListener {
 				+ "      - 자가격리대상자의 식기류 등은 별도로 분리하여 깨끗이 씻기 전에 다른 사람이 사용하지 않도록 하기<BR/><BR/>"
 				+ "  ▶ 테이블 위, 문손잡이, 욕실기구, 키보드, 침대 옆 테이블 등 손길이 많이 닿는 곳의 표면 자주 닦기<BR/><BR/>"
 				+ "  ▶ 자가격리대상자의 건강상태를 주의 깊게 관찰하기<BR/></HTML>");
-		
 		lblTogether.setFont(new Font("맑은고딕", Font.PLAIN, 14));
 		pCenter.add(lblTogether);
 
@@ -75,7 +74,7 @@ public class IsolatedTogether extends JFrame implements ActionListener {
 		pLast.add(pCenter, BorderLayout.CENTER);
 
 		add(pLast);
-
+		setResizable(false);
 		this.setVisible(true);
 	}
 

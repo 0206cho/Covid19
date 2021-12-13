@@ -70,7 +70,7 @@ public class IsolatedSympthoms extends JFrame implements ActionListener {
 		pLast.add(pCenter, BorderLayout.CENTER);
 
 		add(pLast);
-
+		setResizable(false);
 		this.setVisible(true);
 	}
 

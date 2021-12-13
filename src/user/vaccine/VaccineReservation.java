@@ -291,6 +291,7 @@ public class VaccineReservation extends JFrame implements ActionListener {
 		last.add(p3, BorderLayout.NORTH);
 		last.add(p2);
 		add(last);
+		setResizable(false);
 		setVisible(true);
 
 	}

@@ -99,6 +99,7 @@ public class VaccineSearch extends JFrame implements ActionListener {
 		
 		
 		add(last);
+		setResizable(false);
 		setVisible(true);
 		
 		

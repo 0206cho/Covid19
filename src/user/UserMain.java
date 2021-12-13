@@ -151,7 +151,7 @@ public class UserMain extends JFrame implements ActionListener {
 		last.add(test_panel, BorderLayout.NORTH);
 		last.add(p2);
 		add(last);
-
+		setResizable(false);
 		setVisible(true);
 	}
 

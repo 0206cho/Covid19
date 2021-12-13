@@ -83,7 +83,7 @@ public class IsolatedRule extends JFrame implements ActionListener {
 		pLast.add(pCenter, BorderLayout.CENTER);
 
 		add(pLast);
-
+		setResizable(false);
 		this.setVisible(true); // 화면에 보여지게 함
 	}
 
