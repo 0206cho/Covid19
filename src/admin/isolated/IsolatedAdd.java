@@ -110,6 +110,7 @@ public class IsolatedAdd extends JFrame implements ActionListener {
 		tf5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		tf6 = new JTextField();
 		tf6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		tf6.addActionListener(this);
 		
 		pCen.add(lbl1);
 		pCen.add(tf1);
@@ -181,7 +182,7 @@ public class IsolatedAdd extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		
-		if(obj == btnOK) {
+		if(obj == btnOK || obj == tf6) {
 			if(tf1.getText().equals("")) {
 				JOptionPane.showMessageDialog(this, "ID를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf1.requestFocus();
