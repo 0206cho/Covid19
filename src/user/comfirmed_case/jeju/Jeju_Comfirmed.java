@@ -103,7 +103,11 @@ public class Jeju_Comfirmed extends JFrame implements ActionListener {
 		p4 = new JPanel();
 		p4.setBackground(Color.white);
 		String[] header = { "보건소", "1차-당일접종", "1차-당일누계", "2차-당일접종", "2차-당일누계", "부스터샷-당일접종", "부스터샷-당일누계" };
-		model = new DefaultTableModel(header, 0);
+		model = new DefaultTableModel(header, 0){
+			public boolean isCellEditable(int i, int c) {		
+				return false;										// jtable 더블클릭으로 수정 금지
+			}	
+		};
 		table = new JTable(model);
 		scroll = new JScrollPane(table);
 		scroll.setPreferredSize(new Dimension(858, 500));

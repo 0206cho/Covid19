@@ -389,45 +389,45 @@ public class Distancing_Map extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new Distancing_Map("지역별 거리두기 단계", 665, 830);
+		new Distancing_Map("지역별 백신 접종 현황", 665, 830);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if(obj == seoul_btn) {
-			new Seoul_Comfirmed("서울 확진자 현황", 880, 615);
+			new Seoul_Comfirmed("서울 백신 접종 현황", 880, 615);
 		}else if(obj == incheon_btn) {
-			new Incheon_Comfirmed("인천 확진자 현황", 880, 615);
+			new Incheon_Comfirmed("인천 백신 접종 현황", 880, 615);
 		}else if(obj == gyeonggi_btn) {
-			new Gyeonggi_Comfirmed("경기 확진자 현황", 880, 615);
+			new Gyeonggi_Comfirmed("경기 백신 접종 현황", 880, 615);
 		}else if(obj == chungnam_btn) {
-			new Chungnam_Comfirmed("충남 확진자 현황", 880, 615);
+			new Chungnam_Comfirmed("충남 백신 접종 현황", 880, 615);
 		}else if(obj == seojong_btn) {
-			new Sejong_Comfirmed("세종 확진자 현황", 880, 615);
+			new Sejong_Comfirmed("세종 백신 접종 현황", 880, 615);
 		}else if(obj == daejeon_btn) {
-			new Daejeon_Comfirmed("대전 확진자 현황", 880, 615);
+			new Daejeon_Comfirmed("대전 백신 접종 현황", 880, 615);
 		}else if(obj == jeonbuk_btn) {
-			new Jeonbuk_Comfirmed("전북 확진자 현황", 880, 615);
+			new Jeonbuk_Comfirmed("전북 백신 접종 현황", 880, 615);
 		}else if(obj == gwangju_btn) {
-			new Gwangju_Comfirmed("광주 확진자 현황", 880, 615);
+			new Gwangju_Comfirmed("광주 백신 접종 현황", 880, 615);
 		}else if(obj == jeonnam_btn) {
-			new Jeonnam_Comfirmed("전남 확진자 현황", 880, 615);
+			new Jeonnam_Comfirmed("전남 백신 접종 현황", 880, 615);
 		}else if(obj == jeju_btn) {
-			new Jeju_Comfirmed("제주 확진자 현황", 880, 615);
+			new Jeju_Comfirmed("제주 백신 접종 현황", 880, 615);
 		}else if(obj == gyeongnam_btn) {
-			new Gyeongnam_Comfirmed("경남 확진자 현황", 880, 615);
+			new Gyeongnam_Comfirmed("경남 백신 접종 현황", 880, 615);
 		}else if(obj == busan_btn) {
-			new Busan_Comfirmed("부산 확진자 현황", 880, 615);
+			new Busan_Comfirmed("부산 백신 접종 현황", 880, 615);
 		}else if(obj == ulsan_btn) {
-			new Ulsan_Comfirmed("울산 확진자 현황", 880, 615);
+			new Ulsan_Comfirmed("울산 백신 접종 현황", 880, 615);
 		}else if(obj == daegu_btn) {
-			new Daegu_Comfirmed("대구 확진자 현황", 880, 615);
+			new Daegu_Comfirmed("대구 백신 접종 현황", 880, 615);
 		}else if(obj == gyeongbuk_btn) {
-			new Gyeongbuk_Comfirmed("경북 확진자 현황", 880, 615);
+			new Gyeongbuk_Comfirmed("경북 백신 접종 현황", 880, 615);
 		}else if(obj == chungbuk_btn) {
-			new Chungbuk_Comfirmed("충북 확진자 현황", 880, 615);
+			new Chungbuk_Comfirmed("충북 백신 접종 현황", 880, 615);
 		}else if(obj == gangwon_btn) {
-			new Gangwon_Comfirmed("강원 확진자 현황", 880, 615);
+			new Gangwon_Comfirmed("강원 백신 접종 현황", 880, 615);
 		}
 	}
 

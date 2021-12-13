@@ -106,7 +106,11 @@ public class VaccineInquiry extends JFrame implements ActionListener {
 		p7 = new JPanel();
 		p7.setBackground(Color.white);
 		String[] header = { "이름", "주민등록번호", "휴대폰번호", "접종날짜", "의료기관" };
-		model = new DefaultTableModel(header, 0);
+		model = new DefaultTableModel(header, 0){
+			public boolean isCellEditable(int i, int c) {		
+				return false;										// jtable 더블클릭으로 수정 금지
+			}	
+		};
 		table = new JTable(model);
 		scroll = new JScrollPane(table);
 		scroll.setBackground(Color.white);

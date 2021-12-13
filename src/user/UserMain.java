@@ -175,7 +175,7 @@ public class UserMain extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if (obj == b1) {
-			new Distancing_Map("지역별 거리두기 단계", 665, 830);
+			new Distancing_Map("지역별 백신 접종 현황", 665, 830);
 		} else if (obj == b2) {
 			new VaccineIntro("백신 예약 및 조회", 800, 600);
 		} else if (obj == b3) {

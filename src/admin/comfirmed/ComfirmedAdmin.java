@@ -124,7 +124,11 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 		String[] header = { "보건소", "1차-당일접종", "1차-당일누계", "2차-당일접종", "2차-당일누계", "부스터샷-당일접종", "부스터샷-당일누계" };
 		
 		model = new DefaultTableModel(header, 0);
-		table = new JTable(model);
+		table = new JTable(model){
+			public boolean isCellEditable(int i, int c) {		
+				return false;										// jtable 더블클릭으로 수정 금지
+			}	
+		};
 		sp = new JScrollPane(table);
 		sp.setPreferredSize(new Dimension(880, 500));
 		
@@ -171,7 +175,7 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 		last.add(pNor,BorderLayout.NORTH);
 		last.add(pCen);
 		add(last);
-		
+		setResizable(false);
 		setVisible(true);
 		
 		

@@ -112,7 +112,11 @@ public class MedicalStationAdmin extends JFrame implements ActionListener {
 
 		String[] column = { "연번", "시도", "시군구", "의료기관명", "주소", "평일 운영시간", "토요일 운영시간", "공휴일 운영시간", "대표 전화번호" };
 
-		model = new DefaultTableModel(column, 0);
+		model = new DefaultTableModel(column, 0){
+			public boolean isCellEditable(int i, int c) {		
+				return false;										// jtable 더블클릭으로 수정 금지
+			}	
+		};
 
 		table = new JTable(model);
 		sp = new JScrollPane(table);

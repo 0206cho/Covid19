@@ -61,9 +61,8 @@ public class Intro extends JFrame implements ActionListener {
 		cenPen.add(btn_admin);
 		cenPen.add(lblimg);
 		add(cenPen);
-
+		setResizable(false);
 		setVisible(true); // 보이게
-
 	}
 
 	public static void main(String[] args) {
