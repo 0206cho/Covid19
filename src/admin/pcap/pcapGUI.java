@@ -2,22 +2,12 @@ package admin.pcap;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapHeader;
 import org.jnetpcap.PcapIf;
@@ -38,7 +29,6 @@ import org.jnetpcap.protocol.lan.Ethernet;
 import org.jnetpcap.protocol.network.Ip4;
 import org.jnetpcap.protocol.tcpip.Tcp;
 
-
 public class pcapGUI extends JFrame implements ActionListener {
 
 	private JPanel pUp, pCenter, pLast;
@@ -49,7 +39,8 @@ public class pcapGUI extends JFrame implements ActionListener {
 	public static JTextArea logTa;
 	public JButton start_btn;
 	private JButton cancel_btn;
-	
+	private boolean check = true;
+
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public pcapGUI() {
 
@@ -79,29 +70,29 @@ public class pcapGUI extends JFrame implements ActionListener {
 		pCenter.setLayout(null);
 		pCenter.setBackground(color);
 		logTa = new JTextArea();
-		logTa.setEditable(false);	// 글 사용 금지
+		logTa.setEditable(false); // 글 사용 금지
 		scrollPane = new JScrollPane(logTa);
-		scrollPane.setViewportView(logTa);	//텍스트가 아래로 내려갈 경우 스크롤바도 같이 내려감
+		scrollPane.setViewportView(logTa); // 텍스트가 아래로 내려갈 경우 스크롤바도 같이 내려감
 		scrollPane.setBounds(5, 390, 500, 300);
-		
+
 		JLabel packet_Lb = new JLabel("패킷 캡쳐");
 		packet_Lb.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		packet_Lb.setBounds(5, 325, 100, 100);
 		pCenter.add(scrollPane);
 		pCenter.add(packet_Lb);
-		
+
 		start_btn = new JButton("Start");
 		start_btn.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		start_btn.setBounds(5, 150, 150, 150);
 		start_btn.addActionListener(this);
 		pCenter.add(start_btn);
-		
+
 		cancel_btn = new JButton("Cancel");
 		cancel_btn.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		cancel_btn.setBounds(5, 300, 100, 100);
 		cancel_btn.addActionListener(this);
 		pCenter.add(cancel_btn);
-		
+
 		// 모든 패널 붙이기
 		pLast = new JPanel();
 		pLast.setLayout(new BorderLayout());
@@ -111,16 +102,16 @@ public class pcapGUI extends JFrame implements ActionListener {
 		pLast.add(pCenter, BorderLayout.CENTER);
 
 		add(pLast);
-		
+
 		setVisible(true);
+
+		pcap();
 	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.drawLine(0, 98, 1050, 98);
 	}
-
-
 
 	public JTextArea getLogTa() {
 		return logTa;
@@ -131,46 +122,44 @@ public class pcapGUI extends JFrame implements ActionListener {
 	}
 
 	public void pcap() {
-		//logTa.append("test1");
-		ArrayList<PcapIf> allDevs = new ArrayList<PcapIf>(); 
+		// logTa.append("test1");
+		ArrayList<PcapIf> allDevs = new ArrayList<PcapIf>();
 		// 디바이스를 담을 변수를 ArrayList로 생성
-		StringBuilder errbuf = new StringBuilder();	
+		StringBuilder errbuf = new StringBuilder();
 		// 에러처리
-		
-		int r = Pcap.findAllDevs(allDevs, errbuf);	
+
+		int r = Pcap.findAllDevs(allDevs, errbuf);
 		// 접근가능한 디바이스를 첫 번째인자에 담는다, 두 번째인자는 에러처리
-		
-		if (r==Pcap.NOT_OK || allDevs.isEmpty()) {
+
+		if (r == Pcap.NOT_OK || allDevs.isEmpty()) {
 			System.out.println("네트워크 장치 찾기 실패." + errbuf.toString());
-			//logTa.append("네트워크 장치 찾기 실패." + errbuf.toString());
+			// logTa.append("네트워크 장치 찾기 실패." + errbuf.toString());
 			return;
-		}	// 예외처리
+		} // 예외처리
 		System.out.println("< 탐색된 네트워크 Device >");
-		//logTa.append("< 탐색된 네트워크 Device >");
-		int i = 0;	// Device Numbering 용도
-		
-		for(PcapIf device : allDevs) 
-		{	// 탐색한 장비를 출력
+		// logTa.append("< 탐색된 네트워크 Device >");
+		int i = 0; // Device Numbering 용도
+
+		for (PcapIf device : allDevs) { // 탐색한 장비를 출력
 			String description = (device.getDescription() != null) ? device.getDescription() : "장비에 대한 설명이 없습니다.";
 			System.out.printf("[%d번]: %s [%s]\n", ++i, device.getName(), description);
-			//logTa.append("[%d번]: %s [%s]\n" + ++i + device.getName() + description);
+			// logTa.append("[%d번]: %s [%s]\n" + ++i + device.getName() + description);
 		}
-		
+
 		PcapIf device = allDevs.get(5);
-		System.out.printf("선택된 장치: %s\n", (device.getDescription() != null) ?
-				device.getDescription() : device.getName());
+		System.out.printf("선택된 장치: %s\n",
+				(device.getDescription() != null) ? device.getDescription() : device.getName());
 
-
-		int snaplen = 64 * 1024; //65536Byte만큼 패킷을 캡쳐
+		int snaplen = 64 * 1024; // 65536Byte만큼 패킷을 캡쳐
 		int flags = Pcap.MODE_NON_PROMISCUOUS; // 무차별모드
-		int timeout = 10 *1000; // timeout 10second
+		int timeout = 10 * 1000; // timeout 10second
 		Pcap pcap = Pcap.openLive(device.getName(), snaplen, flags, timeout, errbuf);
-		
+
 		if (pcap == null) {
 			System.out.printf("Network Device Access Failed. Error: " + errbuf.toString());
 			return;
 		}
-		
+
 		// 여기서 부터 계층별 객체 생성
 		Ethernet eth = new Ethernet();
 		Ip4 ip = new Ip4();
@@ -178,48 +167,62 @@ public class pcapGUI extends JFrame implements ActionListener {
 		Payload payload = new Payload();
 		PcapHeader header = new PcapHeader(JMemory.POINTER);
 		JBuffer buf = new JBuffer(JMemory.POINTER);
-		int id = JRegistry.mapDLTToId(pcap.datalink());	// pcap의 datalink 유형을 jNetPcap의 프로토콜 ID에 맵핑
-		while(pcap.nextEx(header, buf) == Pcap.NEXT_EX_OK) // 헤더와 버퍼를 피어링
-		{
-			PcapPacket packet = new PcapPacket(header, buf);
-			packet.scan(id); //새로운 패킷을 스캔하여 포함 된 헤더를 찾습니다
-			System.out.printf("[ #%d ]\n", packet.getFrameNumber());
-			System.out.println("##################################### Packet #####################################");
-			if (packet.hasHeader(eth)) {
-				System.out.printf("출발지 MAC 주소 = %s\n도착지 MAC 주소 = %s\n", FormatUtils.mac(eth.source()), FormatUtils.mac(eth.destination()));
-				logTa.append("출발지 MAC 주소 = "+FormatUtils.mac(eth.source())+"\n도착지 MAC 주소 = "+FormatUtils.mac(eth.destination()) +"\n");
-				logTa.setCaretPosition(logTa.getDocument().getLength());	// 포커스 맨 아래로 
-			}
-			if (packet.hasHeader(ip)) {
-				System.out.printf("출발지 IP 주소 = %s\n도착지 IP 주소 = %s\n", FormatUtils.ip(ip.source()), FormatUtils.ip(ip.destination()));
-				logTa.append("출발지 IP 주소 = "+FormatUtils.ip(ip.source())+"\n도착지 IP 주소 = "+FormatUtils.ip(ip.destination())+"\n");
-				logTa.setCaretPosition(logTa.getDocument().getLength());
-			}
-			if (packet.hasHeader(tcp)) {
-				System.out.printf("출발지 TCP 주소 = %d\n도착지 TCP 주소 = %d\n", tcp.source(), tcp.destination());
-				logTa.append("출발지 TCP 주소 = "+tcp.source()+"\n도착지 TCP 주소 = "+tcp.destination()+"\n");
-				logTa.setCaretPosition(logTa.getDocument().getLength());
-			}
-			if (packet.hasHeader(payload)) {
-				System.out.printf("페이로드의 길이 = %d\n", payload.getLength()); System.out.print(payload.toHexdump());	// 와이어샤크에서 보이는 hexdump를 출력
-				logTa.append("페이로드의 길이 = "+payload.getLength()+"\n" + payload.getLength() + "\n");
-				logTa.append(payload.toHexdump());
-				logTa.setCaretPosition(logTa.getDocument().getLength());	// 포커스 맨 아래로 
+		int id = JRegistry.mapDLTToId(pcap.datalink()); // pcap의 datalink 유형을 jNetPcap의 프로토콜 ID에 맵핑
+		if (check == true) {
+			while (pcap.nextEx(header, buf) == Pcap.NEXT_EX_OK) // 헤더와 버퍼를 피어링
+			{
+				PcapPacket packet = new PcapPacket(header, buf);
+				packet.scan(id); // 새로운 패킷을 스캔하여 포함 된 헤더를 찾습니다
+				System.out.printf("[ #%d ]\n", packet.getFrameNumber());
+				System.out
+						.println("##################################### Packet #####################################");
+				if (packet.hasHeader(eth)) {
+					System.out.printf("출발지 MAC 주소 = %s\n도착지 MAC 주소 = %s\n", FormatUtils.mac(eth.source()),
+							FormatUtils.mac(eth.destination()));
+					System.out.println("test : " + logTa.getText());
+//					logTa.setText("출발지 MAC 주소 = "+FormatUtils.mac(eth.source())+"\n도착지 MAC 주소 = "+FormatUtils.mac(eth.destination()) +"\n");
+					logTa.append("출발지 MAC 주소 = " + FormatUtils.mac(eth.source()) + "\n도착지 MAC 주소 = "
+							+ FormatUtils.mac(eth.destination()) + "\n");
+					logTa.setCaretPosition(logTa.getDocument().getLength()); // 포커스 맨 아래로
+				}
+				if (packet.hasHeader(ip)) {
+					System.out.printf("출발지 IP 주소 = %s\n도착지 IP 주소 = %s\n", FormatUtils.ip(ip.source()),
+							FormatUtils.ip(ip.destination()));
+//					logTa.setText(logTa.getText() + "출발지 IP 주소 = "+FormatUtils.ip(ip.source())+"\n도착지 IP 주소 = "+FormatUtils.ip(ip.destination())+"\n");
+					logTa.append("출발지 IP 주소 = " + FormatUtils.ip(ip.source()) + "\n도착지 IP 주소 = "
+							+ FormatUtils.ip(ip.destination()) + "\n");
+					logTa.setCaretPosition(logTa.getDocument().getLength());
+				}
+				if (packet.hasHeader(tcp)) {
+					System.out.printf("출발지 TCP 주소 = %d\n도착지 TCP 주소 = %d\n", tcp.source(), tcp.destination());
+//					logTa.setText(logTa.getText() + "출발지 TCP 주소 = "+tcp.source()+"\n도착지 TCP 주소 = "+tcp.destination()+"\n");
+					logTa.append("출발지 TCP 주소 = " + tcp.source() + "\n도착지 TCP 주소 = " + tcp.destination() + "\n");
+					logTa.setCaretPosition(logTa.getDocument().getLength());
+				}
+				if (packet.hasHeader(payload)) {
+					System.out.printf("페이로드의 길이 = %d\n", payload.getLength());
+					System.out.print(payload.toHexdump()); // 와이어샤크에서 보이는 hexdump를 출력
+//					logTa.setText(logTa.getText() + "페이로드의 길이 = "+payload.getLength()+"\n" + payload.getLength() + "\n");
+					logTa.append("페이로드의 길이 = " + payload.getLength() + "\n" + payload.getLength() + "\n");
+					logTa.append(payload.toHexdump());
+					logTa.setCaretPosition(logTa.getDocument().getLength()); // 포커스 맨 아래로
+				}
 			}
 		}
+
 		pcap.close();
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-			if(obj == start_btn ) {
-				pcap();
-			}
-			else if(obj == cancel_btn) {
-				logTa.append("왜 안되냐");
-			}
+		if (obj == start_btn) {
+
+			pcap();
+			check = true;
+		} else if (obj == cancel_btn) {
+			check = false;
+			logTa.append("왜 안되냐");
 		}
 	}
-
+}

@@ -2,7 +2,6 @@ package admin;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -20,11 +19,8 @@ import admin.comfirmed.ComfirmedAdmin;
 import admin.isolated.IsolatedAdmin;
 import admin.medicalstation.MedicalStationAdmin;
 import admin.pcap.pcapGUI;
-import admin.pcap.pcapServer;
 import admin.vaccine.VaccineAdmin;
-import basic.Server;
 import jdbc.DB;
-import user.comfirmed_case.Distancing_Map;
 
 public class AdminMain extends JFrame implements ActionListener  {
 	
@@ -163,7 +159,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 					dispose();
 				}
 				else if(obj == b2) {
-					new VaccineAdmin("백신 관리자", 700, 700);
+					new VaccineAdmin("백신 관리자", 600, 615);
 				}
 				else if(obj == b3) {
 					new MedicalStationAdmin("선별진료소관리", 1800, 870);
@@ -172,8 +168,8 @@ public class AdminMain extends JFrame implements ActionListener  {
 					new IsolatedAdmin("자가격리관리", 600, 620);
 				}
 				else if(obj == b6) {
-					//new pcapGUI();
-					new pcapServer();
+					new pcapGUI();
+//					new pcapServer();
 					
 					//new Server();
 				}

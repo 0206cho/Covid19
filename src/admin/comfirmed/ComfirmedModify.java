@@ -179,8 +179,6 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 	public void paint (Graphics g) {
 		super.paint(g);
 		g.drawLine(0, 94, 1050, 94);
-		
-
 	}
 	public static void main(String[] args) {
 		try {
