@@ -68,7 +68,7 @@ public class VaccineModify extends JFrame implements ActionListener {
 
 		// 중앙패널
 		pCen = new JPanel();
-		pCen.setLayout(new GridLayout(9, 2));
+		pCen.setLayout(new GridLayout(6, 2));
 		pCen.setBackground(Color.white);
 
 		JLabel lbl1 = new JLabel("  주민번호 뒷자리 :");
@@ -143,6 +143,7 @@ public class VaccineModify extends JFrame implements ActionListener {
 		last.add(pCen);
 		last.add(pSou, BorderLayout.SOUTH);
 		add(last);
+		setResizable(false);
 		setVisible(true);
 
 	}

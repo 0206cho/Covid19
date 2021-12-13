@@ -160,7 +160,7 @@ public class MedicalStationAdmin extends JFrame implements ActionListener {
 		last.add(pNor, BorderLayout.NORTH);
 		last.add(pCen);
 		add(last);
-
+		setResizable(false);
 		setVisible(true);
 
 	}

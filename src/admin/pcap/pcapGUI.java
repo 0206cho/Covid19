@@ -102,7 +102,7 @@ public class pcapGUI extends JFrame implements ActionListener {
 		pLast.add(pCenter, BorderLayout.CENTER);
 
 		add(pLast);
-
+		setResizable(false);
 		setVisible(true);
 
 		pcap();

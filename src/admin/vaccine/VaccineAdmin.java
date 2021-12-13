@@ -128,7 +128,7 @@ public class VaccineAdmin extends JFrame implements ActionListener {
 		last.add(p3, BorderLayout.NORTH);
 		last.add(p4);
 		add(last);
-		
+		setResizable(false);
 		setVisible(true);
 		
 		
@@ -181,7 +181,7 @@ public class VaccineAdmin extends JFrame implements ActionListener {
 			new VaccineDelete("백신 예약 취소", 300, 300,this);
 		}
 		else if(obj == b2) {
-			new VaccineModify("백신 예약 수정", 500, 420,this);
+			new VaccineModify("백신 예약 수정", 300, 300,this);
 		}
 	}
 

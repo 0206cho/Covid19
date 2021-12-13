@@ -129,7 +129,7 @@ public class IsolatedCheckListDelete extends JFrame implements ActionListener {
 		last.add(pCen);
 		last.add(pSou, BorderLayout.SOUTH);
 		add(last);
-
+		setResizable(false);
 		setVisible(true);
 	}
 
