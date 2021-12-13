@@ -19,6 +19,7 @@ encoding//src/admin/medicalstation/MedicalStationAdd.java=UTF-8
 encoding//src/admin/medicalstation/MedicalStationAdmin.java=UTF-8
 encoding//src/admin/medicalstation/MedicalStationDelete.java=UTF-8
 encoding//src/admin/medicalstation/MedicalStationModify.java=UTF-8
+encoding//src/admin/pcap/pcapGUI.java=UTF-8
 encoding//src/admin/vaccine/VaccineAdmin.java=UTF-8
 encoding//src/admin/vaccine/VaccineDelete.java=UTF-8
 encoding//src/admin/vaccine/VaccineModify.java=UTF-8

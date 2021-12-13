@@ -19,7 +19,10 @@ import javax.swing.JPanel;
 import admin.comfirmed.ComfirmedAdmin;
 import admin.isolated.IsolatedAdmin;
 import admin.medicalstation.MedicalStationAdmin;
+import admin.pcap.pcapGUI;
+import admin.pcap.pcapServer;
 import admin.vaccine.VaccineAdmin;
+import basic.Server;
 import jdbc.DB;
 import user.comfirmed_case.Distancing_Map;
 
@@ -27,6 +30,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 	
 	
 	
+	public static pcapGUI pcapGUI;
 	private JLabel lblicon;
 	private JPanel p1;
 	private JPanel p2;
@@ -36,12 +40,13 @@ public class AdminMain extends JFrame implements ActionListener  {
 	private JButton b2;
 	private JButton b3;
 	private JButton b4;
-	private JButton b5;
+	private JButton b5,b6;
 	private JPanel p3;
-	private JButton b6;
+	private JButton btn_logout;
 	private JButton b7;
 	private JPanel p4;
-
+	 
+	
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public AdminMain(String title, int width, int height) {
 		this.setTitle(title);
@@ -58,18 +63,17 @@ public class AdminMain extends JFrame implements ActionListener  {
 		p1.setBackground(Color.white);
 		p1.add(lblicon,BorderLayout.WEST);
 		
-		
 		p3 = new JPanel();
 		p3.setBackground(Color.white);
 		p3.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
 		p3.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		b6 = new JButton("로그아웃");
-		b6.setBorderPainted(false);
-		b6.setBackground(Color.white);
-		b6.setFocusPainted(false);
-		b6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		b6.addActionListener(this);
-		p3.add(b6);
+		btn_logout = new JButton("로그아웃");
+		btn_logout.setBorderPainted(false);
+		btn_logout.setBackground(Color.white);
+		btn_logout.setFocusPainted(false);
+		btn_logout.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		btn_logout.addActionListener(this);
+		p3.add(btn_logout);
 		
 		p4 = new JPanel();
 		p4.setBackground(Color.white);
@@ -77,13 +81,9 @@ public class AdminMain extends JFrame implements ActionListener  {
 		p4.add(p1,BorderLayout.WEST);
 		p4.add(p3,BorderLayout.EAST);
 		
-		
-		
 		p2 = new JPanel();
 		p2.setBackground(Color.WHITE);
 		p2.setLayout(null);
-		
-		
 		
 		b1 = new JButton("백신접종현황");
 		b1.setBounds(140, 100, 120, 100);
@@ -125,6 +125,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 		p2.add(b3);
 		p2.add(b5);
 		p2.add(b6);
+		p2.add(btn_logout);
 		
 		add(p4,BorderLayout.NORTH);
 		add(p2);
@@ -139,6 +140,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 	
 	
 	public static void main(String[] args) {
+		
 		try {
 			DB.init();
 		} catch (Exception e) {
@@ -146,6 +148,10 @@ public class AdminMain extends JFrame implements ActionListener  {
 			e.printStackTrace();
 		}
 		new AdminMain("관리자", 1020, 420);
+		//new pcapServer(pcapGUI);
+		//new Server();
+		//new pcapServer();
+		//new pcapGUI();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -153,7 +159,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 				if(obj == b1) {
 					new ComfirmedAdmin("백신접종관리", 900, 620);
 				}
-				else if(obj == b6) {
+				else if(obj == btn_logout) {
 					dispose();
 				}
 				else if(obj == b2) {
@@ -165,6 +171,11 @@ public class AdminMain extends JFrame implements ActionListener  {
 				else if(obj == b5) {
 					new IsolatedAdmin("자가격리관리", 600, 620);
 				}
+				else if(obj == b6) {
+					//new pcapGUI();
+					new pcapServer();
+					
+					//new Server();
+				}
 	}
-
 }

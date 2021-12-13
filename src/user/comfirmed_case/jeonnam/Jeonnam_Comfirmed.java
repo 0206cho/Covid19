@@ -90,7 +90,7 @@ public class Jeonnam_Comfirmed extends JFrame implements ActionListener {
 		b3.setBackground(Color.white);
 		b3.setFocusPainted(false);
 		b3.addActionListener(this);
-		p2.add(b2);
+		//p2.add(b2);
 		p2.add(b3);
 		p2.add(b1);
 

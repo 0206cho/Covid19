@@ -8,8 +8,22 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+
+import org.jnetpcap.Pcap;
+import org.jnetpcap.PcapHeader;
+import org.jnetpcap.PcapIf;
+import org.jnetpcap.nio.JBuffer;
+import org.jnetpcap.nio.JMemory;
+import org.jnetpcap.packet.JRegistry;
+import org.jnetpcap.packet.Payload;
+import org.jnetpcap.packet.PcapPacket;
+import org.jnetpcap.packet.format.FormatUtils;
+import org.jnetpcap.protocol.lan.Ethernet;
+import org.jnetpcap.protocol.network.Ip4;
+import org.jnetpcap.protocol.tcpip.Tcp;
 
 import jdbc.DB;
 
@@ -60,7 +74,7 @@ public class Server {
 
 				writer.println("SERVER TO CLIENT");
 				// 서버에서 클라이언트로 메세지 보내기
-
+				
 			}
 
 		} catch (IOException e) {
@@ -85,4 +99,6 @@ public class Server {
 		DB.executeQuery(sql);
 		
 	}
+	
+
 }

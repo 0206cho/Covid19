@@ -282,19 +282,8 @@ public class VaccineReservation extends JFrame implements ActionListener {
 		p2.add(btnReserve);
 		p2.add(btnCancle);
 		p2.add(btnCal);
-		
-		
-		
 		p2.add(topButton);
 		p2.add(nameButton);
-
-		
-		
-		
-
-
-		
-		
 
 		last = new JPanel();
 		last.setBackground(Color.white);
