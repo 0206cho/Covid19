@@ -200,7 +200,7 @@ public class IsolatedCheckListAdmin extends JFrame implements ActionListener {
 		} else if (obj == btnDelete) {
 			new IsolatedCheckListDelete("자가진단삭제", 300, 300, this);
 		} else if (obj == btnModify) {
-			new IsolatedCheckListModify("격리자수정", 300, 320, this);
+			new IsolatedCheckListModify("자가진단수정", 300, 320, this);
 		}
 
 	}

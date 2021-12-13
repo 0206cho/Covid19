@@ -91,6 +91,7 @@ public class Daegu_Search extends JFrame implements ActionListener {
 		
 		
 		add(last);
+		setResizable(false);
 		setVisible(true);
 		
 		

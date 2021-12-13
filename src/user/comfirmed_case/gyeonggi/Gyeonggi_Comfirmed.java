@@ -147,7 +147,7 @@ public class Gyeonggi_Comfirmed extends JFrame implements ActionListener {
 		add(last);
 
 		useraddAll(model);
-
+		setResizable(false);
 		setVisible(true);
 	}
 

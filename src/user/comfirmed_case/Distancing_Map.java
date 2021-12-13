@@ -350,10 +350,7 @@ public class Distancing_Map extends JFrame implements ActionListener {
 		add(p2,BorderLayout.NORTH);
 		add(p1);
 		
-		
-		
-		
-		
+		setResizable(false);
 		setVisible(true);
 		
 		

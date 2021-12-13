@@ -125,7 +125,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 		
 		add(p4,BorderLayout.NORTH);
 		add(p2);
-		
+		setResizable(false);
 		setVisible(true);
 	}
 	public void paint (Graphics g) {
