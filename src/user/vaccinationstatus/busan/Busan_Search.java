@@ -35,10 +35,10 @@ public class Busan_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Busan_Comfirmed busan_Comfirmed;
+	private  Busan_vaccinationstatus busan_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Busan_Search(String title, int width, int height, Busan_Comfirmed busan_Comfirmed) {
+	public Busan_Search(String title, int width, int height, Busan_vaccinationstatus busan_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

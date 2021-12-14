@@ -1,4 +1,4 @@
-package user.vaccinationstatus.sejong;
+package user.vaccinationstatus.gyeongnam;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,7 +31,7 @@ import javax.swing.table.TableRowSorter;
 
 import jdbc.DB;
 
-public class Sejong_Comfirmed extends JFrame implements ActionListener {
+public class Gyeongnam_vaccinationstatus extends JFrame implements ActionListener {
 
 	private JPanel p1;
 	private JLabel lblicon;
@@ -53,7 +53,7 @@ public class Sejong_Comfirmed extends JFrame implements ActionListener {
 	private DefaultTableCellRenderer tbCellRender;
  
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Sejong_Comfirmed(String title, int width, int height) {
+	public Gyeongnam_vaccinationstatus(String title, int width, int height) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); // 화면 가운데 찍음
@@ -78,7 +78,7 @@ public class Sejong_Comfirmed extends JFrame implements ActionListener {
 		b1.setBackground(Color.white);
 		b1.setFocusPainted(false);
 		b1.addActionListener(this);
-		b2 = new JButton("세종방역지침");
+		b2 = new JButton("경남방역지침");
 		b2.setBorderPainted(false);
 		b2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		b2.setBackground(Color.white);
@@ -153,7 +153,7 @@ public class Sejong_Comfirmed extends JFrame implements ActionListener {
 
 	// 테이블에 db가져옴,, 반드시 기존테이블에 있는거 다 삭제하고 db에 가져오는식으로? 해야 깔끔하다
 	public void useraddAll(DefaultTableModel model) {
-		String sql = "select * from vaccinationstatus where name LIKE '%세종특별자치시%'";
+		String sql = "select * from vaccinationstatus where name LIKE '%경상남도%'";
 		try {
 			ResultSet rs = DB.getResultSet(sql);
 			for (int i = 0; i < model.getRowCount();) {
@@ -175,7 +175,7 @@ public class Sejong_Comfirmed extends JFrame implements ActionListener {
 //		String sql = "select * from confirmed where PERSON LIKE '%부산%' AND " + combo.trim() + " LIKE '" + word.trim()
 //				+ "'";
 		
-		String sql = "SELECT * FROM vaccinationstatus WHERE name LIKE '%세종특별자치시%' AND name LIKE '%" + word + "%'";
+		String sql = "SELECT * FROM vaccinationstatus WHERE name LIKE '%경상남도%' AND name LIKE '%" + word + "%'";
 
 		try {
 			ResultSet rs = DB.getResultSet(sql);
@@ -204,7 +204,7 @@ public class Sejong_Comfirmed extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new Sejong_Comfirmed("세종 보건소 현황", 880, 615);
+		new Gyeongnam_vaccinationstatus("경남 보건소 현황", 880, 615);
 	}
 
 	public DefaultTableModel getModel() {
@@ -214,12 +214,10 @@ public class Sejong_Comfirmed extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if (obj == b2) {
-			new Sejong_guidelines("세종 방역지침", 610, 670);
-		} else if (obj == b3) {
+		if (obj == b3) {
 			useraddAll(model);
 		} else if (obj == b1) {
-			new Sejong_Search("세종 보건소 검색", 350, 250, this);
+			new Gyeongnam_Search("경남 보건소 검색", 350, 250, this);
 		}
 	}
 

@@ -35,10 +35,10 @@ public class Chungnam_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Chungnam_Comfirmed Chungnam_Comfirmed;
+	private  Chungnam_vaccinationstatus Chungnam_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Chungnam_Search(String title, int width, int height, Chungnam_Comfirmed chungnam_Comfirmed) {
+	public Chungnam_Search(String title, int width, int height, Chungnam_vaccinationstatus chungnam_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

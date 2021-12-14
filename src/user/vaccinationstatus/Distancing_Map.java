@@ -26,23 +26,23 @@ import org.jsoup.select.Elements;
 
 import jdbc.DB;
 import user.UserMain;
-import user.vaccinationstatus.busan.Busan_Comfirmed;
-import user.vaccinationstatus.chungbuk.Chungbuk_Comfirmed;
-import user.vaccinationstatus.chungnam.Chungnam_Comfirmed;
-import user.vaccinationstatus.daegu.Daegu_Comfirmed;
-import user.vaccinationstatus.daejeon.Daejeon_Comfirmed;
-import user.vaccinationstatus.gangwon.Gangwon_Comfirmed;
-import user.vaccinationstatus.gwangju.Gwangju_Comfirmed;
-import user.vaccinationstatus.gyeongbuk.Gyeongbuk_Comfirmed;
-import user.vaccinationstatus.gyeonggi.Gyeonggi_Comfirmed;
-import user.vaccinationstatus.gyeongnam.Gyeongnam_Comfirmed;
-import user.vaccinationstatus.incheon.Incheon_Comfirmed;
-import user.vaccinationstatus.jeju.Jeju_Comfirmed;
-import user.vaccinationstatus.jeonbuk.Jeonbuk_Comfirmed;
-import user.vaccinationstatus.jeonnam.Jeonnam_Comfirmed;
-import user.vaccinationstatus.sejong.Sejong_Comfirmed;
-import user.vaccinationstatus.seoul.Seoul_Comfirmed;
-import user.vaccinationstatus.ulsan.Ulsan_Comfirmed;
+import user.vaccinationstatus.busan.Busan_vaccinationstatus;
+import user.vaccinationstatus.chungbuk.Chungbuk_vaccinationstatus;
+import user.vaccinationstatus.chungnam.Chungnam_vaccinationstatus;
+import user.vaccinationstatus.daegu.Daegu_vaccinationstatus;
+import user.vaccinationstatus.daejeon.Daejeon_vaccinationstatus;
+import user.vaccinationstatus.gangwon.Gangwon_vaccinationstatus;
+import user.vaccinationstatus.gwangju.Gwangju_vaccinationstatus;
+import user.vaccinationstatus.gyeongbuk.Gyeongbuk_vaccinationstatus;
+import user.vaccinationstatus.gyeonggi.Gyeonggi_vaccinationstatus;
+import user.vaccinationstatus.gyeongnam.Gyeongnam_vaccinationstatus;
+import user.vaccinationstatus.incheon.Incheon_vaccinationstatus;
+import user.vaccinationstatus.jeju.Jeju_vaccinationstatus;
+import user.vaccinationstatus.jeonbuk.Jeonbuk_vaccinationstatus;
+import user.vaccinationstatus.jeonnam.Jeonnam_vaccinationstatus;
+import user.vaccinationstatus.sejong.Sejong_vaccinationstatus;
+import user.vaccinationstatus.seoul.Seoul_vaccinationstatus;
+import user.vaccinationstatus.ulsan.Ulsan_vaccinationstatus;
 
 public class Distancing_Map extends JFrame implements ActionListener {
 	
@@ -389,39 +389,39 @@ public class Distancing_Map extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if(obj == seoul_btn) {
-			new Seoul_Comfirmed("서울 백신 접종 현황", 880, 615);
+			new Seoul_vaccinationstatus("서울 백신 접종 현황", 880, 615);
 		}else if(obj == incheon_btn) {
-			new Incheon_Comfirmed("인천 백신 접종 현황", 880, 615);
+			new Incheon_vaccinationstatus("인천 백신 접종 현황", 880, 615);
 		}else if(obj == gyeonggi_btn) {
-			new Gyeonggi_Comfirmed("경기 백신 접종 현황", 880, 615);
+			new Gyeonggi_vaccinationstatus("경기 백신 접종 현황", 880, 615);
 		}else if(obj == chungnam_btn) {
-			new Chungnam_Comfirmed("충남 백신 접종 현황", 880, 615);
+			new Chungnam_vaccinationstatus("충남 백신 접종 현황", 880, 615);
 		}else if(obj == seojong_btn) {
-			new Sejong_Comfirmed("세종 백신 접종 현황", 880, 615);
+			new Sejong_vaccinationstatus("세종 백신 접종 현황", 880, 615);
 		}else if(obj == daejeon_btn) {
-			new Daejeon_Comfirmed("대전 백신 접종 현황", 880, 615);
+			new Daejeon_vaccinationstatus("대전 백신 접종 현황", 880, 615);
 		}else if(obj == jeonbuk_btn) {
-			new Jeonbuk_Comfirmed("전북 백신 접종 현황", 880, 615);
+			new Jeonbuk_vaccinationstatus("전북 백신 접종 현황", 880, 615);
 		}else if(obj == gwangju_btn) {
-			new Gwangju_Comfirmed("광주 백신 접종 현황", 880, 615);
+			new Gwangju_vaccinationstatus("광주 백신 접종 현황", 880, 615);
 		}else if(obj == jeonnam_btn) {
-			new Jeonnam_Comfirmed("전남 백신 접종 현황", 880, 615);
+			new Jeonnam_vaccinationstatus("전남 백신 접종 현황", 880, 615);
 		}else if(obj == jeju_btn) {
-			new Jeju_Comfirmed("제주 백신 접종 현황", 880, 615);
+			new Jeju_vaccinationstatus("제주 백신 접종 현황", 880, 615);
 		}else if(obj == gyeongnam_btn) {
-			new Gyeongnam_Comfirmed("경남 백신 접종 현황", 880, 615);
+			new Gyeongnam_vaccinationstatus("경남 백신 접종 현황", 880, 615);
 		}else if(obj == busan_btn) {
-			new Busan_Comfirmed("부산 백신 접종 현황", 880, 615);
+			new Busan_vaccinationstatus("부산 백신 접종 현황", 880, 615);
 		}else if(obj == ulsan_btn) {
-			new Ulsan_Comfirmed("울산 백신 접종 현황", 880, 615);
+			new Ulsan_vaccinationstatus("울산 백신 접종 현황", 880, 615);
 		}else if(obj == daegu_btn) {
-			new Daegu_Comfirmed("대구 백신 접종 현황", 880, 615);
+			new Daegu_vaccinationstatus("대구 백신 접종 현황", 880, 615);
 		}else if(obj == gyeongbuk_btn) {
-			new Gyeongbuk_Comfirmed("경북 백신 접종 현황", 880, 615);
+			new Gyeongbuk_vaccinationstatus("경북 백신 접종 현황", 880, 615);
 		}else if(obj == chungbuk_btn) {
-			new Chungbuk_Comfirmed("충북 백신 접종 현황", 880, 615);
+			new Chungbuk_vaccinationstatus("충북 백신 접종 현황", 880, 615);
 		}else if(obj == gangwon_btn) {
-			new Gangwon_Comfirmed("강원 백신 접종 현황", 880, 615);
+			new Gangwon_vaccinationstatus("강원 백신 접종 현황", 880, 615);
 		}
 	}
 

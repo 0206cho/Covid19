@@ -35,10 +35,10 @@ public class Sejong_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Sejong_Comfirmed Sejong_Comfirmed;
+	private  Sejong_vaccinationstatus Sejong_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Sejong_Search(String title, int width, int height, Sejong_Comfirmed Sejong_Comfirmed) {
+	public Sejong_Search(String title, int width, int height, Sejong_vaccinationstatus Sejong_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

@@ -31,7 +31,7 @@ import javax.swing.table.TableRowSorter;
 
 import jdbc.DB;
 
-public class Daejeon_Comfirmed extends JFrame implements ActionListener {
+public class Daejeon_vaccinationstatus extends JFrame implements ActionListener {
 
 	private JPanel p1;
 	private JLabel lblicon;
@@ -53,7 +53,7 @@ public class Daejeon_Comfirmed extends JFrame implements ActionListener {
 	private DefaultTableCellRenderer tbCellRender;
  
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Daejeon_Comfirmed(String title, int width, int height) {
+	public Daejeon_vaccinationstatus(String title, int width, int height) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); // 화면 가운데 찍음
@@ -204,7 +204,7 @@ public class Daejeon_Comfirmed extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new Daejeon_Comfirmed("대전 보건소 현황", 880, 615);
+		new Daejeon_vaccinationstatus("대전 보건소 현황", 880, 615);
 	}
 
 	public DefaultTableModel getModel() {
@@ -214,9 +214,7 @@ public class Daejeon_Comfirmed extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if (obj == b2) {
-			new Daejeon_guidelines("대전 방역지침", 610, 670);
-		} else if (obj == b3) {
+		if (obj == b3) {
 			useraddAll(model);
 		} else if (obj == b1) {
 			new Daejeon_Search("대전 보건소 검색", 350, 250, this);

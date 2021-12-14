@@ -35,10 +35,10 @@ public class Seoul_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Seoul_Comfirmed Seoul_Comfirmed;
+	private  Seoul_vaccinationstatus Seoul_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Seoul_Search(String title, int width, int height, Seoul_Comfirmed Seoul_Comfirmed) {
+	public Seoul_Search(String title, int width, int height, Seoul_vaccinationstatus Seoul_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

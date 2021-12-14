@@ -1,4 +1,4 @@
-package user.vaccinationstatus.busan;
+package user.vaccinationstatus.jeonnam;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,7 +31,7 @@ import javax.swing.table.TableRowSorter;
 
 import jdbc.DB;
 
-public class Busan_Comfirmed extends JFrame implements ActionListener {
+public class Jeonnam_vaccinationstatus extends JFrame implements ActionListener {
 
 	private JPanel p1;
 	private JLabel lblicon;
@@ -51,9 +51,9 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 	private JTextField tx1;
 	private JButton b3;
 	private DefaultTableCellRenderer tbCellRender;
-
+ 
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Busan_Comfirmed(String title, int width, int height) {
+	public Jeonnam_vaccinationstatus(String title, int width, int height) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); // 화면 가운데 찍음
@@ -78,7 +78,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 		b1.setBackground(Color.white);
 		b1.setFocusPainted(false);
 		b1.addActionListener(this);
-		b2 = new JButton("부산방역지침");
+		b2 = new JButton("전남방역지침");
 		b2.setBorderPainted(false);
 		b2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		b2.setBackground(Color.white);
@@ -90,7 +90,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 		b3.setBackground(Color.white);
 		b3.setFocusPainted(false);
 		b3.addActionListener(this);
-		// p2.add(b2);
+		//p2.add(b2);
 		p2.add(b3);
 		p2.add(b1);
 
@@ -103,16 +103,15 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 		p4 = new JPanel();
 		p4.setBackground(Color.white);
 		String[] header = { "보건소", "1차-당일접종", "1차-당일누계", "2차-당일접종", "2차-당일누계", "부스터샷-당일접종", "부스터샷-당일누계" };
-		model = new DefaultTableModel(header, 0) {
-			public boolean isCellEditable(int i, int c) {		// jtable 더블클릭으로 수정 금지
-				return false;				
-			}
+		model = new DefaultTableModel(header, 0){
+			public boolean isCellEditable(int i, int c) {		
+				return false;										// jtable 더블클릭으로 수정 금지
+			}	
 		};
-
 		table = new JTable(model);
 		scroll = new JScrollPane(table);
 		scroll.setPreferredSize(new Dimension(858, 500));
-
+		
 		// DefaultCellHeaderRender 생성 (가운데 정렬을 위한)
 		tbCellRender = new DefaultTableCellRenderer();
 		// DefaultTableCellHeaderRender의 정렬을 가운데 정렬로 지정
@@ -129,7 +128,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 		TableRowSorter tablesorter = new TableRowSorter(table.getModel());
 		table.setRowSorter(tablesorter);
 		table.getTableHeader().setReorderingAllowed(false); // 테이블 열 이동 불가
-		// 컬럼 길이조절
+		//컬럼 길이조절
 		table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		table.getColumnModel().getColumn(1).setPreferredWidth(0);
 		table.getColumnModel().getColumn(2).setPreferredWidth(0);
@@ -154,7 +153,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 
 	// 테이블에 db가져옴,, 반드시 기존테이블에 있는거 다 삭제하고 db에 가져오는식으로? 해야 깔끔하다
 	public void useraddAll(DefaultTableModel model) {
-		String sql = "select * from vaccinationstatus where name LIKE '%부산%'";
+		String sql = "select * from vaccinationstatus where name LIKE '%전라남도%'";
 		try {
 			ResultSet rs = DB.getResultSet(sql);
 			for (int i = 0; i < model.getRowCount();) {
@@ -162,8 +161,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 			}
 
 			while (rs.next()) {
-				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getString(7) };
+				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7) };
 				model.addRow(data);
 			}
 		} catch (Exception e) {
@@ -172,12 +170,12 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 		}
 	}
 
-	// 지역 검색하는 메소드 생성
+	//지역 검색하는 메소드 생성
 	public void getSearch(DefaultTableModel model, String combo, String word) throws Exception {
 //		String sql = "select * from confirmed where PERSON LIKE '%부산%' AND " + combo.trim() + " LIKE '" + word.trim()
 //				+ "'";
-
-		String sql = "SELECT * FROM vaccinationstatus WHERE name LIKE '%부산%' AND name LIKE '%" + word + "%'";
+		
+		String sql = "SELECT * FROM vaccinationstatus WHERE name LIKE '%전라남도%' AND name LIKE '%" + word + "%'";
 
 		try {
 			ResultSet rs = DB.getResultSet(sql);
@@ -185,8 +183,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 				model.removeRow(0);
 			}
 			while (rs.next()) {
-				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getString(7) };
+				String data[] = { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7) };
 				model.addRow(data);
 			}
 		} catch (SQLException e) {
@@ -207,7 +204,7 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new Busan_Comfirmed("부산 보건소 현황", 880, 615);
+		new Jeonnam_vaccinationstatus("전남 보건소 현황", 880, 615);
 	}
 
 	public DefaultTableModel getModel() {
@@ -217,12 +214,10 @@ public class Busan_Comfirmed extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if (obj == b2) {
-			new Busan_guidelines("부산 방역지침", 610, 670);
-		} else if (obj == b3) {
+		if (obj == b3) {
 			useraddAll(model);
 		} else if (obj == b1) {
-			new Busan_Search("부산 보건소 검색", 350, 250, this);
+			new Jeonnam_Search("전남 보건소 검색", 350, 250, this);
 		}
 	}
 

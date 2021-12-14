@@ -35,10 +35,10 @@ public class Gangwon_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Gangwon_Comfirmed Gangwon_Comfirmed;
+	private  Gangwon_vaccinationstatus Gangwon_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Gangwon_Search(String title, int width, int height, Gangwon_Comfirmed Gangwon_Comfirmed) {
+	public Gangwon_Search(String title, int width, int height, Gangwon_vaccinationstatus Gangwon_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

@@ -35,10 +35,10 @@ public class Chungbuk_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Chungbuk_Comfirmed Chungbuk_Comfirmed;
+	private  Chungbuk_vaccinationstatus Chungbuk_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Chungbuk_Search(String title, int width, int height, Chungbuk_Comfirmed chungbuk_Comfirmed) {
+	public Chungbuk_Search(String title, int width, int height, Chungbuk_vaccinationstatus chungbuk_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

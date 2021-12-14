@@ -35,10 +35,10 @@ public class Gyeonggi_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Gyeonggi_Comfirmed Gyeonggi_Comfirmed;
+	private  Gyeonggi_vaccinationstatus Gyeonggi_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Gyeonggi_Search(String title, int width, int height, Gyeonggi_Comfirmed Gyeonggi_Comfirmed) {
+	public Gyeonggi_Search(String title, int width, int height, Gyeonggi_vaccinationstatus Gyeonggi_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

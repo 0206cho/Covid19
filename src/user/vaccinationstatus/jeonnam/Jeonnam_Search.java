@@ -35,10 +35,10 @@ public class Jeonnam_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Jeonnam_Comfirmed Jeonnam_Comfirmed;
+	private  Jeonnam_vaccinationstatus Jeonnam_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Jeonnam_Search(String title, int width, int height, Jeonnam_Comfirmed Jeonnam_Comfirmed) {
+	public Jeonnam_Search(String title, int width, int height, Jeonnam_vaccinationstatus Jeonnam_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

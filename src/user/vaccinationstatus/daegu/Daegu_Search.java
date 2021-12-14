@@ -35,10 +35,10 @@ public class Daegu_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Daegu_Comfirmed Daegu_Comfirmed;
+	private  Daegu_vaccinationstatus Daegu_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Daegu_Search(String title, int width, int height, Daegu_Comfirmed Daegu_Comfirmed) {
+	public Daegu_Search(String title, int width, int height, Daegu_vaccinationstatus Daegu_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

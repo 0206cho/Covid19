@@ -35,10 +35,10 @@ public class Incheon_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Incheon_Comfirmed Incheon_Comfirmed;
+	private  Incheon_vaccinationstatus Incheon_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Incheon_Search(String title, int width, int height, Incheon_Comfirmed Incheon_Comfirmed) {
+	public Incheon_Search(String title, int width, int height, Incheon_vaccinationstatus Incheon_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

@@ -35,10 +35,10 @@ public class Gwangju_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Gwangju_Comfirmed Gwangju_Comfirmed;
+	private  Gwangju_vaccinationstatus Gwangju_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Gwangju_Search(String title, int width, int height, Gwangju_Comfirmed Gwangju_Comfirmed) {
+	public Gwangju_Search(String title, int width, int height, Gwangju_vaccinationstatus Gwangju_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음

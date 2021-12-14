@@ -35,10 +35,10 @@ public class Ulsan_Search extends JFrame implements ActionListener {
 	private JPanel p3;
 	private JButton b2;
 	private JLabel lb1;
-	private  Ulsan_Comfirmed Ulsan_Comfirmed;
+	private  Ulsan_vaccinationstatus Ulsan_Comfirmed;
 	private JLabel lbl1;
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public Ulsan_Search(String title, int width, int height, Ulsan_Comfirmed Seoul_Comfirmed) {
+	public Ulsan_Search(String title, int width, int height, Ulsan_vaccinationstatus Seoul_Comfirmed) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음
