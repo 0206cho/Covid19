@@ -228,17 +228,11 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		
-		if(obj == btnAdd) {
-			new ComfirmedAdd("백신접종삽입", 300, 320, this);
-		}else if(obj == btnDelete) {
+		if(obj == btnDelete) {
 			new ComfirmedDelete("백신접종삭제", 300, 300, this);
 		}else if(obj == btnModify) {
 			new ComfirmedModify("백신접종수정", 300, 320, this);
-		}else if(obj==btnLevel) {
-			new ComfirmedLevel("지역별거리단계관리", 300, 400);
 		}
-		
 	}
 
 }
