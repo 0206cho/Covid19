@@ -31,7 +31,7 @@ import org.jsoup.nodes.Document;
 import jdbc.DB;
 import user.isolated.IsolatedLogin;
 import user.medicalstation.Medicalstation;
-import user.comfirmed_case.Distancing_Map;
+import user.vaccinationstatus.Distancing_Map;
 import user.vaccine.VaccineIntro;
 
 public class UserMain extends JFrame implements ActionListener {
