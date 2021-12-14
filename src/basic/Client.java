@@ -20,6 +20,7 @@ public class Client {
 		
 		try {
 			Socket socket = new Socket("127.0.0.1", 1234); // 소켓 서버에 접속
+			
 			System.out.println("socket 서버에 접속 성공!");
 
 			// OutputStream - 클라이언트에서 Server로 메세지 발송
@@ -45,7 +46,7 @@ public class Client {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 			// BufferedReader에 위 InputStream을 담아 사용
 
-			System.out.println(reader.readLine());
+			//System.out.println(reader.readLine());
 			// 서버에서 온 메세지 확인
 			System.out.println("CLIENT SOCKET CLOSE");
 			socket.close(); // 소켓 종료

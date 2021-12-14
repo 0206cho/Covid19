@@ -1,4 +1,4 @@
-package admin.comfirmed;
+package admin.vaccinationstatus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

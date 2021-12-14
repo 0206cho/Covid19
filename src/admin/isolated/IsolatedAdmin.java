@@ -131,7 +131,7 @@ public class IsolatedAdmin extends JFrame implements ActionListener {
 
 		table = new JTable(model);
 		table.getTableHeader().setReorderingAllowed(false); // 테이블 열 이동 불가
-
+		
 		// DefaultCellHeaderRender 생성 (가운데 정렬을 위한)
 		tbCellRender = new DefaultTableCellRenderer();
 		// DefaultTableCellHeaderRender의 정렬을 가운데 정렬로 지정

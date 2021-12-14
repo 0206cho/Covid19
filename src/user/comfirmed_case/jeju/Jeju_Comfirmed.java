@@ -122,7 +122,7 @@ public class Jeju_Comfirmed extends JFrame implements ActionListener {
 		for (int i = 0; i < tbColModel.getColumnCount(); i++) {
 			tbColModel.getColumn(i).setCellRenderer(tbCellRender);
 		}
-
+		table.getTableHeader().setReorderingAllowed(false); // 테이블 열 이동 불가
 		// 머리글(컬럼헤더) 클릭시 필드를 기준으로 오름차순, 내림차순
 		table.setAutoCreateRowSorter(true);
 		TableRowSorter tablesorter = new TableRowSorter(table.getModel());

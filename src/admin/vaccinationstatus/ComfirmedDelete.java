@@ -1,4 +1,4 @@
-package admin.comfirmed;
+package admin.vaccinationstatus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import jdbc.DB;
 
-public class ComfirmedAdd extends JFrame implements ActionListener {
+public class ComfirmedDelete extends JFrame implements ActionListener {
 	
 	private JPanel p1;
 	private JLabel lblicon;
@@ -41,12 +41,12 @@ public class ComfirmedAdd extends JFrame implements ActionListener {
 	private JTextField tf4;
 	private JTextField tf5;
 	private JTextField tf6;
-	private JButton btnOK;
+	private JButton btnDelete;
 	private JButton btnCancel;
 	private ComfirmedAdmin comfirmedAdmin;
 
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public ComfirmedAdd(String title, int width, int height, ComfirmedAdmin comfirmedAdmin) {
+	public ComfirmedDelete(String title, int width, int height, ComfirmedAdmin comfirmedAdmin) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음
@@ -81,43 +81,25 @@ public class ComfirmedAdd extends JFrame implements ActionListener {
 		
 		//중앙패널
 		pCen = new JPanel();
-		pCen.setLayout(new GridLayout(5, 2));
+		pCen.setLayout(null);
 		pCen.setBackground(Color.white);
 		
-		JLabel lbl1 = new JLabel("   번호 :");
+		JLabel lbl1 = new JLabel("   보건소 :");
 		lbl1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl2 = new JLabel("   날짜:");
-		lbl2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl3 = new JLabel("   시군구 :");
-		lbl3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl4 = new JLabel("   접촉력 :");
-		lbl4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		JLabel lbl5 = new JLabel("   노출여부 :");
-		lbl5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		lbl1.setBounds(50, 50, 70, 20);
+		
+
 
 		
 		tf1 = new JTextField();
+		tf1.setBounds(120, 50, 100, 25);
 		tf1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		tf2 = new JTextField();
-		tf2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		tf3 = new JTextField();
-		tf3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		tf4 = new JTextField();
-		tf4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		tf5 = new JTextField();
-		tf5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		
 
 		
 		pCen.add(lbl1);
 		pCen.add(tf1);
-		pCen.add(lbl2);
-		pCen.add(tf2);
-		pCen.add(lbl3);
-		pCen.add(tf3);
-		pCen.add(lbl4);
-		pCen.add(tf4);
-		pCen.add(lbl5);
-		pCen.add(tf5);
+
 
 
 		
@@ -126,12 +108,12 @@ public class ComfirmedAdd extends JFrame implements ActionListener {
 		JPanel pSou = new JPanel();
 		pSou.setBackground(Color.WHITE);
 		
-		btnOK = new JButton("확인");
-		btnOK.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		btnOK.setBackground(Color.WHITE);
-		btnOK.setFocusPainted(false);
-		btnOK.addActionListener(this);
-		pSou.add(btnOK);
+		btnDelete = new JButton("삭제");
+		btnDelete.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		btnDelete.setBackground(Color.WHITE);
+		btnDelete.setFocusPainted(false);
+		btnDelete.addActionListener(this);
+		pSou.add(btnDelete);
 		
 		btnCancel = new JButton("취소");
 		btnCancel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
@@ -149,7 +131,7 @@ public class ComfirmedAdd extends JFrame implements ActionListener {
 		last.add(pCen);
 		last.add(pSou, BorderLayout.SOUTH);
 		add(last);
-		
+		setResizable(false);
 		setVisible(true);
 		
 		
@@ -169,6 +151,7 @@ public class ComfirmedAdd extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 		
+		
 //		new IsolatedAdd("자가격리괸리", 300, 320);
 	}
 	
@@ -177,32 +160,15 @@ public class ComfirmedAdd extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		
-		if(obj == btnOK) {
+		if(obj == btnDelete) {
 			if(tf1.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "번호를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "보건소를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
 				tf1.requestFocus();
-			}else if(tf2.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "날짜을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
-				tf2.requestFocus();
-			}else if(tf3.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "시군구를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
-				tf3.requestFocus();
-			}else if(tf4.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "접촉력을 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
-				tf4.requestFocus();
-			}else if(tf5.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "노출여부를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
-				tf5.requestFocus();
 			}else {
-				String sql = "INSERT INTO confirmed VALUES('" + tf1.getText() +"', '" + tf2.getText() + "', '" + tf3.getText() + "', '"
-						+ tf4.getText() + "', '" + tf5.getText() +  "' )";
-				setInsertDB(sql);
-				JOptionPane.showMessageDialog(this,"처리가 완료되었습니다.","메시지",JOptionPane.INFORMATION_MESSAGE);
+				String sql = "DELETE FROM vaccinationstatus WHERE name = '" + tf1.getText()  + "' ";
+				deleteDB(sql);
+				
 				tf1.setText("");
-				tf2.setText("");
-				tf3.setText("");
-				tf4.setText("");
-				tf5.setText("");
 				comfirmedAdmin.SelectAll(comfirmedAdmin.getModel());
 			}
 			
@@ -213,9 +179,9 @@ public class ComfirmedAdd extends JFrame implements ActionListener {
 		
 	}
 
-	private void setInsertDB(String sql) {
+	private void deleteDB(String sql) {
 		DB.executeQuery(sql);
-		
+		JOptionPane.showMessageDialog(this,"삭제가 완료되었습니다.","메시지",JOptionPane.INFORMATION_MESSAGE);
 	}
 
 }

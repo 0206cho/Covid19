@@ -1,4 +1,4 @@
-package admin.comfirmed;
+package admin.vaccinationstatus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -47,26 +47,26 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 	private JButton btnModify;
 	private JTextField tf7;
 
-	//JFrameÀ» »ó¼Ó ¹Þ¾Æ ¸¸µå´Â ¹æ¹ý << ÀÌ°É ´õ ¼±È£ÇÔ.
+	//JFrameï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ << ï¿½Ì°ï¿½ ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½.
 	public ComfirmedModify(String title, int width, int height, ComfirmedAdmin comfirmedAdmin) {
 		this.setTitle(title);
 		setSize(width, height);
-		setLocationRelativeTo(this); 	//È­¸é °¡¿îµ¥ ÂïÀ½
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //´ÝÀ»¼ö ÀÖ´Â Æ¯Á¤ »ó¼ö°ªÀ» ÁÖ¾ú±â ¶§¹®¿¡ ÇÁ·¹ÀÓ Á¾·á¹öÆ°ÀÌ Å¬¸¯µÉ¶§ ÇÁ·Î±×·¥µµ °°ÀÌ »ç¶óÁü 
+		setLocationRelativeTo(this); 	//È­ï¿½ï¿½ ï¿½ï¿½ï¿½îµ¥ ï¿½ï¿½ï¿½ï¿½
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½É¶ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		this.comfirmedAdmin = comfirmedAdmin;
 		
 		
-		//»ó´Ü ÆÐ³Î
+		//ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½
 		p1 = new JPanel();
 		p1.setLayout(new BorderLayout());
 		ImageIcon icon = new ImageIcon("images/logo2.JPG");
 		lblicon = new JLabel(icon);
-		lblicon.setToolTipText("¹ã³·¾øÀÌ ¹æ¿ªÀ» À§ÇØ °í»ýÇÏ½Ã´Â °ü°èÀÚºÐµé ÀÀ¿øÇÕ´Ï´Ù!!");
+		lblicon.setToolTipText("ï¿½ã³·ï¿½ï¿½ï¿½ï¿½ ï¿½æ¿ªï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï½Ã´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ÚºÐµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½!!");
 		//lblicon.setPreferredSize(new Dimension(150, 150));
 		p1.setBackground(Color.white);
 		p1.add(lblicon,BorderLayout.WEST);
 		
-		//»ó´Ü ¹öÆ° ÆÐ³Î
+		//ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½Ð³ï¿½
 		p2 = new JPanel();
 		p2.setBackground(Color.WHITE);
 		p2.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
@@ -81,42 +81,42 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 		pNor.setBackground(Color.WHITE);
 		
 		
-		//Áß¾ÓÆÐ³Î
+		//ï¿½ß¾ï¿½ï¿½Ð³ï¿½
 		pCen = new JPanel();
 		pCen.setLayout(new GridLayout(7, 2));
 		pCen.setBackground(Color.white);
 		
-		JLabel lbl1 = new JLabel("   º¸°Ç¼Ò ");
-		lbl1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
-		JLabel lbl2 = new JLabel("   1Â÷-´çÀÏÁ¢Á¾");
-		lbl2.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
-		JLabel lbl3 = new JLabel("   1Â÷-´çÀÏ´©°è");
-		lbl3.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
-		JLabel lbl4 = new JLabel("   2Â÷-´çÀÏÁ¢Á¾");
-		lbl4.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
-		JLabel lbl5 = new JLabel("   2Â÷-´çÀÏ´©°è");
-		lbl5.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
-		JLabel lbl6 = new JLabel("   ºÎ½ºÅÍ¼¦-´çÀÏÁ¢Á¾");
-		lbl6.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
-		JLabel lbl7 = new JLabel("   ºÎ½ºÅÍ¼¦-´çÀÏ´©°è");
-		lbl7.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		JLabel lbl1 = new JLabel("   ï¿½ï¿½ï¿½Ç¼ï¿½ ");
+		lbl1.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
+		JLabel lbl2 = new JLabel("   1ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		lbl2.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
+		JLabel lbl3 = new JLabel("   1ï¿½ï¿½-ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½");
+		lbl3.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
+		JLabel lbl4 = new JLabel("   2ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		lbl4.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
+		JLabel lbl5 = new JLabel("   2ï¿½ï¿½-ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½");
+		lbl5.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
+		JLabel lbl6 = new JLabel("   ï¿½Î½ï¿½ï¿½Í¼ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		lbl6.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
+		JLabel lbl7 = new JLabel("   ï¿½Î½ï¿½ï¿½Í¼ï¿½-ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½");
+		lbl7.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 
 		
 		
 		tf1 = new JTextField();
-		tf1.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		tf1.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 		tf2 = new JTextField();
-		tf2.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		tf2.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 		tf3 = new JTextField();
-		tf3.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		tf3.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 		tf4 = new JTextField();
-		tf4.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		tf4.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 		tf5 = new JTextField();
-		tf5.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		tf5.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 		tf6 = new JTextField();
-		tf6.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		tf6.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 		tf7 = new JTextField();
-		tf7.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		tf7.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 		
 		pCen.add(lbl1);
 		pCen.add(tf1);
@@ -136,33 +136,33 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 
 		
 		
-		//ÇÏ´Ü ÆÐ³Î
+		//ï¿½Ï´ï¿½ ï¿½Ð³ï¿½
 		JPanel pSou = new JPanel();
 		pSou.setBackground(Color.WHITE);
 		
-		btnSearch = new JButton("°Ë»ö");
-		btnSearch.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		btnSearch = new JButton("ï¿½Ë»ï¿½");
+		btnSearch.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 		btnSearch.setBackground(Color.WHITE);
 		btnSearch.setFocusPainted(false);
 		btnSearch.addActionListener(this);
 		pSou.add(btnSearch);
 		
-		btnModify = new JButton("¼öÁ¤");
-		btnModify.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		btnModify = new JButton("ï¿½ï¿½ï¿½ï¿½");
+		btnModify.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 		btnModify.setBackground(Color.WHITE);
 		btnModify.setFocusPainted(false);
 		btnModify.addActionListener(this);
 		pSou.add(btnModify);
 		
-		btnCancel = new JButton("Ãë¼Ò");
-		btnCancel.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
+		btnCancel = new JButton("ï¿½ï¿½ï¿½");
+		btnCancel.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½", Font.BOLD, 13));
 		btnCancel.setBackground(Color.WHITE);
 		btnCancel.setFocusPainted(false);
 		btnCancel.addActionListener(this);
 		pSou.add(btnCancel);
 		
 		
-		//¸ðµç ÆÐ³Î ºÙÀÌ±â
+		//ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½
 		last = new JPanel();
 		last.setLayout(new BorderLayout());
 		last.setBackground(Color.white);
@@ -188,48 +188,48 @@ public class ComfirmedModify extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 		
-//		new IsolatedAdd("ÀÚ°¡°Ý¸®±­¸®", 300, 320);
+//		new IsolatedAdd("ï¿½Ú°ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½", 300, 320);
 	}
 	
-	//ÀÌº¥Æ® Ã³¸®
+	//ï¿½Ìºï¿½Æ® Ã³ï¿½ï¿½
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		
 		if(obj == btnSearch) {
 			if(tf1.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "º¸°Ç¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.", "¿À·ù", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "ï¿½ï¿½ï¿½Ç¼Ò¸ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.", "ï¿½ï¿½ï¿½ï¿½", JOptionPane.ERROR_MESSAGE);
 			}else {
 				String sql = "SELECT * FROM vaccinationstatus WHERE name= '" + tf1.getText() + "' ";
 				IDSearchDB(sql);
-				JOptionPane.showMessageDialog(this,"°Ë»öÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.","¸Þ½ÃÁö",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this,"ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.","ï¿½Þ½ï¿½ï¿½ï¿½",JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 			
 		}else if(obj == btnModify) {
 			if(tf2.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "1Â÷-´çÀÏÁ¢Á¾À» ÀÔ·ÂÇØÁÖ¼¼¿ä.", "¿À·ù", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "1ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.", "ï¿½ï¿½ï¿½ï¿½", JOptionPane.ERROR_MESSAGE);
 				tf2.requestFocus();
 			}else if(tf3.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "1Â÷-´çÀÏ´©°è¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.", "¿À·ù", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "1ï¿½ï¿½-ï¿½ï¿½ï¿½Ï´ï¿½ï¿½è¸¦ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.", "ï¿½ï¿½ï¿½ï¿½", JOptionPane.ERROR_MESSAGE);
 				tf3.requestFocus();
 			}else if(tf4.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "2Â÷-´çÀÏÁ¢Á¾À» ÀÔ·ÂÇØÁÖ¼¼¿ä.", "¿À·ù", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "2ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.", "ï¿½ï¿½ï¿½ï¿½", JOptionPane.ERROR_MESSAGE);
 				tf4.requestFocus();
 			}else if(tf5.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "2Â÷-´çÀÏ´©°è¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.", "¿À·ù", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "2ï¿½ï¿½-ï¿½ï¿½ï¿½Ï´ï¿½ï¿½è¸¦ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.", "ï¿½ï¿½ï¿½ï¿½", JOptionPane.ERROR_MESSAGE);
 				tf5.requestFocus();
 			}else if(tf6.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "ºÎ½ºÅÍ¼¦-´çÀÏÁ¢Á¾À» ÀÔ·ÂÇØÁÖ¼¼¿ä.", "¿À·ù", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "ï¿½Î½ï¿½ï¿½Í¼ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.", "ï¿½ï¿½ï¿½ï¿½", JOptionPane.ERROR_MESSAGE);
 				tf6.requestFocus();
 			}else if(tf7.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "ºÎ½ºÅÍ¼¦-´çÀÏ´©°è¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.", "¿À·ù", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "ï¿½Î½ï¿½ï¿½Í¼ï¿½-ï¿½ï¿½ï¿½Ï´ï¿½ï¿½è¸¦ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.", "ï¿½ï¿½ï¿½ï¿½", JOptionPane.ERROR_MESSAGE);
 				tf7.requestFocus();
 			}
 			else {
 				String sql = "UPDATE vaccinationstatus SET first_today = '"+ tf2.getText() + "', first_total = '" +tf3.getText()+ "', second_today = '"+tf4.getText()+"', second_total = '"+tf5.getText()+"', booster_today = '"+tf6.getText()+"', booster_total = '"+tf7.getText()+"' WHERE name = '"+tf1.getText()+"'"; 
 				updateDB(sql);
-				JOptionPane.showMessageDialog(this,"¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.","¸Þ½ÃÁö",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this,"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.","ï¿½Þ½ï¿½ï¿½ï¿½",JOptionPane.INFORMATION_MESSAGE);
 				
 				comfirmedAdmin.SelectAll(comfirmedAdmin.getModel());
 				tf1.setText("");

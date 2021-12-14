@@ -120,7 +120,7 @@ public class IsolatedMain extends JFrame implements ActionListener, MouseListene
 
 		// 자가격리 날짜
 		get_id = isolatedLogin.getTx1().getText();
-		System.out.println(get_id);
+		//System.out.println(get_id);
 
 		String isolatedDate = "SELECT name, DATEDIFF('" + now
 				+ "', (select isolatedDate from isolated WHERE isolatedID LIKE '" + get_id + "')) "

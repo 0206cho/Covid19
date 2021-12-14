@@ -15,10 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import admin.comfirmed.ComfirmedAdmin;
 import admin.isolated.IsolatedAdmin;
 import admin.medicalstation.MedicalStationAdmin;
 import admin.pcap.pcapGUI;
+import admin.vaccinationstatus.ComfirmedAdmin;
 import admin.vaccine.VaccineAdmin;
 import jdbc.DB;
 
@@ -114,7 +114,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 		b6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		b6.setFocusPainted(false);
 		b6.setBackground(Color.white);
-		b6.addActionListener(this);
+		//b6.addActionListener(this);
 		
 		p2.add(b1);
 		p2.add(b2);

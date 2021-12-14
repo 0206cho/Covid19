@@ -116,6 +116,7 @@ public class Medicalstation extends JFrame implements ActionListener {
 		for (int i = 0; i < tbColModel.getColumnCount(); i++) {
 			tbColModel.getColumn(i).setCellRenderer(tbCellRender);
 		}
+		table.getTableHeader().setReorderingAllowed(false); // 테이블 열 이동 불가
 		// 컬럼 길이조절
 		table.getColumnModel().getColumn(0).setPreferredWidth(0);
 		table.getColumnModel().getColumn(1).setPreferredWidth(0);

@@ -127,7 +127,7 @@ public class Gwangju_Comfirmed extends JFrame implements ActionListener {
 		table.setAutoCreateRowSorter(true);
 		TableRowSorter tablesorter = new TableRowSorter(table.getModel());
 		table.setRowSorter(tablesorter);
-		
+		table.getTableHeader().setReorderingAllowed(false); // 테이블 열 이동 불가
 		//컬럼 길이조절
 		table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		table.getColumnModel().getColumn(1).setPreferredWidth(0);

@@ -241,6 +241,7 @@ public class VaccineReservation extends JFrame implements ActionListener {
 		redStarHsp.setBounds(207, 388, 100, 100);
 		cb = new JComboBox<String>(local);
 		cb.setBounds(260,420,80,35);
+		cb.addActionListener(this);
 		btnReserve = new JButton("예약");
 		btnReserve.setBounds(500, 485, 100, 40);
 		btnReserve.setBackground(new Color(75, 137, 220));
@@ -415,6 +416,9 @@ public class VaccineReservation extends JFrame implements ActionListener {
 		}
 		else if(obj == b4) {
 			new VaccineInquiry("백신 예약 조회", 750, 650);
+		}
+		else if(obj == cb) {
+			repaint();
 		}
 	}
 

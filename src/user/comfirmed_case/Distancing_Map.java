@@ -483,8 +483,8 @@ public class Distancing_Map extends JFrame implements ActionListener {
 			String jeju_vaccine = jeju_elm.text();
 			jeju_vaccine = jeju_vaccine.format("%.2f%%%n", Double.parseDouble(jeju_vaccine.replace(",",""))  / 669177 * 100.0);
 			
-			System.out.println(seoul_vaccine);
-			System.out.println(busan_vaccine);
+			//System.out.println(seoul_vaccine);
+			//System.out.println(busan_vaccine);
 			
 			
 			seoul_btn.setText("<html><body><center>"+ "서울" +"<br>"+ seoul_vaccine + "</body></html>");

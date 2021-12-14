@@ -38,14 +38,14 @@ public class pcapGUI extends JFrame implements ActionListener {
 	JScrollPane scrollPane;
 	public static JTextArea logTa;
 	public JButton start_btn;
-	private JButton cancel_btn;
+	private JButton stop_btn;
 	private boolean check = true;
 
 	// JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
 	public pcapGUI() {
 
-		this.setTitle("비인가 패킷 분석");
-		setSize(525, 800);
+		this.setTitle("비인가 분석 확인");
+		setSize(525, 502);
 		setLocationRelativeTo(this); // 화면 가운데 찍음
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //닫을수 있는 특정 상수값을 주었기 때문에 프레임
 		// 종료버튼이 클릭될때 프로그램도 같이 사라짐
@@ -73,25 +73,29 @@ public class pcapGUI extends JFrame implements ActionListener {
 		logTa.setEditable(false); // 글 사용 금지
 		scrollPane = new JScrollPane(logTa);
 		scrollPane.setViewportView(logTa); // 텍스트가 아래로 내려갈 경우 스크롤바도 같이 내려감
-		scrollPane.setBounds(5, 390, 500, 300);
+		scrollPane.setBounds(5, 35, 500, 300);
 
 		JLabel packet_Lb = new JLabel("패킷 캡쳐");
-		packet_Lb.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		packet_Lb.setBounds(5, 325, 100, 100);
+		packet_Lb.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		packet_Lb.setBounds(10, 0, 100, 35);
 		pCenter.add(scrollPane);
 		pCenter.add(packet_Lb);
 
 		start_btn = new JButton("Start");
-		start_btn.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		start_btn.setBounds(5, 150, 150, 150);
+		start_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		start_btn.setBounds(295, 340, 100, 50);
+		start_btn.setFocusPainted(false);
+		start_btn.setBackground(Color.white);
 		start_btn.addActionListener(this);
 		pCenter.add(start_btn);
 
-		cancel_btn = new JButton("Cancel");
-		cancel_btn.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		cancel_btn.setBounds(5, 300, 100, 100);
-		cancel_btn.addActionListener(this);
-		pCenter.add(cancel_btn);
+		stop_btn = new JButton("Stop");
+		stop_btn.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		stop_btn.setBounds(403, 340, 100, 50);
+		stop_btn.setFocusPainted(false);
+		stop_btn.setBackground(Color.white);
+		stop_btn.addActionListener(this);
+		pCenter.add(stop_btn);
 
 		// 모든 패널 붙이기
 		pLast = new JPanel();
@@ -220,9 +224,9 @@ public class pcapGUI extends JFrame implements ActionListener {
 
 			pcap();
 			check = true;
-		} else if (obj == cancel_btn) {
+		} else if (obj == stop_btn) {
 			check = false;
-			logTa.append("왜 안되냐");
+			logTa.append("STOP...\n");
 		}
 	}
 }
