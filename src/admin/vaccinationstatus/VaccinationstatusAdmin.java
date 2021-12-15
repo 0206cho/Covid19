@@ -27,7 +27,7 @@ import javax.swing.table.TableRowSorter;
 
 import jdbc.DB;
 
-public class ComfirmedAdmin extends JFrame implements ActionListener {
+public class VaccinationstatusAdmin extends JFrame implements ActionListener {
 	
 	private JPanel p1;
 	private JLabel lblicon;
@@ -54,7 +54,7 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 	private DefaultTableCellRenderer tbCellRender;
 
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public ComfirmedAdmin(String title, int width, int height) {
+	public VaccinationstatusAdmin(String title, int width, int height) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음
@@ -221,7 +221,7 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 		
-		new ComfirmedAdmin("백신접종관리", 900, 620);
+		new VaccinationstatusAdmin("백신접종관리", 900, 620);
 	}
 	
 	//이벤트 처리
@@ -229,9 +229,9 @@ public class ComfirmedAdmin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if(obj == btnDelete) {
-			new ComfirmedDelete("백신접종삭제", 300, 300, this);
+			new VaccinationstatusDelete("백신접종삭제", 300, 300, this);
 		}else if(obj == btnModify) {
-			new ComfirmedModify("백신접종수정", 300, 320, this);
+			new VaccinationstatusModify("백신접종수정", 300, 320, this);
 		}
 	}
 

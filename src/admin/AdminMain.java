@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import admin.isolated.IsolatedAdmin;
 import admin.medicalstation.MedicalStationAdmin;
 import admin.pcap.pcapGUI;
-import admin.vaccinationstatus.ComfirmedAdmin;
+import admin.vaccinationstatus.VaccinationstatusAdmin;
 import admin.vaccine.VaccineAdmin;
 import jdbc.DB;
 
@@ -153,7 +153,7 @@ public class AdminMain extends JFrame implements ActionListener  {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 				if(obj == b1) {
-					new ComfirmedAdmin("백신접종관리", 900, 620);
+					new VaccinationstatusAdmin("백신접종관리", 900, 620);
 				}
 				else if(obj == btn_logout) {
 					dispose();

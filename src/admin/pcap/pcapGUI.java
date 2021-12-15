@@ -150,7 +150,7 @@ public class pcapGUI extends JFrame implements ActionListener {
 			// logTa.append("[%d번]: %s [%s]\n" + ++i + device.getName() + description);
 		}
 
-		PcapIf device = allDevs.get(5);
+		PcapIf device = allDevs.get(5);		//6번째 인터페이스를 패킷 분석
 		System.out.printf("선택된 장치: %s\n",
 				(device.getDescription() != null) ? device.getDescription() : device.getName());
 

@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import jdbc.DB;
 
-public class ComfirmedDelete extends JFrame implements ActionListener {
+public class VaccinationstatusDelete extends JFrame implements ActionListener {
 	
 	private JPanel p1;
 	private JLabel lblicon;
@@ -43,10 +43,10 @@ public class ComfirmedDelete extends JFrame implements ActionListener {
 	private JTextField tf6;
 	private JButton btnDelete;
 	private JButton btnCancel;
-	private ComfirmedAdmin comfirmedAdmin;
+	private VaccinationstatusAdmin comfirmedAdmin;
 
 	//JFrame을 상속 받아 만드는 방법 << 이걸 더 선호함.
-	public ComfirmedDelete(String title, int width, int height, ComfirmedAdmin comfirmedAdmin) {
+	public VaccinationstatusDelete(String title, int width, int height, VaccinationstatusAdmin comfirmedAdmin) {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this); 	//화면 가운데 찍음
