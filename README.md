@@ -1,4 +1,4 @@
-## TCP/IP소캣 통신을 이용한 코로나 종합 시스템_코로나로 inha여_
+## TCP/IP소캣 통신을 이용한 코로나 종합 시스템_코로나로 inha여_ver2
 <p> 
  
 <img src="https://img.shields.io/badge/Java-3776AB?style=flat-square&logo=Java&logoColor=white"/>
